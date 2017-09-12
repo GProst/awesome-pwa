@@ -1,0 +1,18 @@
+{
+  "verbose": true,
+  "transformIgnorePatterns": [
+    "<rootDir>/node_modules/(?!lodash-es)"
+  ],
+  "automock": true,
+  "unmockedModulePathPatterns": [
+    "node_modules/react/",
+    "node_modules/react-dom/",
+    "node_modules/prop-types/",
+    "node_modules/enzyme/",
+    "node_modules/material-ui/",
+    "node_modules/material-ui-icons/"
+  ],
+  "testEnvironment": "jsdom",
+  "collectCoverageFrom" : ["src/**/*.{js,jsx}", "!**/__tests__/**"],
+  "coverageDirectory": "./coverage"
+}

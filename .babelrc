@@ -1,0 +1,38 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 Opera versions",
+            "last 2 Chrome versions",
+            "last 2 ChromeAndroid versions",
+            "last 2 Firefox versions",
+            "last 2 Safari versions",
+            "last 2 iOS versions"
+          ]
+        },
+        "modules": false,
+        "loose": true,
+        "useBuiltIns": true
+      }
+    ],
+    "react"
+  ],
+  "env": {
+    "test": {
+      "presets": ["react"],
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "transform-class-properties"
+      ]
+    }
+  },
+  "plugins": [
+    "babel-plugin-styled-components",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "syntax-dynamic-import"
+  ]
+}
