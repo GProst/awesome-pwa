@@ -1,7 +1,5 @@
-import {CLEAR_TOKEN, SET_TOKEN} from './actions'
-import api from '../../../api'
-
 import {LOGIN} from '../../genericActions/api'
+import {CLEAR_TOKEN} from './actions'
 
 export * from './actions'
 
@@ -9,26 +7,21 @@ export const defaultState = {
   token: null
 }
 
+// TODO: add validation for token on actions and initial value
+
 export const getAuthInitialState = () => {
-  return {...defaultState, token: api.readTokenCookie() || defaultState.token}
+  return {...defaultState, token: window.__JWT__ || defaultState.token}
 }
 
 export default (previousState = defaultState, action) => {
   switch (action.type) {
     case CLEAR_TOKEN:
-      api.deleteTokenCookie()
-      return defaultState
-    case SET_TOKEN: {
-      const token = action.payload
-      api.setTokenCookie(token)
       return {
         ...previousState,
-        token
+        token: null
       }
-    }
     case LOGIN: {
       const {token} = action.payload
-      api.setTokenCookie(token)
       return {
         ...previousState,
         token

@@ -1,3 +1,5 @@
+// TODO: noSupportPage in separate SSR page (check browser in backend)
+
 export function isChrome() {
   // function was taken from https://stackoverflow.com/a/13348618/7376567
   let isChromium = window.chrome
