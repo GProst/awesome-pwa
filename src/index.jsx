@@ -28,4 +28,4 @@ export function init(module) {
   }
 }
 
-init(module)
+init(module) // TODO: fix bug with hot reload
