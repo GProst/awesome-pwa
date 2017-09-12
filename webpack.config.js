@@ -10,7 +10,7 @@ function _isVendor(module) {
 }
 
 const isProd = process.env.NODE_ENV === 'production'
-const domain = process.env.GPROST_ADMIN_DOMAIN || 'localhost'
+const domain = process.env.GPROST_ADMIN_DOMAIN || 'localhost' // TODO: dix variable name
 
 const config = {
   entry: {
