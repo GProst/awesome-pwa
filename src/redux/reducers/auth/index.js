@@ -7,7 +7,8 @@ export const defaultState = {
   token: null
 }
 
-// TODO: add validation for token on actions and initial value
+// TODO: add validation for token on actions and initial value (just do it before return it, even
+// if it is default previous state)
 
 export const getAuthInitialState = () => {
   return {...defaultState, token: window.__JWT__ || defaultState.token}

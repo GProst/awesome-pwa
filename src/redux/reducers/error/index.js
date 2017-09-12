@@ -4,6 +4,8 @@ export * from './actions'
 
 export const defaultState = null
 
+// TODO: add validation for error on actions and initial valueΩ
+
 export default (previousState = defaultState, action) => {
   switch (action.type) {
     case CLEAR_ERROR:
