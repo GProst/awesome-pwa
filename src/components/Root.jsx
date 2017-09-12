@@ -17,7 +17,6 @@ import Main from './pages/Main'
 import Login from './pages/Login/index'
 import Loader from './pages/Loader/index'
 import PostList from './pages/PostList'
-import NotSupported from './pages/NotSupported'
 
 injectGlobal`
   html {
@@ -62,7 +61,6 @@ class Root extends React.Component {
                 <Route exact path={Routes.login} component={Login} />
                 <Route exact path={Routes.fetchingProfileData} component={Loader} />
                 <Route exact path={Routes.postList} component={PostList} />
-                <Route exact path={Routes.notSupported} component={NotSupported} />
                 <Redirect to={Routes.main} />
               </Switch>
             </ConnectedRouter>

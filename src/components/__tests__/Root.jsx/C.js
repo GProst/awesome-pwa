@@ -3,7 +3,7 @@ import {shallow} from 'enzyme'
 
 describe('Test that Root component renders correctly', () => {
   let RootWrapper, reduxStore, Provider, ConnectedRouter, ThemeProvider, Route, Switch, Redirect, Routes, MainPage,
-    LoginPage, LoaderPage, PostListPage, NotSupportedPage, injectGlobal, WebLoader
+    LoginPage, LoaderPage, PostListPage, injectGlobal, WebLoader
 
   beforeAll(() => {
     jest.mock('../../../theme', () => ({ThemeProvider() { return null }}))
@@ -14,14 +14,12 @@ describe('Test that Root component renders correctly', () => {
     jest.mock('../../pages/Login', () => 'LoginPage')
     jest.mock('../../pages/Loader', () => 'LoaderPage')
     jest.mock('../../pages/PostList', () => 'PostListPage')
-    jest.mock('../../pages/NotSupported', () => 'NotSupportedPage')
     jest.unmock('../../../routes')
     jest.unmock('../../../font')
     MainPage = require('../../pages/Main')
     LoginPage = require('../../pages/Login')
     LoaderPage = require('../../pages/Loader')
     PostListPage = require('../../pages/PostList')
-    NotSupportedPage = require('../../pages/NotSupported')
     Routes = require('../../../routes').Routes
     reduxStore = require('../../../redux/store')
     Provider = require('react-redux').Provider
@@ -143,18 +141,6 @@ describe('Test that Root component renders correctly', () => {
         w.prop('exact') === true &&
         w.prop('path') === Routes.postList &&
         w.prop('component') === PostListPage
-      ))).toBe(true)
-    })
-
-  test(
-    `Root component should render react-router Route comp with 'exact' prop and path to not-supported page with
-    correct component`,
-    () => {
-      const RoutesWrapper = RootWrapper.find(Route)
-      expect(RoutesWrapper.someWhere(w => (
-        w.prop('exact') === true &&
-        w.prop('path') === Routes.notSupported &&
-        w.prop('component') === NotSupportedPage
       ))).toBe(true)
     })
 })
