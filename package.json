@@ -1,17 +1,12 @@
 {
-  "name": "gprost.com-admin-front",
-  "version": "1.0.0",
+  "name": "priority-book-web-client",
+  "version": "0.0.1",
   "engines": {
     "node": "^8.3.0",
     "npm": "^5.3.0"
   },
   "description": "",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GProst/for-fun-adm.git"
-  },
   "author": "GProst a.k.a German Prostakov <gprostmail@gmail.com>",
-  "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --port 3000 --output-public-path=\"http://localhost:3000/\" --public=\"localhost:3000/\" --hot --inline",
     "build": "webpack",
@@ -20,10 +15,6 @@
     "lint": "eslint --ext .js --ext .jsx --ignore-path .gitignore ./",
     "precommit": "lint-staged"
   },
-  "bugs": {
-    "url": "https://github.com/GProst/for-fun-adm/issues"
-  },
-  "homepage": "https://github.com/GProst/for-fun-adm#readme",
   "dependencies": {
     "history": "^4.7.2",
     "lodash-es": "^4.17.4",
