@@ -61,7 +61,7 @@ describe('Test that Root component renders correctly', () => {
   })
 
   test('Root component should render ErrorHandler comp after Provider + ThemeProvider and before ConnectedRouter', () => {
-    const ErrorHandler = require('../../ErrorHandler')
+    const ErrorHandler = require('../../services/ErrorHandler')
     const ErrorHandlerWrapper = RootWrapper.find(ErrorHandler)
     expect(ErrorHandlerWrapper.length).toBe(1)
     expect(ErrorHandlerWrapper.parents().some(Provider)).toBe(true)

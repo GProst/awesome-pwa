@@ -1,5 +1,5 @@
 import {createStore} from './create'
-import {validateStore} from './validation/index'
+import {validateStore} from './genericValidation/index'
 
 const store = createStore()
 validateStore(store)

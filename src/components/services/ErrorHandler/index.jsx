@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
-import {clearError} from '../../redux/reducers/error'
+import {clearError} from '../../../redux/reducers/error/index'
 
 import Fade from 'material-ui/transitions/Fade'
-import Snackbar from '../atoms/Snackbar'
+import Snackbar from '../../atoms/Snackbar'
 import IconButton from 'material-ui/IconButton'
 import CloseIcon from 'material-ui-icons/Close'
 import {ErrorSnackBarContent, Wrapper, closeButtonStyles} from './styles'

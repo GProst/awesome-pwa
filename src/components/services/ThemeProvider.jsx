@@ -4,8 +4,8 @@ import {ThemeProvider as CSThemeProvider} from 'styled-components'
 import {connect} from 'react-redux'
 import {MuiThemeProvider} from 'material-ui/styles'
 
-import {ThemeType} from './constants'
-import {createTheme} from './functions'
+import {ThemeType} from '../../theme/constants'
+import {createTheme} from '../../theme/functions'
 
 const connector = connect(state => ({
   theme: state.theme

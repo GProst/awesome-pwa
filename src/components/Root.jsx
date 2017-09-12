@@ -7,7 +7,7 @@ import {Provider} from 'react-redux'
 import '../font'
 
 import {ThemeProvider} from '../theme'
-import ErrorHandler from './ErrorHandler/index'
+import ErrorHandler from './services/ErrorHandler/index'
 
 import store from '../redux/store'
 import history from '../history'

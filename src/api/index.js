@@ -31,7 +31,7 @@ class API {
       })
   }
 
-  setTokenCookie(token) {
+  setTokenCookie(token) { // TODO: HTTP Only cookie
     const cookieDuration = 7 // value in days
     const domain = process.env.DOMAIN
     createCookie(TokenCookieName, token, cookieDuration, domain)
