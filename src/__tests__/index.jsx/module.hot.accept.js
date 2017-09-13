@@ -18,10 +18,10 @@ describe('Test that module.hot.accept callback is doing right thing', () => {
     process.env.NODE_ENV = 'develop'
 
     let acceptCallback
-    const accept = (filePath, callback) => {
+    const hotAccept = (callback) => {
       acceptCallback = callback
     }
-    const module = {hot: {accept}}
+    const module = {hot: true, hotAccept}
 
     expect(init(module)).toBe('develop hot')
     ReactDOM.render.mockClear()

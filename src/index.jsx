@@ -3,6 +3,15 @@ import React from 'react'
 
 import Root from './components/Root'
 
+const moduleProxy = {
+  get hot() {
+    return module.hot
+  },
+  hotAccept(callback) {
+    module.hot.accept('./components/Root', callback)
+  }
+}
+
 export function init(module) {
   if (process.env.NODE_ENV !== 'production') {
     const {AppContainer} = require('react-hot-loader')
@@ -18,7 +27,7 @@ export function init(module) {
     render(Root)
 
     if (module.hot) {
-      module.hot.accept('./components/Root', () => { render(Root) })
+      module.hotAccept(() => { render(Root) })
       return 'develop hot'
     }
     return 'develop'
@@ -28,4 +37,4 @@ export function init(module) {
   }
 }
 
-init(module) // TODO: fix bug with hot reload
+init(moduleProxy)

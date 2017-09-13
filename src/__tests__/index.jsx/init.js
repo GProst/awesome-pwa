@@ -27,7 +27,7 @@ describe('Test how init() method behavior depends on NODE_ENV var', () => {
 
   test(`init() method SHOULD initialize in 'develop hot' mode if NODE_ENV !== 'production' and module.hot`, () => {
     process.env.NODE_ENV = 'develop'
-    const module = {hot: {accept: () => null}}
+    const module = {hot: true, hotAccept: () => null}
     expect(init(module)).toBe('develop hot')
   })
 })
