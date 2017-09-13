@@ -8,6 +8,8 @@ const moduleProxy = {
     return module.hot
   },
   hotAccept(callback) {
+    // unfortunately there is no way to test this method call in unit tests
+    // see this issue: https://github.com/webpack/webpack/issues/5668
     module.hot.accept('./components/Root', callback)
   }
 }
