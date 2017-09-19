@@ -8,19 +8,23 @@ import {getAuthInitialState} from '../reducers/auth/index'
 
 export function createStore() {
   const middleware = [routerMiddleware(history), thunk]
+  const toCompose = [applyMiddleware(...middleware)]
 
   if (process.env.NODE_ENV !== 'production') {
-    middleware.push(require('redux-logger').createLogger())
+    const DevTools = require('../DevTools').default
+    toCompose.push(DevTools.instrument())
   }
 
-  let finalCreateStore = compose(applyMiddleware(...middleware))(_createStore)
+  let enchancer = compose(...toCompose)
 
-  const store = finalCreateStore(combineReducers({
+  const store = _createStore(combineReducers({
     ...reducers,
     router: routerReducer
   }), {
     auth: getAuthInitialState()
-  })
+  },
+  enchancer
+  )
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
