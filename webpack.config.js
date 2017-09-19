@@ -29,6 +29,14 @@ const config = {
   },
   devtool: 'source-map',
   plugins: [
+    new webpack.DefinePlugin({
+      process: {
+        env: {
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+        }
+      }
+    }),
+
     new CleanWebpackPlugin(['dist'], {
       root: path.join(__dirname),
       verbose: true,
@@ -87,6 +95,18 @@ if (isProd) {
   config.plugins.push(
     new webpack.optimize.ModuleConcatenationPlugin(),
     new UglifyWebpackPlugin()
+  )
+} else {
+  config.plugins.push(
+    // This is a workaround for jsondiffpatch lib, which cause warnings, see here:
+    // https://github.com/benjamine/jsondiffpatch/issues/76#issuecomment-261689690
+    // and here:
+    // https://github.com/alexkuz/redux-devtools-inspector/issues/68
+    new webpack.ContextReplacementPlugin(/\/src\/(formatters|main)/, path.resolve(__dirname, 'node_modules', 'jsondiffpatch'), {
+      '../package.json': './package.json',
+      './formatters': './src/formatters/index.js',
+      './console': './src/formatters/console.js'
+    })
   )
 }
 
