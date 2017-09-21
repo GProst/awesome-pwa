@@ -8,7 +8,9 @@ import Email from 'material-ui-icons/Email'
 import Lock from 'material-ui-icons/Lock'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
+import Tabs, {Tab} from 'material-ui/Tabs'
 import Typography from '../../atoms/Typography'
+import Paper from 'material-ui/Paper'
 import {Wrapper, Form, Header, MainContent, Inputs, InputRow, Label, ProgressContainer} from './styles'
 
 class LoginPageTemplate extends React.Component {
@@ -21,6 +23,10 @@ class LoginPageTemplate extends React.Component {
     onSubmit: PropTypes.func.isRequired,
     onInputChange: PropTypes.func.isRequired,
     onInputBlur: PropTypes.func.isRequired
+  }
+
+  state = {
+    tabIndex: 0
   }
 
   formShowsErrors(form) {
@@ -41,6 +47,10 @@ class LoginPageTemplate extends React.Component {
     this.props.onInputBlur(fieldName, event)
   }
 
+  onTabChange = (event, tabIndex) => {
+    this.setState({tabIndex})
+  }
+
   render() {
     const {form, loading} = this.props
     const disabled = this.formShowsErrors(form)
@@ -53,11 +63,23 @@ class LoginPageTemplate extends React.Component {
           </ProgressContainer>
         )}
         <Form onSubmit={this.onSubmit} component='form'>
-          <Header>
-            <Typography color={{type: 'common', payload: 'white'}} type='display1'>
-              Login to proceed
-            </Typography>
-          </Header>
+          <Paper elevation={3}>
+            <Header>
+              <Typography color={{type: 'common', payload: 'white'}} type='display1'>
+                Authorize to proceed
+              </Typography>
+            </Header>
+            <Tabs
+              value={this.state.tabIndex}
+              onChange={this.onTabChange}
+              indicatorColor='accent'
+              textColor='primary'
+              fullWidth
+            >
+              <Tab label='Sign In' />
+              <Tab label='Sign Up' />
+            </Tabs>
+          </Paper>
           <MainContent>
             <Inputs>
               <InputRow>
