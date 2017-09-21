@@ -10,7 +10,7 @@ const DevTools = createDevTools(
     changePositionKey='ctrl-q'
     changeMonitorKey='ctrl-m'
     defaultPosition='right'
-    defaultIsVisible
+    defaultIsVisible={false}
   >
     <Inspector />
     <SliderMonitor keyboardEnabled />
