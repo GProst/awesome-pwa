@@ -1,5 +1,4 @@
-import {createMuiTheme} from 'material-ui/styles'
-import createPalette from 'material-ui/styles/palette'
+import createMuiTheme from 'material-ui/styles/createMuiTheme'
 
 import {themes} from './constants'
 
@@ -30,10 +29,10 @@ const createTheme = (themeType) => {
 
   const muiTheme = createMuiTheme({
     ...theme,
-    palette: createPalette({
+    palette: {
       ...theme.palette,
       type: themeType
-    })
+    }
   })
 
   muiTheme.breakpoints = upgradeBreakpoints(muiTheme.breakpoints)

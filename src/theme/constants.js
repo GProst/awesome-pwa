@@ -11,7 +11,7 @@ const lightTheme = {
     'primary': {
       ...blueGrey
     },
-    'accent': {
+    'secondary': {
       ...orange
     },
     'error': {
@@ -63,7 +63,7 @@ const darkTheme = {
       'A700': '#2962ff',
       'contrastDefaultColor': 'dark'
     },
-    'accent': {
+    'secondary': {
       '50': '#fce4ec',
       '100': '#f8bbd0',
       '200': '#f48fb1',
