@@ -14,7 +14,7 @@ import history from '../history'
 import {Routes} from '../routes'
 
 import Main from './pages/Main'
-import Login from './pages/Login/index'
+import Login from './pages/Authorization/index'
 import Loader from './pages/Loader/index'
 import PostList from './pages/PostList'
 
