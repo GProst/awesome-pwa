@@ -75,7 +75,7 @@ const config = {
         // https://github.com/benjamine/jsondiffpatch/issues/76#issuecomment-261689690
         // and here:
         // https://github.com/alexkuz/redux-devtools-inspector/issues/68
-        new webpack.ContextReplacementPlugin(/\/src\/(formatters|main)/, path.resolve(__dirname, 'node_modules', 'jsondiffpatch'), {
+        new webpack.ContextReplacementPlugin(/.*/, path.resolve(__dirname, 'node_modules', 'jsondiffpatch'), {
           '../package.json': './package.json',
           './formatters': './src/formatters/index.js',
           './console': './src/formatters/console.js'
