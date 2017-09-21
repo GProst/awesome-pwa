@@ -1,6 +1,6 @@
 export const Routes = {
   main: '/',
-  login: '/login',
+  authorization: '/authorization',
   fetchingProfileData: '/fetching-profile-data',
   postList: '/post-list',
   notSupported: '/not-supported'

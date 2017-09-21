@@ -116,7 +116,7 @@ describe('Test that Root component renders correctly', () => {
       const RoutesWrapper = RootWrapper.find(Route)
       expect(RoutesWrapper.someWhere(w => (
         w.prop('exact') === true &&
-        w.prop('path') === Routes.login &&
+        w.prop('path') === Routes.authorization &&
         w.prop('component') === LoginPage
       ))).toBe(true)
     })

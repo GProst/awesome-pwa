@@ -61,7 +61,7 @@ class Root extends React.Component {
             <ConnectedRouter history={history} store={store}>
               <Switch>
                 <Route exact path={Routes.main} component={Main} />
-                <Route exact path={Routes.login} component={Login} />
+                <Route exact path={Routes.authorization} component={Login} />
                 <Route exact path={Routes.fetchingProfileData} component={Loader} />
                 <Route exact path={Routes.postList} component={PostList} />
                 <Redirect to={Routes.main} />

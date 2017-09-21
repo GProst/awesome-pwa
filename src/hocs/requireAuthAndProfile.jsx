@@ -35,7 +35,7 @@ export default (WrappedComponent) => {
             if (authToken !== null) {
               return <Redirect to={{pathname: Routes.fetchingProfileData, state: {redirect: location.pathname}}} />
             }
-            return <Redirect to={{pathname: Routes.login, state: {redirect: location.pathname}}} />
+            return <Redirect to={{pathname: Routes.authorization, state: {redirect: location.pathname}}} />
           }
         }
       }
