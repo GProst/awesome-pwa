@@ -4,10 +4,18 @@ import {themes} from './constants'
 
 const upgradeBreakpoints = (breakpoints) => ({
   ...breakpoints,
-  asObject: breakpoints.keys.reduce((asObject, key, index) => {
+  asObject: breakpoints.keys.reduce((asObject, key, index) => { // Mui breakpoints
     asObject[key] = breakpoints.values[index]
     return asObject
-  }, {})
+  }, { // extra breakpoints (as in Material Design docs)
+    xs2: 400,
+    xs3: 480,
+    sm1: 720,
+    sm2: 840,
+    md2: 1024,
+    lg2: 1440,
+    lg3: 1600
+  })
 })
 
 const createMediaQueries = (breakpoints) => {
