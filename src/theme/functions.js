@@ -21,11 +21,12 @@ const upgradeBreakpoints = (breakpoints) => ({
 const createMediaQueries = (breakpoints) => {
   const length = breakpoints.keys.length
   return breakpoints.keys.reduce((queries, key, index) => {
-    queries[`lt${key}`] = `(max-width: ${breakpoints.values[index] - 1}px)`
+    const capitalizedKey = key.replace(/\b\w/g, l => l.toUpperCase())
+    queries[`lt${capitalizedKey}`] = `(max-width: ${breakpoints.values[index] - 1}px)`
     queries[key] = `(min-width: ${breakpoints.values[index]}px)`
     if (index < length - 1) {
       queries[key] += ` and (max-width: ${breakpoints.values[index + 1] - 1}px)`
-      queries[`gt${key}`] = `(min-width: ${breakpoints.values[index + 1]}px)`
+      queries[`gt${capitalizedKey}`] = `(min-width: ${breakpoints.values[index + 1]}px)`
     }
     return queries
   }, {})
