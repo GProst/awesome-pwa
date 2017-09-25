@@ -24,6 +24,9 @@ class ThemeProvider extends React.Component {
     this.setState({
       theme
     })
+    if (process.env.NODE_ENV !== 'production') {
+      window.theme = theme
+    }
   }
 
   componentWillMount() {
