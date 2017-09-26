@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+// TODO: create your own Background (that was taken from Google Sign In page)
 // FixMe: get colors from theme
 const Wrapper = styled.div`
   background: #e0e0e0;
