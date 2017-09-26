@@ -12,8 +12,8 @@ const Wrapper = styled.div`
 Wrapper.displayName = 'Wrapper'
 
 const closeButtonStyles = {
-  width: '1em',
-  height: '1em'
+  width: '24px',
+  height: '24px'
 }
 
 export {
