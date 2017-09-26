@@ -49,15 +49,18 @@ injectGlobal`
   }
 `
 
-const DevTools = process.env.NODE_ENV === 'production' ? () => null : require('../redux/DevTools').default
-
 class Root extends React.Component {
+  renderDevToolsComp() {
+    const DevTools = process.env.NODE_ENV === 'production' ? () => null : require('../redux/DevTools').default
+    return <DevTools />
+  }
+
   render() {
     return (
       <Provider store={store}>
         <ThemeProvider>
           <ErrorHandler>
-            <DevTools />
+            {this.renderDevToolsComp()}
             <ConnectedRouter history={history} store={store}>
               <Switch>
                 <Route exact path={Routes.main} component={Main} />

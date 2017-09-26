@@ -3,20 +3,20 @@ import {shallow} from 'enzyme'
 
 describe('Test that Root component renders correctly', () => {
   let RootWrapper, reduxStore, Provider, ConnectedRouter, ThemeProvider, Route, Switch, Redirect, Routes, MainPage,
-    LoginPage, LoaderPage, PostListPage, injectGlobal, WebLoader
+    LoginPage, LoaderPage, PostListPage, injectGlobal, WebLoader, NODE_ENV, Root, DevTools
 
   // TODO: move mocks to __mocks__ folder for automocking
   beforeAll(() => {
+    NODE_ENV = process.env.NODE_ENV
     jest.mock('../../../theme', () => ({ThemeProvider() { return null }}))
     jest.mock('../../services/ErrorHandler', () => function ErrorHandler() { return null })
-    jest.mock('../../../redux/DevTools', () => function DevTools() { return null })
+    jest.mock('../../../redux/DevTools', () => ({default: function DevTools() { return null }}))
     jest.mock('../../../redux/store', () => 'my redux store')
     jest.mock('../../../history', () => 'my history')
     jest.mock('../../pages/Main', () => 'MainPage')
     jest.mock('../../pages/Authorization', () => 'LoginPage')
     jest.mock('../../pages/Loader', () => 'LoaderPage')
     jest.mock('../../pages/PostList', () => 'PostListPage')
-    require('../../../redux/DevTools')
     jest.unmock('../../../routes')
     jest.unmock('../../../font')
     MainPage = require('../../pages/Main')
@@ -28,6 +28,7 @@ describe('Test that Root component renders correctly', () => {
     Provider = require('react-redux').Provider
     ConnectedRouter = require('react-router-redux').ConnectedRouter
     ThemeProvider = require('../../../theme').ThemeProvider
+    DevTools = require('../../../redux/DevTools').default
     injectGlobal = require('styled-components').injectGlobal
     WebLoader = require('webfontloader').default
     Switch = require('react-router-dom').Switch
@@ -37,8 +38,12 @@ describe('Test that Root component renders correctly', () => {
     injectGlobal.mockClear()
     WebLoader.load.mockClear()
 
-    const Root = require.requireActual('../../Root').default
+    Root = require.requireActual('../../Root').default
     RootWrapper = shallow(<Root />)
+  })
+
+  afterAll(() => {
+    process.env.NODE_ENV = NODE_ENV
   })
 
   test('Root component file should invoke webfontloader lib loader', () => {
@@ -47,6 +52,18 @@ describe('Test that Root component renders correctly', () => {
 
   test('Root component file should invoke styled-component injectGlobal() method with app global styles', () => {
     expect(injectGlobal.mock.calls.length).toBe(1)
+  })
+
+  test(`Root component should render DevTools comp only if NODE_ENV !== 'production'`, () => {
+    process.env.NODE_ENV = 'production'
+    let RootWrapper = shallow(<Root />)
+    let DevToolsWrapper = RootWrapper.find(DevTools)
+    expect(DevToolsWrapper.length).toBe(0)
+
+    process.env.NODE_ENV = 'development'
+    RootWrapper = shallow(<Root />)
+    DevToolsWrapper = RootWrapper.find(DevTools)
+    expect(DevToolsWrapper.length).toBe(1)
   })
 
   test('Root component should render react-redux Provider comp before any others with a correct store', () => {
