@@ -10,7 +10,6 @@ import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 import Tabs, {Tab} from 'material-ui/Tabs'
 import Typography from '../../atoms/Typography'
-import Paper from 'material-ui/Paper'
 import {Wrapper, Form, Header, MainContent, Inputs, InputRow, Label, ProgressContainer} from './styles'
 
 class LoginPageTemplate extends React.Component {
@@ -63,23 +62,21 @@ class LoginPageTemplate extends React.Component {
           </ProgressContainer>
         )}
         <Form onSubmit={this.onSubmit} component='form'>
-          <Paper elevation={3}>
-            <Header>
-              <Typography color={{type: 'common', payload: 'white'}} type='display1'>
-                Authorize to proceed
-              </Typography>
-            </Header>
-            <Tabs
-              value={this.state.tabIndex}
-              onChange={this.onTabChange}
-              indicatorColor='accent'
-              textColor='primary'
-              fullWidth
-            >
-              <Tab label='Sign In' />
-              <Tab label='Sign Up' />
-            </Tabs>
-          </Paper>
+          <Header>
+            <Typography color={{type: 'common', payload: 'white'}} type='display1'>
+              Authorize to proceed
+            </Typography>
+          </Header>
+          <Tabs
+            value={this.state.tabIndex}
+            onChange={this.onTabChange}
+            indicatorColor='accent'
+            textColor='primary'
+            fullWidth
+          >
+            <Tab label='Sign In' />
+            <Tab label='Sign Up' />
+          </Tabs>
           <MainContent>
             <Inputs>
               <InputRow>
