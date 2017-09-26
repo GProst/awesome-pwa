@@ -5,15 +5,18 @@ describe('Test that Root component renders correctly', () => {
   let RootWrapper, reduxStore, Provider, ConnectedRouter, ThemeProvider, Route, Switch, Redirect, Routes, MainPage,
     LoginPage, LoaderPage, PostListPage, injectGlobal, WebLoader
 
+  // TODO: move mocks to __mocks__ folder for automocking
   beforeAll(() => {
     jest.mock('../../../theme', () => ({ThemeProvider() { return null }}))
     jest.mock('../../services/ErrorHandler', () => function ErrorHandler() { return null })
+    jest.mock('../../../redux/DevTools', () => function DevTools() { return null })
     jest.mock('../../../redux/store', () => 'my redux store')
     jest.mock('../../../history', () => 'my history')
     jest.mock('../../pages/Main', () => 'MainPage')
     jest.mock('../../pages/Authorization', () => 'LoginPage')
     jest.mock('../../pages/Loader', () => 'LoaderPage')
     jest.mock('../../pages/PostList', () => 'PostListPage')
+    require('../../../redux/DevTools')
     jest.unmock('../../../routes')
     jest.unmock('../../../font')
     MainPage = require('../../pages/Main')
