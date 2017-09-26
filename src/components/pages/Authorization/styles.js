@@ -24,6 +24,8 @@ ProgressContainer.displayName = 'ProgressContainer'
 
 const Form = styled(Paper)`
   width: 512px;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
 `

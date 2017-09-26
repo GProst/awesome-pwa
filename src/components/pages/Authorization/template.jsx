@@ -10,6 +10,7 @@ import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 import Tabs, {Tab} from 'material-ui/Tabs'
 import Typography from '../../atoms/Typography'
+import Background from '../../atoms/Background'
 import {Wrapper, Form, Header, MainContent, Inputs, InputRow, Label, ProgressContainer} from './styles'
 
 class LoginPageTemplate extends React.Component {
@@ -120,6 +121,7 @@ class LoginPageTemplate extends React.Component {
             </Button>
           </MainContent>
         </Form>
+        <Background />
       </Wrapper>
     )
   }
