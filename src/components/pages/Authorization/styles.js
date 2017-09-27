@@ -38,7 +38,7 @@ const Header = styled.div`
 Header.displayName = 'Header'
 
 const MainContent = styled.div`
-  padding: 40px 48px 32px;
+  padding: 25px 48px 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -51,7 +51,7 @@ const Inputs = styled.div`
   align-self: stretch;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
 `
 Inputs.displayName = 'Inputs'
 

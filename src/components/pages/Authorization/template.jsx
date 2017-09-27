@@ -116,7 +116,7 @@ class LoginPageTemplate extends React.Component {
                 />
               </InputRow>
             </Inputs>
-            <Button raised color='accent' type='submit' disabled={disabled}>
+            <Button color='accent' type='submit' disabled={disabled}>
               Login
             </Button>
           </MainContent>
