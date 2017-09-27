@@ -63,7 +63,15 @@ class LoginPage extends React.Component {
     loading: false
   }
 
-  checkFieldIsValid(fieldName) {
+  validateFields(fields) {
+    const statuses = fields.reduce((statuses, field) => {
+      statuses.push(this.getFieldValidationStatus(field))
+      return statuses
+    }, [])
+    this.setFieldsValidationStatuses(statuses)
+  }
+
+  getFieldValidationStatus = (fieldName) => {
     const {form} = this.state
     const field = form[fieldName]
 
@@ -82,13 +90,30 @@ class LoginPage extends React.Component {
       }
     }
 
+    return {
+      fieldName,
+      errorText
+    }
+  }
+
+  setFieldsValidationStatuses(statuses) {
+    const {form} = this.state
+    const updatedFields = statuses.reduce((updatedFields, field) => {
+      const {fieldName, errorText} = field
+      const currentField = form[fieldName]
+      return {
+        ...updatedFields,
+        [fieldName]: {
+          ...currentField,
+          error: errorText
+        }
+      }
+    }, {})
+
     this.setState({
       form: {
         ...form,
-        [fieldName]: {
-          ...field,
-          error: errorText
-        }
+        ...updatedFields
       }
     })
   }
@@ -102,6 +127,7 @@ class LoginPage extends React.Component {
   onSubmit = (event) => {
     event.preventDefault()
     if (this.state.loading) return
+    this.validateFields(Object.keys(this.state.form))
 
     if (this.formIsValid(this.state.form)) {
       this.setState({
@@ -142,7 +168,8 @@ class LoginPage extends React.Component {
   }
 
   onInputBlur = (fieldName, event) => {
-    this.checkFieldIsValid(fieldName)
+    const status = this.getFieldValidationStatus(fieldName)
+    this.setFieldsValidationStatuses([status])
   }
 
   render() {
