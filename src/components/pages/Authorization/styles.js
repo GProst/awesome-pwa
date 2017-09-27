@@ -39,7 +39,7 @@ const Header = styled.div`
 Header.displayName = 'Header'
 
 const MainContent = styled.div`
-  padding: 25px 48px 20px;
+  padding: 25px 45px 20px 40px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
