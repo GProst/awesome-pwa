@@ -54,6 +54,7 @@ class LoginPageTemplate extends React.Component {
   render() {
     const {form, loading} = this.props
     const disabled = this.formShowsErrors(form)
+    const tabsDisabled = loading
 
     return (
       <Wrapper>
@@ -75,8 +76,8 @@ class LoginPageTemplate extends React.Component {
             textColor='primary'
             fullWidth
           >
-            <Tab label='Sign In' />
-            <Tab label='Sign Up' />
+            <Tab label='Sign In' disabled={tabsDisabled} />
+            <Tab label='Sign Up' disabled={tabsDisabled} />
           </Tabs>
           <MainContent>
             <Inputs>
