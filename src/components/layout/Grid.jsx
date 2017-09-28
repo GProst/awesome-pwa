@@ -21,7 +21,7 @@ const GridContainer = styled.div`
   
     `
   }}
-  ` // FixMe: this is a wrong indent, try to resolve this with prettier.js
+  ` // FixMe: this is a wrong indent, try to resolve this with prettier.js (in the future maybe, or create issue)
 GridContainer.displayName = 'GridContainer'
 
 export default GridContainer
