@@ -6,6 +6,7 @@ describe('Test that Root component renders correctly', () => {
     LoginPage, LoaderPage, PostListPage, injectGlobal, WebLoader, NODE_ENV, Root, DevTools
 
   // TODO: move mocks to __mocks__ folder for automocking
+  // after this issue is fixed: https://github.com/facebook/jest/issues/2070
   beforeAll(() => {
     NODE_ENV = process.env.NODE_ENV
     jest.mock('../../../theme', () => ({ThemeProvider() { return null }}))
