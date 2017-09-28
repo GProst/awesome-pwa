@@ -29,6 +29,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "styled-components": "^2.1.2",
+    "tcomb": "^3.2.24",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
