@@ -1,4 +1,4 @@
-# PriorityBook web client
+# React web client (in process)
 
 ## Install
 
