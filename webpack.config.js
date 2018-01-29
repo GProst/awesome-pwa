@@ -67,21 +67,8 @@ const config = {
 
     isProd ? new webpack.optimize.ModuleConcatenationPlugin() : null,
 
-    isProd ? new UglifyWebpackPlugin() : null,
+    isProd ? new UglifyWebpackPlugin() : null
 
-    !isProd
-      ? (
-        // This is a workaround for jsondiffpatch lib, which cause warnings, see here:
-        // https://github.com/benjamine/jsondiffpatch/issues/76#issuecomment-261689690
-        // and here:
-        // https://github.com/alexkuz/redux-devtools-inspector/issues/68
-        new webpack.ContextReplacementPlugin(/.*/, path.resolve(__dirname, 'node_modules', 'jsondiffpatch'), {
-          '../package.json': './package.json',
-          './formatters': './src/formatters/index.js',
-          './console': './src/formatters/console.js'
-        })
-      )
-      : null
   ].filter(Boolean),
   module: {
     rules: [

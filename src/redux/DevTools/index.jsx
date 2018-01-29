@@ -1,8 +1,10 @@
 import React from 'react'
 import {createDevTools} from 'redux-devtools'
-import Inspector from 'redux-devtools-inspector'
 import SliderMonitor from 'redux-slider-monitor'
+import Dispatcher from 'redux-devtools-dispatch'
 import DockMonitor from 'redux-devtools-dock-monitor'
+import MultipleMonitors from 'redux-devtools-multiple-monitors'
+import DiffMonitor from 'redux-devtools-diff-monitor'
 
 const DevTools = createDevTools(
   <DockMonitor
@@ -12,7 +14,10 @@ const DevTools = createDevTools(
     defaultPosition='right'
     defaultIsVisible={false}
   >
-    <Inspector />
+    <MultipleMonitors>
+      <DiffMonitor />
+      <Dispatcher />
+    </MultipleMonitors>
     <SliderMonitor keyboardEnabled />
   </DockMonitor>
 )
