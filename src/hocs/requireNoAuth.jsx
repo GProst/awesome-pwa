@@ -28,7 +28,7 @@ export default (WrappedComponent) => {
           if (authToken === null) {
             return <WrappedComponent {...clearedProps} />
           } else {
-            return <Redirect to={{pathname: Routes.goals}} />
+            return <Redirect to={{pathname: Routes.main}} />
           }
         }
       }

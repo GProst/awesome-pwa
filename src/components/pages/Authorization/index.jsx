@@ -137,7 +137,7 @@ class AuthPage extends React.Component {
       this.props.login()
         .then(() => {
           const {state} = this.props.location
-          if (state && state.redirect && state.redirect !== Routes.main) { // we will be automatically redirected to this route
+          if (state && state.redirect && state.redirect !== Routes.main) { // we will be automatically redirected to main route
             this.props.push(state.redirect)
           }
         })
