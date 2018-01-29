@@ -12,10 +12,8 @@ import store from '../redux/store'
 import history from '../history'
 import {Routes} from '../routes'
 
-import Main from './pages/Main'
-import Login from './pages/Authorization/index'
-import Loader from './pages/Loader/index'
-import PostList from './pages/PostList'
+import Goals from './pages/Goals'
+import Auth from './pages/Authorization/index'
 
 class Root extends React.Component {
   renderDevToolsComp() {
@@ -30,11 +28,9 @@ class Root extends React.Component {
           {this.renderDevToolsComp()}
           <ConnectedRouter history={history} store={store}>
             <Switch>
-              <Route exact path={Routes.main} component={Main} />
-              <Route exact path={Routes.authorization} component={Login} />
-              <Route exact path={Routes.fetchingProfileData} component={Loader} />
-              <Route exact path={Routes.postList} component={PostList} />
-              <Redirect to={Routes.main} />
+              <Route exact path={Routes.goals} component={Goals} />
+              <Route exact path={Routes.authorization} component={Auth} />
+              <Redirect to={Routes.goals} />
             </Switch>
           </ConnectedRouter>
         </ErrorHandler>

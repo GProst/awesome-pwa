@@ -3,24 +3,26 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import Button from 'material-ui/Button'
 
+import {Routes} from '../../routes'
+
 import requireAuthAndProfile from '../../hocs/requireAuthAndProfile'
 
 const Wrapper = styled.div`
   color: blue;
 `
 
-class MainPage extends React.Component {
+class GoalsPage extends React.Component {
   render() {
     return (
       <Wrapper>
-        You are in Main page!
+        You are in Goals page!
         <br />
-        <Button component={Link} to='/login'>
-          Go to Login page.
+        <Button component={Link} to={Routes.authorization}>
+          Go to Auth page.
         </Button>
       </Wrapper>
     )
   }
 }
 
-export default requireAuthAndProfile(MainPage)
+export default requireAuthAndProfile(GoalsPage)
