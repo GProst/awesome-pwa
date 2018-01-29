@@ -7,8 +7,8 @@ import {Routes} from '../routes'
 
 const connector = connect(
   state => ({
-    profile: state.profile,
-    authToken: state.auth.token
+    authToken: state.auth.token,
+    location: state.router.location
   })
 )
 
@@ -18,23 +18,19 @@ export default (WrappedComponent) => {
   return (
     connector(
       class extends Component {
-        static displayName = `requireAuthAndNoProfile(${displayName})`
+        static displayName = `requireAuth(${displayName})`
 
         static propTypes = {
-          profile: PropTypes.object,
-          authToken: PropTypes.string
+          authToken: PropTypes.string,
+          location: PropTypes.object.isRequired
         }
 
         render() {
-          const {profile, authToken, ...clearedProps} = this.props
-          if (authToken !== null && profile === null) {
+          const {authToken, location, ...clearedProps} = this.props
+          if (authToken !== null) {
             return <WrappedComponent {...clearedProps} />
           } else {
-            if (authToken === null) {
-              return <Redirect to={{pathname: Routes.authorization}} />
-            } else {
-              return <Redirect to={{pathname: Routes.main}} />
-            }
+            return <Redirect to={{pathname: Routes.authorization, state: {redirect: location.pathname}}} />
           }
         }
       }

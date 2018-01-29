@@ -5,7 +5,7 @@ import Button from 'material-ui/Button'
 
 import {Routes} from '../../routes'
 
-import requireAuthAndProfile from '../../hocs/requireAuthAndProfile'
+import requireAuth from '../../hocs/requireAuth'
 
 const Wrapper = styled.div`
   color: blue;
@@ -25,4 +25,4 @@ class GoalsPage extends React.Component {
   }
 }
 
-export default requireAuthAndProfile(GoalsPage)
+export default requireAuth(GoalsPage)

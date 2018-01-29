@@ -7,8 +7,7 @@ import {Routes} from '../routes'
 
 const connector = connect(
   state => ({
-    authToken: state.auth.token,
-    profile: state.profile
+    authToken: state.auth.token
   })
 )
 
@@ -21,19 +20,15 @@ export default (WrappedComponent) => {
         static displayName = `requireNoAuth(${displayName})`
 
         static propTypes = {
-          authToken: PropTypes.string,
-          profile: PropTypes.object
+          authToken: PropTypes.string
         }
 
         render() {
-          const {authToken, profile, ...clearedProps} = this.props
+          const {authToken, ...clearedProps} = this.props
           if (authToken === null) {
             return <WrappedComponent {...clearedProps} />
           } else {
-            if (profile === null) {
-              return <Redirect to={{pathname: Routes.fetchingProfileData}} />
-            }
-            return <Redirect to={{pathname: Routes.main}} />
+            return <Redirect to={{pathname: Routes.goals}} />
           }
         }
       }
