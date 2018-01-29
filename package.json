@@ -1,6 +1,6 @@
 {
   "name": "priority-book-pwa",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "node": "^8.3.0",
     "npm": "^5.3.0"
@@ -10,8 +10,6 @@
   "scripts": {
     "start": "webpack-dev-server --port 3000 --output-public-path=\"http://localhost:3000/\" --public=\"localhost:3000/\" --hot --inline",
     "build": "webpack",
-    "test": "jest --config ./jest.config.json",
-    "coverage": "jest --coverage --no-cache --config ./jest.config.json",
     "lint": "eslint --ext .js --ext .jsx --ignore-path .gitignore ./",
     "precommit": "lint-staged"
   },
