@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-// TODO: create your own Background (that was taken from Google Sign In page)
 const Wrapper = styled.div`
   left: 0;
   top: 0;
