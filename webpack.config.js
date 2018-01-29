@@ -78,9 +78,6 @@ const config = {
         use: [
           {
             loader: 'babel-loader'
-          },
-          {
-            loader: 'eslint-loader'
           }
         ]
       },
