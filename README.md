@@ -1,4 +1,4 @@
-# React web client (in process)
+# Priority Book PWA
 
 ## Install
 
