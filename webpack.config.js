@@ -90,6 +90,9 @@ const config = {
         ]
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true
   }
 }
 
