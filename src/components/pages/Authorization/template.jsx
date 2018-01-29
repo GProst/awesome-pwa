@@ -12,7 +12,7 @@ import Tabs, {Tab} from 'material-ui/Tabs'
 import Typography from '../../atoms/Typography'
 import {Wrapper, Form, Header, MainContent, Inputs, InputRow, Label, ProgressContainer} from './styles'
 
-class LoginPageTemplate extends React.Component {
+class AuthPageTemplate extends React.Component {
   static propTypes = {
     form: PropTypes.shape({
       email: FieldShape.isRequired,
@@ -126,4 +126,4 @@ class LoginPageTemplate extends React.Component {
   }
 }
 
-export default LoginPageTemplate
+export default AuthPageTemplate
