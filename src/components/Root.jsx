@@ -6,7 +6,6 @@ import {Provider} from 'react-redux'
 import './styles'
 import '../font'
 
-import {ThemeProvider} from '../theme'
 import ErrorHandler from './services/ErrorHandler/index'
 
 import store from '../redux/store'
@@ -27,20 +26,18 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <ThemeProvider>
-          <ErrorHandler>
-            {this.renderDevToolsComp()}
-            <ConnectedRouter history={history} store={store}>
-              <Switch>
-                <Route exact path={Routes.main} component={Main} />
-                <Route exact path={Routes.authorization} component={Login} />
-                <Route exact path={Routes.fetchingProfileData} component={Loader} />
-                <Route exact path={Routes.postList} component={PostList} />
-                <Redirect to={Routes.main} />
-              </Switch>
-            </ConnectedRouter>
-          </ErrorHandler>
-        </ThemeProvider>
+        <ErrorHandler>
+          {this.renderDevToolsComp()}
+          <ConnectedRouter history={history} store={store}>
+            <Switch>
+              <Route exact path={Routes.main} component={Main} />
+              <Route exact path={Routes.authorization} component={Login} />
+              <Route exact path={Routes.fetchingProfileData} component={Loader} />
+              <Route exact path={Routes.postList} component={PostList} />
+              <Redirect to={Routes.main} />
+            </Switch>
+          </ConnectedRouter>
+        </ErrorHandler>
       </Provider>
     )
   }

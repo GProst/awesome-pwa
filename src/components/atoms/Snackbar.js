@@ -38,9 +38,7 @@ class MySnackbar extends React.Component {
     if (status === 'error') {
       this.setState({
         styles: {
-          root: {
-            backgroundColor: this.props.theme.palette.error.A100
-          }
+          root: {}
         }
       })
     }

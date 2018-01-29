@@ -23,9 +23,7 @@ class MyTypography extends React.Component {
       })
     } else {
       this.setState({
-        style: {
-          color: this.props.theme.palette.common[color.payload]
-        }
+        style: {}
       })
     }
   }
