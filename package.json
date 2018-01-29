@@ -1,11 +1,11 @@
 {
-  "name": "priority-book-web-client",
+  "name": "priority-book-pwa",
   "version": "0.0.1",
   "engines": {
     "node": "^8.3.0",
     "npm": "^5.3.0"
   },
-  "description": "",
+  "description": "Priority Book PWA",
   "author": "GProst a.k.a German Prostakov <gprostmail@gmail.com>",
   "scripts": {
     "start": "webpack-dev-server --port 3000 --output-public-path=\"http://localhost:3000/\" --public=\"localhost:3000/\" --hot --inline",
