@@ -8,14 +8,17 @@ import {getAuthInitialState} from '../reducers/auth/index'
 
 export function createStore() {
   const middleware = [routerMiddleware(history), thunk]
-  const toCompose = [applyMiddleware(...middleware)]
+  const toCompose = []
 
   if (process.env.NODE_ENV !== 'production') {
+    const {logger} = require(`redux-logger`)
     const DevTools = require('../DevTools').default
+    middleware.push(logger)
     toCompose.push(DevTools.instrument())
   }
 
-  let enchancer = compose(...toCompose)
+  toCompose.unshift(applyMiddleware(...middleware))
+  let enhancer = compose(...toCompose)
 
   const store = _createStore(combineReducers({
     ...reducers,
@@ -23,7 +26,7 @@ export function createStore() {
   }), {
     auth: getAuthInitialState()
   },
-  enchancer
+  enhancer
   )
 
   if (module.hot) {
