@@ -1,9 +1,9 @@
 import React from 'react'
-import {injectGlobal} from 'styled-components'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import {ConnectedRouter} from 'react-router-redux'
 import {Provider} from 'react-redux'
 
+import './styles'
 import '../font'
 
 import {ThemeProvider} from '../theme'
@@ -17,37 +17,6 @@ import Main from './pages/Main'
 import Login from './pages/Authorization/index'
 import Loader from './pages/Loader/index'
 import PostList from './pages/PostList'
-
-injectGlobal`
-  html {
-    font-size: 16px;
-    font-family: sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-width: 1280px;
-  }
-
-  html.wf-active {
-    font-family: "Roboto", sans-serif;
-  }
-
-  html {
-    height: 100vh;
-  }
-
-  body {
-    height: 100%;
-  }
-
-  #root {
-    height: 100%;
-  }
-  
-  * {
-    margin: 0;
-    padding: 0;
-  }
-`
 
 class Root extends React.Component {
   renderDevToolsComp() {
