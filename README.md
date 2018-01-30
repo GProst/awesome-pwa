@@ -12,6 +12,8 @@ yarn
 yarn run build
 ```
 
+To build production version use `NODE_ENV = 'production'`
+
 ## Start dev server
 
 ```shell
