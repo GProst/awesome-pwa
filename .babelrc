@@ -20,15 +20,6 @@
     ],
     "react"
   ],
-  "env": {
-    "test": {
-      "presets": ["react"],
-      "plugins": [
-        "transform-es2015-modules-commonjs",
-        "transform-class-properties"
-      ]
-    }
-  },
   "plugins": [
     "babel-plugin-styled-components",
     "transform-class-properties",
