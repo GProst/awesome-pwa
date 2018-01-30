@@ -1,9 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
-import Button from 'material-ui/Button'
-
-import {Routes} from '../../routes'
 
 import requireAuth from '../../hocs/requireAuth'
 
@@ -16,10 +12,6 @@ class GoalsPage extends React.Component {
     return (
       <Wrapper>
         You are in Goals page!
-        <br />
-        <Button component={Link} to={Routes.authorization}>
-          Go to Auth page.
-        </Button>
       </Wrapper>
     )
   }

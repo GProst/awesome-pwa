@@ -1,12 +1,10 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import {ConnectedRouter} from 'react-router-redux'
 import {Provider} from 'react-redux'
 
 import './styles'
 import '../font'
-
-import ErrorHandler from './services/ErrorHandler/index'
 
 import store from '../redux/store'
 import history from '../history'
@@ -24,7 +22,7 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <ErrorHandler>
+        <Fragment>
           {this.renderDevToolsComp()}
           <ConnectedRouter history={history} store={store}>
             <Switch>
@@ -33,7 +31,7 @@ class Root extends React.Component {
               <Redirect to={Routes.goals} />
             </Switch>
           </ConnectedRouter>
-        </ErrorHandler>
+        </Fragment>
       </Provider>
     )
   }
