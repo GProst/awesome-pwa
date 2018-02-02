@@ -13,7 +13,7 @@ import {Routes} from '../routes'
 import Goals from './pages/Goals'
 import Auth from './pages/Authorization/index'
 
-import Background from './global/AppBackground'
+import AppBackground from './global/AppBackground'
 
 class Root extends React.Component {
   renderDevToolsComp() {
@@ -24,7 +24,7 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Background>
+        <AppBackground>
           {this.renderDevToolsComp()}
           <ConnectedRouter history={history} store={store}>
             <Switch>
@@ -33,7 +33,7 @@ class Root extends React.Component {
               <Redirect to={Routes.goals} />
             </Switch>
           </ConnectedRouter>
-        </Background>
+        </AppBackground>
       </Provider>
     )
   }
