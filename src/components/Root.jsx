@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import {ConnectedRouter} from 'react-router-redux'
 import {Provider} from 'react-redux'
@@ -13,6 +13,8 @@ import {Routes} from '../routes'
 import Goals from './pages/Goals'
 import Auth from './pages/Authorization/index'
 
+import Background from './global/AppBackground'
+
 class Root extends React.Component {
   renderDevToolsComp() {
     const DevTools = process.env.NODE_ENV === 'production' ? () => null : require('../redux/DevTools').default
@@ -22,7 +24,7 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Fragment>
+        <Background>
           {this.renderDevToolsComp()}
           <ConnectedRouter history={history} store={store}>
             <Switch>
@@ -31,7 +33,7 @@ class Root extends React.Component {
               <Redirect to={Routes.goals} />
             </Switch>
           </ConnectedRouter>
-        </Fragment>
+        </Background>
       </Provider>
     )
   }

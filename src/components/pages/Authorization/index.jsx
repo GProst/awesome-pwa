@@ -12,7 +12,7 @@ import {FieldTypes, isValidField, ErrorTypes} from '../../../form/index'
 import {login} from '../../../redux/genericActions/api/index'
 import {setError} from '../../../redux/reducers/error'
 
-import AuthPageTemplate from './template'
+import AuthPageView from './view'
 
 const connector = connect(
   (state) => ({
@@ -31,7 +31,7 @@ const connector = connect(
   })
 )
 
-class AuthPage extends React.Component {
+class AuthPageComp extends React.Component {
   static propTypes = {
     login: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
@@ -176,7 +176,7 @@ class AuthPage extends React.Component {
     const {form, loading} = this.state
 
     return (
-      <AuthPageTemplate
+      <AuthPageView
         form={form}
         onSubmit={this.onSubmit}
         onInputChange={this.onInputChange}
@@ -187,4 +187,4 @@ class AuthPage extends React.Component {
   }
 }
 
-export default requireNoAuth(connector(AuthPage))
+export default requireNoAuth(connector(AuthPageComp))

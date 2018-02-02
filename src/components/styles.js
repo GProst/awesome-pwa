@@ -5,7 +5,6 @@ injectGlobal`
     font-family: sans-serif; /*fallback*/
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-width: 1280px;
   }
 
   html.wf-active {
@@ -14,10 +13,15 @@ injectGlobal`
 
   html {
     height: 100vh;
+    width: 100vw;
   }
 
   body {
     height: 100%;
+
+    // This is outer background, it is used for outside coloring
+    // (for example on MacOS X you can sharply scroll page and see outside background)
+    background: #8f57b4;
   }
 
   #root {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import {Wrapper} from './styles'
 
-class AuthPageTemplate extends React.Component {
+class AuthPageView extends React.Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onInputChange: PropTypes.func.isRequired,
@@ -45,4 +45,4 @@ class AuthPageTemplate extends React.Component {
   }
 }
 
-export default AuthPageTemplate
+export default AuthPageView
