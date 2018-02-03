@@ -6,7 +6,7 @@ import _capitalize from 'lodash-es/capitalize'
 
 import {Routes} from '../../../routes'
 
-import requireNoAuth from '../../../hocs/requireNoAuth'
+import {requireNoAuth} from '../../../hocs/requireNoAuth'
 
 import {FieldTypes, isValidField, ErrorTypes} from '../../../form/index'
 import {login} from '../../../redux/genericActions/api/index'

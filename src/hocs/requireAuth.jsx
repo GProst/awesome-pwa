@@ -12,7 +12,7 @@ const connector = connect(
   })
 )
 
-export default (WrappedComponent) => {
+export const requireAuth = (WrappedComponent) => {
   const displayName = WrappedComponent.displayName || WrappedComponent.prototype.constructor.name
 
   return (
