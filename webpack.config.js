@@ -67,7 +67,7 @@ const config = {
 
     isProd ? new webpack.optimize.ModuleConcatenationPlugin() : null,
 
-    isProd ? new UglifyWebpackPlugin() : null
+    isProd ? new UglifyWebpackPlugin({sourceMap: true}) : null
 
   ].filter(Boolean),
   module: {
