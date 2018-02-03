@@ -1,7 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import {Container} from './styles'
+import {AuthForm} from './ingredients'
+
+const PageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`
+PageContainer.displayName = 'PageContainer'
 
 class AuthPageView extends React.Component {
   static propTypes = {
@@ -10,7 +22,7 @@ class AuthPageView extends React.Component {
     onInputBlur: PropTypes.func.isRequired
   }
 
-  state = {
+  state = { // TODO: remove state from here as it is VIEW component (stateless)
     tabIndex: 0
   }
 
@@ -38,9 +50,9 @@ class AuthPageView extends React.Component {
 
   render() {
     return (
-      <Container>
-        We are in Auth page
-      </Container>
+      <PageContainer>
+        <AuthForm />
+      </PageContainer>
     )
   }
 }
