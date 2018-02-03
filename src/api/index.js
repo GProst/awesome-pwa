@@ -1,4 +1,4 @@
-class API {
+export const api = {
   login(email, password) {
     return new Promise((resolve, reject) => {
       setTimeout(() => { // TODO: real request
@@ -12,5 +12,3 @@ class API {
       })
   }
 }
-
-export default new API()

@@ -12,7 +12,7 @@ import {FieldTypes, isValidField, ErrorTypes} from '../../../form/index'
 import {login} from '../../../redux/genericActions/api/index'
 import {setError} from '../../../redux/reducers/error'
 
-import AuthPageView from './view'
+import {AuthPageView} from './view'
 
 const connector = connect(
   (state) => ({

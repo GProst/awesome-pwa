@@ -17,7 +17,7 @@ import {AppBackground} from './global/AppBackground'
 
 class Root extends React.Component {
   renderDevToolsComp() {
-    const DevTools = process.env.NODE_ENV === 'production' ? () => null : require('../redux/DevTools').default
+    const DevTools = process.env.NODE_ENV === 'production' ? () => null : require('../redux/DevTools').DevTools
     return <DevTools />
   }
 

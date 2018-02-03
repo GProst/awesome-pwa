@@ -4,7 +4,7 @@ import SliderMonitor from 'redux-slider-monitor'
 import Dispatcher from 'redux-devtools-dispatch'
 import DockMonitor from 'redux-devtools-dock-monitor'
 
-const DevTools = createDevTools(
+export const DevTools = createDevTools(
   <DockMonitor
     toggleVisibilityKey='ctrl-h'
     changePositionKey='ctrl-q'
@@ -16,5 +16,3 @@ const DevTools = createDevTools(
     <SliderMonitor keyboardEnabled />
   </DockMonitor>
 )
-
-export default DevTools

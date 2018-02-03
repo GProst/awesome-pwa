@@ -45,4 +45,6 @@ class AuthPageView extends React.Component {
   }
 }
 
-export default AuthPageView
+export {
+  AuthPageView
+}
