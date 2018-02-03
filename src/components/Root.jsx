@@ -6,8 +6,8 @@ import {Provider} from 'react-redux'
 import './styles'
 import '../font'
 
-import store from '../redux/store'
-import history from '../history'
+import {store} from '../redux/store'
+import {history} from '../history'
 import {Routes} from '../routes'
 
 import {GoalsPage} from './pages/Goals'

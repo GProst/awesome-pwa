@@ -2,7 +2,7 @@ import {createStore as _createStore, applyMiddleware, combineReducers, compose} 
 import {routerMiddleware, routerReducer} from 'react-router-redux'
 import thunk from 'redux-thunk'
 
-import history from '../../history'
+import {history} from '../../history'
 import * as reducers from '../reducers/index'
 import {getAuthInitialState} from '../reducers/auth/index'
 

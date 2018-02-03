@@ -1,5 +1,3 @@
 import {createStore} from './create'
 
-const store = createStore()
-
-export default store
+export const store = createStore()
