@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {Wrapper} from './styles'
+import {Container} from './styles'
 
 class AuthPageView extends React.Component {
   static propTypes = {
@@ -38,9 +38,9 @@ class AuthPageView extends React.Component {
 
   render() {
     return (
-      <Wrapper>
+      <Container>
         We are in Auth page
-      </Wrapper>
+      </Container>
     )
   }
 }

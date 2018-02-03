@@ -3,16 +3,16 @@ import styled from 'styled-components'
 
 import requireAuth from '../../hocs/requireAuth'
 
-const Wrapper = styled.div`
+const Container = styled.div`
   color: blue;
 `
 
 class GoalsPage extends React.Component {
   render() {
     return (
-      <Wrapper>
+      <Container>
         You are in Goals page!
-      </Wrapper>
+      </Container>
     )
   }
 }

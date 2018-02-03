@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
+const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -9,8 +9,8 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
 `
-Wrapper.displayName = 'Wrapper'
+Container.displayName = 'Container'
 
 export {
-  Wrapper
+  Container
 }
