@@ -10,10 +10,10 @@ import store from '../redux/store'
 import history from '../history'
 import {Routes} from '../routes'
 
-import Goals from './pages/Goals'
-import Auth from './pages/Authorization/index'
+import {GoalsPage} from './pages/Goals'
+import {AuthPage} from './pages/Authorization'
 
-import AppBackground from './global/AppBackground'
+import {AppBackground} from './global/AppBackground'
 
 class Root extends React.Component {
   renderDevToolsComp() {
@@ -28,8 +28,8 @@ class Root extends React.Component {
           {this.renderDevToolsComp()}
           <ConnectedRouter history={history} store={store}>
             <Switch>
-              <Route exact path={Routes.goals} component={Goals} />
-              <Route exact path={Routes.authorization} component={Auth} />
+              <Route exact path={Routes.goals} component={GoalsPage} />
+              <Route exact path={Routes.authorization} component={AuthPage} />
               <Redirect to={Routes.goals} />
             </Switch>
           </ConnectedRouter>
@@ -39,4 +39,6 @@ class Root extends React.Component {
   }
 }
 
-export default Root
+export {
+  Root
+}

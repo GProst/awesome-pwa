@@ -17,4 +17,8 @@ class GoalsPage extends React.Component {
   }
 }
 
-export default requireAuth(GoalsPage)
+const GoalsPageGuarded = requireAuth(GoalsPage)
+
+export {
+  GoalsPageGuarded as GoalsPage
+}

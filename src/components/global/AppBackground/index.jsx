@@ -7,4 +7,6 @@ const AppBackground = styled.div`
 `
 AppBackground.displayName = 'AppBackground'
 
-export default AppBackground
+export {
+  AppBackground
+}

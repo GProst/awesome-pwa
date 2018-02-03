@@ -187,4 +187,8 @@ class AuthPageController extends React.Component {
   }
 }
 
-export default requireNoAuth(connector(AuthPageController))
+const AuthPageGuarded = requireNoAuth(connector(AuthPageController))
+
+export {
+  AuthPageGuarded as AuthPage
+}

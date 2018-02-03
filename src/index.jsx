@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 
-import Root from './components/Root'
+import {Root} from './components/Root'
 
 if (process.env.NODE_ENV !== 'production') {
   const {AppContainer} = require('react-hot-loader')
