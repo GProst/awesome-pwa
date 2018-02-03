@@ -21,8 +21,8 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js',
-    chunkFilename: '[name].[chunkhash].js'
+    filename: isProd ? '[name].[chunkhash].js' : '[name].js',
+    chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js'
   },
   resolve: {
     extensions: ['.js', '.jsx']
