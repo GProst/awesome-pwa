@@ -31,7 +31,7 @@ const connector = connect(
   })
 )
 
-class AuthPageComp extends React.Component {
+class AuthPageController extends React.Component {
   static propTypes = {
     login: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
@@ -187,4 +187,4 @@ class AuthPageComp extends React.Component {
   }
 }
 
-export default requireNoAuth(connector(AuthPageComp))
+export default requireNoAuth(connector(AuthPageController))

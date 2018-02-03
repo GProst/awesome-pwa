@@ -1,20 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import AppBackground from './view'
+const AppBackground = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(-135deg, #CE93D8 0%, #4A148C 100%);
+`
+AppBackground.displayName = 'AppBackground'
 
-class AppBackgroundComp extends React.Component {
-  static propTypes = {
-    children: PropTypes.any
-  }
-
-  render() {
-    return (
-      <AppBackground>
-        {this.props.children}
-      </AppBackground>
-    )
-  }
-}
-
-export default AppBackgroundComp
+export default AppBackground

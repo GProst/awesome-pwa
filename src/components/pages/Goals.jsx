@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   color: blue;
 `
 
-class GoalsPageComp extends React.Component {
+class GoalsPage extends React.Component {
   render() {
     return (
       <Wrapper>
@@ -17,4 +17,4 @@ class GoalsPageComp extends React.Component {
   }
 }
 
-export default requireAuth(GoalsPageComp)
+export default requireAuth(GoalsPage)
