@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import {Subscribe, Provider} from 'unstated'
 
-import {AUTH_TYPE} from '../../constants'
+import {AuthPageStateContainer, AUTH_TYPE} from '../../state'
 
 const Container = styled.div`
   display: flex;
@@ -27,17 +28,21 @@ const Button = styled.button`
 `
 
 export const BottomAction = props => {
-  const {authType, className, switchAuthType} = props
+  const {className} = props
   return (
-    <Container className={className}>
-      <Desc>{authType === AUTH_TYPE.signUp ? 'Already have an account?' : 'Don’t have an account?'}</Desc>
-      <Button onClick={switchAuthType}>{authType === AUTH_TYPE.signUp ? 'Sign In' : 'Sign Up'}</Button>
-    </Container>
+    <Provider inject={[new AuthPageStateContainer()]}>
+      <Subscribe to={[AuthPageStateContainer]}>
+        {container => (
+          <Container className={className}>
+            <Desc>{container.state.authType === AUTH_TYPE.signUp ? 'Already have an account?' : 'Don’t have an account?'}</Desc>
+            <Button onClick={container.switchAuthType}>{container.state.authType === AUTH_TYPE.signUp ? 'Sign In' : 'Sign Up'}</Button>
+          </Container>
+        )}
+      </Subscribe>
+    </Provider>
   )
 }
 BottomAction.displayName = 'BottomAction'
 BottomAction.propTypes = {
-  switchAuthType: PropTypes.func.isRequired,
-  className: PropTypes.string,
-  authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
+  className: PropTypes.string
 }
