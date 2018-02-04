@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import {AuthForm, LogoWithTitle as _LogoWithTitle} from './ingredients'
+import {AuthForm} from './AuthForm'
+import {LogoWithTitle as _LogoWithTitle} from './LogoWithTitle'
 
 const PageContainer = styled.div`
   width: 100%;
