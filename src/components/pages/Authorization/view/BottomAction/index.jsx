@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import {Subscribe, Provider} from 'unstated'
+import {Subscribe} from 'unstated'
 
 import {AuthPageStateContainer, AUTH_TYPE} from '../../state'
 
@@ -30,16 +30,14 @@ const Button = styled.button`
 export const BottomAction = props => {
   const {className} = props
   return (
-    <Provider inject={[new AuthPageStateContainer()]}>
-      <Subscribe to={[AuthPageStateContainer]}>
-        {container => (
-          <Container className={className}>
-            <Desc>{container.state.authType === AUTH_TYPE.signUp ? 'Already have an account?' : 'Don’t have an account?'}</Desc>
-            <Button onClick={container.switchAuthType}>{container.state.authType === AUTH_TYPE.signUp ? 'Sign In' : 'Sign Up'}</Button>
-          </Container>
-        )}
-      </Subscribe>
-    </Provider>
+    <Subscribe to={[AuthPageStateContainer]}>
+      {container => (
+        <Container className={className}>
+          <Desc>{container.state.authType === AUTH_TYPE.signUp ? 'Already have an account?' : 'Don’t have an account?'}</Desc>
+          <Button onClick={container.switchAuthType}>{container.state.authType === AUTH_TYPE.signUp ? 'Sign In' : 'Sign Up'}</Button>
+        </Container>
+      )}
+    </Subscribe>
   )
 }
 BottomAction.displayName = 'BottomAction'
