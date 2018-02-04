@@ -8,6 +8,8 @@ const Container = styled.div`
 `
 
 class GoalsPage extends React.Component {
+  static displayName = 'GoalsPage'
+
   render() {
     return (
       <Container>

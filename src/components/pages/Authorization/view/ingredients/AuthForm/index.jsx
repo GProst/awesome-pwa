@@ -8,4 +8,3 @@ export const AuthForm = styled.div`
   max-width: 360px;
   box-sizing: border-box;
 `
-AuthForm.displayName = 'AuthForm'

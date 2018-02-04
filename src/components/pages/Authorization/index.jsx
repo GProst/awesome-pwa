@@ -32,6 +32,8 @@ const connector = connect(
 )
 
 class AuthPageController extends React.Component {
+  static displayName = 'AuthPageController'
+
   static propTypes = {
     login: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,

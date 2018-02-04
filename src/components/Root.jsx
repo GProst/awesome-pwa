@@ -16,6 +16,8 @@ import {AuthPage} from './pages/Authorization'
 import {AppBackground} from './global/AppBackground'
 
 class Root extends React.Component {
+  static displayName = 'Root'
+
   renderDevToolsComp() {
     const DevTools = process.env.NODE_ENV === 'production' ? () => null : require('../redux/DevTools').DevTools
     return <DevTools />

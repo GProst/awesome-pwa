@@ -13,9 +13,18 @@ const PageContainer = styled.div`
   align-items: center;
   position: relative;
 `
-PageContainer.displayName = 'PageContainer'
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`
 
 class AuthPageView extends React.Component {
+  static displayName = 'AuthPageView'
+
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onInputChange: PropTypes.func.isRequired,
@@ -51,7 +60,9 @@ class AuthPageView extends React.Component {
   render() {
     return (
       <PageContainer>
-        <AuthForm />
+        <Content>
+          <AuthForm />
+        </Content>
       </PageContainer>
     )
   }
