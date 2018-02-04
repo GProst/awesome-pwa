@@ -27,7 +27,7 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  devtool: isProd ? 'source-map' : 'eval-source-map',
+  devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin({
       process: {
