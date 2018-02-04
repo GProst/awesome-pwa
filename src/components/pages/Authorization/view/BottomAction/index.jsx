@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import {Link as _Link} from 'react-router-dom'
 import {Subscribe} from 'unstated'
 
 import {AuthPageStateContainer, AUTH_TYPE} from '../../state'
@@ -18,25 +19,32 @@ const Desc = styled.span`
   line-height: 24px;
 `
 
-const Button = styled.button`
+const Link = styled(_Link)`
   font-size: 16px;
   color: #64FFDA; // TODO: create our color palette and use colors from there
   font-weight: bold;
   background: none;
   border: none;
   outline: none;
+  text-decoration: none;
 `
 
 export const BottomAction = props => {
   const {className} = props
   return (
     <Subscribe to={[AuthPageStateContainer]}>
-      {container => (
-        <Container className={className}>
-          <Desc>{container.state.authType === AUTH_TYPE.signUp ? 'Already have an account?' : 'Don’t have an account?'}</Desc>
-          <Button onClick={container.switchAuthType}>{container.state.authType === AUTH_TYPE.signUp ? 'Sign In' : 'Sign Up'}</Button>
-        </Container>
-      )}
+      {container => {
+        const {authType} = container.state
+        const isSignUp = authType === AUTH_TYPE.signUp
+        return (
+          <Container className={className}>
+            <Desc>{isSignUp ? 'Already have an account?' : 'Don’t have an account?'}</Desc>
+            <Link to={`/authorization?authType=${isSignUp ? AUTH_TYPE.signIn : AUTH_TYPE.signUp}`}>
+              {isSignUp ? 'Sign In' : 'Sign Up'}
+            </Link>
+          </Container>
+        )
+      }}
     </Subscribe>
   )
 }

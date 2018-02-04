@@ -1,8 +1,8 @@
 import {Container} from 'unstated'
 
 export const AUTH_TYPE = {
-  signUp: 0,
-  signIn: 1
+  signUp: 'sign-up',
+  signIn: 'sign-in'
 }
 
 export class AuthPageStateContainer extends Container {
@@ -10,9 +10,11 @@ export class AuthPageStateContainer extends Container {
     authType: AUTH_TYPE.signUp
   }
 
-  switchAuthType = () => {
-    this.setState({
-      authType: this.state.authType === AUTH_TYPE.signUp ? AUTH_TYPE.signIn : AUTH_TYPE.signUp
-    })
+  setAuthType = (authType) => {
+    if (authType !== this.state.authType && Object.values(AUTH_TYPE).includes(authType)) {
+      this.setState({
+        authType
+      })
+    }
   }
 }
