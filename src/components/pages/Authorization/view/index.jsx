@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import {AuthForm} from './ingredients'
+import {AuthForm, LogoWithTitle as _LogoWithTitle} from './ingredients'
 
 const PageContainer = styled.div`
   width: 100%;
@@ -20,6 +20,11 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+`
+
+const LogoWithTitle = styled(_LogoWithTitle)`
+  width: 132px;
+  margin-bottom: 28px;
 `
 
 class AuthPageView extends React.Component {
@@ -61,6 +66,7 @@ class AuthPageView extends React.Component {
     return (
       <PageContainer>
         <Content>
+          <LogoWithTitle />
           <AuthForm />
         </Content>
       </PageContainer>
