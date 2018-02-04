@@ -14,7 +14,7 @@ export const getAuthInitialState = () => {
   return {...defaultState, token: window.__JWT__ || defaultState.token}
 }
 
-export const auth = (previousState = defaultState, action) => {
+export default (previousState = defaultState, action) => {
   switch (action.type) {
     case CLEAR_TOKEN:
       return {

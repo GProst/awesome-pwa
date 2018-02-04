@@ -1,2 +1,1 @@
-export {auth} from './auth'
-export {error} from './error'
+export {default as auth} from './auth'
