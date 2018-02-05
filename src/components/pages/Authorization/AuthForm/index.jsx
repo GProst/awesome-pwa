@@ -1,6 +1,9 @@
+import React from 'react'
 import styled from 'styled-components'
 
-export const AuthForm = styled.div`
+import {Inputs} from './Inputs'
+
+export const Container = styled.div`
   background: white;
   border-radius: 19px;
   padding: 38px 28px;
@@ -8,3 +11,15 @@ export const AuthForm = styled.div`
   max-width: 360px;
   box-sizing: border-box;
 `
+
+export class AuthForm extends React.Component {
+  static displayName = 'AuthForm'
+
+  render() {
+    return (
+      <Container>
+        <Inputs />
+      </Container>
+    )
+  }
+}
