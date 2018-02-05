@@ -3,9 +3,6 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import {ConnectedRouter} from 'react-router-redux'
 import {Provider} from 'react-redux'
 
-import './styles'
-import '../font'
-
 import {store} from '../redux/store'
 import {history} from '../history'
 import {Routes} from '../routes'
