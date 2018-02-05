@@ -33,8 +33,8 @@ export const BottomAction = props => {
   const {className} = props
   return (
     <Subscribe to={[AuthPageStateContainer]}>
-      {container => {
-        const {authType} = container.state
+      {stateContainer => {
+        const {authType} = stateContainer.state
         const isSignUp = authType === AUTH_TYPE.signUp
         return (
           <Container className={className}>
