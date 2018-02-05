@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {Link as _Link} from 'react-router-dom'
 import {Subscribe} from 'unstated'
 
-import {AuthPageStateContainer, AUTH_TYPE} from '../../state'
+import {AuthPageStateContainer, AUTH_TYPE} from '../state'
 
 const Container = styled.div`
   display: flex;

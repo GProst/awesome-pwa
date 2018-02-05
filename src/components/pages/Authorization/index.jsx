@@ -1,13 +1,43 @@
 import React from 'react'
+import styled from 'styled-components'
 import queryString from 'query-string'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Provider} from 'unstated'
 
 import {requireNoAuth} from '../../../hocs/requireNoAuth'
-
-import {AuthPageView} from './view'
 import {AuthPageStateContainer} from './state'
+
+import {AuthForm} from './AuthForm'
+import {BottomAction as _BottomAction} from './BottomAction'
+import {LogoWithTitle as _LogoWithTitle} from './LogoWithTitle'
+
+const PageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`
+
+const LogoWithTitle = styled(_LogoWithTitle)`
+  width: 132px;
+  margin-bottom: 28px;
+`
+
+const BottomAction = styled(_BottomAction)`
+  margin-top: 28px;
+`
 
 const authPageStateContainer = new AuthPageStateContainer()
 
@@ -20,8 +50,8 @@ const connector = connect(
   }
 )
 
-class AuthPageController extends React.Component {
-  static displayName = 'AuthPageController'
+class AuthPage extends React.Component {
+  static displayName = 'AuthPage'
 
   static propTypes = {
     authType: PropTypes.string
@@ -42,13 +72,19 @@ class AuthPageController extends React.Component {
   render() {
     return (
       <Provider inject={[authPageStateContainer]}>
-        <AuthPageView />
+        <PageContainer>
+          <Content>
+            <LogoWithTitle />
+            <AuthForm />
+            <BottomAction />
+          </Content>
+        </PageContainer>
       </Provider>
     )
   }
 }
 
-const AuthPageGuarded = requireNoAuth(connector(AuthPageController))
+const AuthPageGuarded = requireNoAuth(connector(AuthPage))
 
 export {
   AuthPageGuarded as AuthPage
