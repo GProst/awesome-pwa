@@ -21,7 +21,7 @@ const Desc = styled.span`
 
 const Link = styled(_Link)`
   font-size: 16px;
-  color: #64FFDA; // TODO: create our color palette and use colors from there
+  color: #64FFDA;
   font-weight: bold;
   background: none;
   border: none;
