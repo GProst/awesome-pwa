@@ -60,6 +60,7 @@ export class Inputs extends React.Component {
                   </IconContainer>
                   <TextField
                     label='Full Name'
+                    autoComplete='name'
                     placeholder='John Doe'
                     fullWidth
                     InputLabelProps={{
@@ -76,6 +77,7 @@ export class Inputs extends React.Component {
                 <TextField
                   label='Email'
                   placeholder='johndoe@example.com'
+                  autoComplete='email'
                   fullWidth
                   InputLabelProps={{
                     shrink: true
@@ -90,6 +92,7 @@ export class Inputs extends React.Component {
                 <TextField
                   type={this.state.showPassword ? 'text' : 'password'}
                   label='Password'
+                  autoComplete={isSignUp ? 'new-password' : 'current-password'}
                   fullWidth
                   InputLabelProps={{
                     shrink: true
