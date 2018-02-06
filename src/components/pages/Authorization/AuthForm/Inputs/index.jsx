@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import TextField from 'material-ui/TextField'
+import {InputAdornment} from 'material-ui/Input'
+import IconButton from 'material-ui/IconButton'
 
 import {MaterialIcon} from '../../../../reusable/MaterialIcon'
 
@@ -31,6 +33,16 @@ const IconContainer = styled.div`
 
 export class Inputs extends React.Component {
   static displayName = 'Inputs'
+
+  state = {
+    showPassword: false
+  }
+
+  togglePasswordVisibility = () => {
+    this.setState({
+      showPassword: !this.state.showPassword
+    })
+  }
 
   render() {
     return (
@@ -68,13 +80,28 @@ export class Inputs extends React.Component {
             <MaterialIcon name='Lock' />
           </IconContainer>
           <TextField
-            type='password'
+            type={this.state.showPassword ? 'text' : 'password'}
             label='Password'
             fullWidth
             InputLabelProps={{
               shrink: true
             }}
             helperText=' '
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    onClick={this.togglePasswordVisibility}
+                    style={{
+                      color: 'black',
+                      width: '28px'
+                    }}
+                  >
+                    {this.state.showPassword ? <MaterialIcon name='VisibilityOff' /> : <MaterialIcon name='Visibility' />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
           />
         </InputContainer>
       </Container>
