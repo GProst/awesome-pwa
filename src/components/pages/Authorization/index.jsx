@@ -11,16 +11,7 @@ import {AuthPageStateContainer} from './state'
 import {AuthForm} from './AuthForm'
 import {BottomAction as _BottomAction} from './BottomAction'
 import {LogoWithTitle as _LogoWithTitle} from './LogoWithTitle'
-
-const PageContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-`
+import {PageContainer} from '../../reusable/PageContainer'
 
 const Content = styled.div`
   display: flex;
@@ -28,6 +19,16 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  
+  ${props => {
+    if (process.env.isMobile === true) {
+      return `
+        @media screen and (orientation: landscape) {
+          padding: 40px 0;
+        }
+      `
+    }
+  }}
 `
 
 const LogoWithTitle = styled(_LogoWithTitle)`
