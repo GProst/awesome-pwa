@@ -6,6 +6,7 @@ import {Provider} from 'react-redux'
 import {store} from '../redux/store'
 import {history} from '../history'
 import {Routes} from '../routes'
+import {ThemeProvider} from './ThemeProvider'
 
 import {GoalsPage} from './pages/Goals'
 import {AuthPage} from './pages/Authorization'
@@ -23,16 +24,18 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <AppBackground>
-          {this.renderDevToolsComp()}
-          <ConnectedRouter history={history} store={store}>
-            <Switch>
-              <Route exact path={Routes.goals} component={GoalsPage} />
-              <Route exact path={Routes.authorization} component={AuthPage} />
-              <Redirect to={Routes.goals} />
-            </Switch>
-          </ConnectedRouter>
-        </AppBackground>
+        <ThemeProvider>
+          <AppBackground>
+            {this.renderDevToolsComp()}
+            <ConnectedRouter history={history} store={store}>
+              <Switch>
+                <Route exact path={Routes.goals} component={GoalsPage} />
+                <Route exact path={Routes.authorization} component={AuthPage} />
+                <Redirect to={Routes.goals} />
+              </Switch>
+            </ConnectedRouter>
+          </AppBackground>
+        </ThemeProvider>
       </Provider>
     )
   }
