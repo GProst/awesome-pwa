@@ -10,7 +10,7 @@ export const Link = styled(_Link)`
   align-self: flex-end;
   
   :hover {
-    text-decoration: underline;
+    color: #9C27B0;
   }
 `
 
