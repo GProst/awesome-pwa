@@ -17,7 +17,7 @@ class Root extends React.Component {
   static displayName = 'Root'
 
   renderDevToolsComp() {
-    const DevTools = process.env.NODE_ENV === 'production' ? () => null : require('../redux/DevTools').DevTools
+    const DevTools = process.env.NODE_ENV === 'production' ? () => null : require('./global/DevTools').DevTools
     return <DevTools />
   }
 
