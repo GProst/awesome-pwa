@@ -17,6 +17,11 @@ const styles = {
   },
   raisedPrimary: {
     ...commonButtonStyles
+  },
+  disabled: {
+    ...commonButtonStyles,
+    color: 'rgba(0, 0, 0, 0.26)!important',
+    backgroundColor: 'rgba(0, 0, 0, 0.12)!important'
   }
 }
 
