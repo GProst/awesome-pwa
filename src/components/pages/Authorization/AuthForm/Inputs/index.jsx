@@ -3,8 +3,10 @@ import styled from 'styled-components'
 import TextField from 'material-ui/TextField'
 import {InputAdornment} from 'material-ui/Input'
 import IconButton from 'material-ui/IconButton'
+import {Subscribe} from 'unstated'
 
 import {MaterialIcon} from '../../../../reusable/MaterialIcon'
+import {AuthPageStateContainer, AUTH_TYPE} from '../../state'
 
 const Container = styled.div`
   width: 100%;
@@ -46,65 +48,74 @@ export class Inputs extends React.Component {
 
   render() {
     return (
-      <Container>
-        <InputContainer>
-          <IconContainer>
-            <MaterialIcon name='AccountBox' />
-          </IconContainer>
-          <TextField
-            label='Full Name'
-            placeholder='John Doe'
-            fullWidth
-            InputLabelProps={{
-              shrink: true
-            }}
-            helperText=' '
-          />
-        </InputContainer>
-        <InputContainer>
-          <IconContainer>
-            <MaterialIcon name='Email' />
-          </IconContainer>
-          <TextField
-            label='Email'
-            placeholder='johndoe@example.com'
-            fullWidth
-            InputLabelProps={{
-              shrink: true
-            }}
-            helperText=' '
-          />
-        </InputContainer>
-        <InputContainer>
-          <IconContainer>
-            <MaterialIcon name='Lock' />
-          </IconContainer>
-          <TextField
-            type={this.state.showPassword ? 'text' : 'password'}
-            label='Password'
-            fullWidth
-            InputLabelProps={{
-              shrink: true
-            }}
-            helperText=' '
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position='end'>
-                  <IconButton
-                    onClick={this.togglePasswordVisibility}
-                    style={{
-                      color: 'black',
-                      width: '28px'
+      <Subscribe to={[AuthPageStateContainer]}>
+        {stateContainer => {
+          const isSignUp = stateContainer.state.authType === AUTH_TYPE.signUp
+          return (
+            <Container>
+              {isSignUp && (
+                <InputContainer>
+                  <IconContainer>
+                    <MaterialIcon name='AccountBox' />
+                  </IconContainer>
+                  <TextField
+                    label='Full Name'
+                    placeholder='John Doe'
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true
                     }}
-                  >
-                    {this.state.showPassword ? <MaterialIcon name='VisibilityOff' /> : <MaterialIcon name='Visibility' />}
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-          />
-        </InputContainer>
-      </Container>
+                    helperText=' '
+                  />
+                </InputContainer>
+              )}
+              <InputContainer>
+                <IconContainer>
+                  <MaterialIcon name='Email' />
+                </IconContainer>
+                <TextField
+                  label='Email'
+                  placeholder='johndoe@example.com'
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  helperText=' '
+                />
+              </InputContainer>
+              <InputContainer>
+                <IconContainer>
+                  <MaterialIcon name='Lock' />
+                </IconContainer>
+                <TextField
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  label='Password'
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  helperText=' '
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <IconButton
+                          onClick={this.togglePasswordVisibility}
+                          style={{
+                            color: 'black',
+                            width: '28px'
+                          }}
+                        >
+                          {this.state.showPassword ? <MaterialIcon name='VisibilityOff' /> : <MaterialIcon name='Visibility' />}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </InputContainer>
+            </Container>
+          )
+        }}
+      </Subscribe>
     )
   }
 }
