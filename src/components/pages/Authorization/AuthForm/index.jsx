@@ -6,7 +6,7 @@ import {Inputs} from './Inputs'
 export const Container = styled.div`
   background: white;
   border-radius: 19px;
-  padding: 38px 28px;
+  padding: 38px 36px;
   width: 85vw;
   max-width: 360px;
   box-sizing: border-box;
