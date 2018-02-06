@@ -4,6 +4,8 @@ import {Subscribe} from 'unstated'
 
 import {Inputs} from './Inputs'
 import {ForgotPasswordLink} from './ForgotPasswordLink'
+import {SubmitButton} from './SubmitButton'
+
 import {AuthPageStateContainer, AUTH_TYPE} from '../state'
 
 export const Container = styled.div`
@@ -31,6 +33,7 @@ export class AuthForm extends React.Component {
             {stateContainer.state.authType === AUTH_TYPE.signIn && (
               <ForgotPasswordLink />
             )}
+            <SubmitButton authType={stateContainer.state.authType} />
           </Container>
         )}
       </Subscribe>
