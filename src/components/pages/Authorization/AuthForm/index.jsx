@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Subscribe} from 'unstated'
 
 import {Inputs} from './Inputs'
+import {ForgotPasswordLink} from './ForgotPasswordLink'
+import {AuthPageStateContainer, AUTH_TYPE} from '../state'
 
 export const Container = styled.div`
   background: white;
@@ -10,6 +13,10 @@ export const Container = styled.div`
   width: 85vw;
   max-width: 360px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export class AuthForm extends React.Component {
@@ -17,9 +24,16 @@ export class AuthForm extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Inputs />
-      </Container>
+      <Subscribe to={[AuthPageStateContainer]}>
+        {stateContainer => (
+          <Container>
+            <Inputs />
+            {stateContainer.state.authType === AUTH_TYPE.signIn && (
+              <ForgotPasswordLink />
+            )}
+          </Container>
+        )}
+      </Subscribe>
     )
   }
 }
