@@ -6,7 +6,7 @@ import {Provider} from 'react-redux'
 import {store} from '../redux/store'
 import {history} from '../history'
 import {Routes} from '../routes'
-import {ThemeProvider} from './ThemeProvider'
+import {ThemeProvider} from './global/ThemeProvider'
 
 import {GoalsPage} from './pages/Goals'
 import {AuthPage} from './pages/Authorization'
