@@ -35,7 +35,7 @@ export class Action extends React.Component {
     linkText: PropTypes.string.isRequired,
     toAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    transitionStatus: PropTypes.oneOf(['entering', 'entered', 'exiting', 'exited']).isRequired,
+    onceMounted: PropTypes.bool,
     toggleAction: PropTypes.func.isRequired,
     onTransitionEnd: PropTypes.func.isRequired
   }
@@ -45,7 +45,7 @@ export class Action extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.transitionStatus !== 'entered') {
+    if (this.props.onceMounted) {
       const {animOpacity} = this.state
       animOpacity.setValue(0)
       Animated.sequence([

@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TransitionGroup from 'react-transition-group/TransitionGroup'
-import Transition from 'react-transition-group/Transition'
 
+import {EnterState} from '../../../../lib/react-once-mounted'
 import {Action} from './Action'
 import {AUTH_TYPE} from '../stateAuthPage'
 
@@ -44,38 +43,30 @@ export class BottomAction extends React.Component {
     const {actionView} = this.state
     return (
       <div ref={(elem) => { this.container = elem }} className={className} style={{height: this.state.height}}>
-        <TransitionGroup>
+        <EnterState>
           {actionView === AUTH_TYPE.signUp && (
-            <Transition timeout={{enter: 125, exit: 0}} key='signUp'>
-              {(status) => (
-                <Action
-                  desc='Already have an account?'
-                  linkText='Sign In'
-                  toAuthType={AUTH_TYPE.signIn}
-                  authType={authType}
-                  transitionStatus={status}
-                  toggleAction={this.toggleAction}
-                  onTransitionEnd={this.onTransitionEnd}
-                />
-              )}
-            </Transition>
+            <Action
+              key='signUp'
+              desc='Already have an account?'
+              linkText='Sign In'
+              toAuthType={AUTH_TYPE.signIn}
+              authType={authType}
+              toggleAction={this.toggleAction}
+              onTransitionEnd={this.onTransitionEnd}
+            />
           )}
           {actionView === AUTH_TYPE.signIn && (
-            <Transition timeout={{enter: 125, exit: 0}} key='signIn'>
-              {(status) => (
-                <Action
-                  desc='Don’t have an account?'
-                  linkText='Sign Up'
-                  toAuthType={AUTH_TYPE.signUp}
-                  authType={authType}
-                  transitionStatus={status}
-                  toggleAction={this.toggleAction}
-                  onTransitionEnd={this.onTransitionEnd}
-                />
-              )}
-            </Transition>
+            <Action
+              key='signIn'
+              desc='Don’t have an account?'
+              linkText='Sign Up'
+              toAuthType={AUTH_TYPE.signUp}
+              authType={authType}
+              toggleAction={this.toggleAction}
+              onTransitionEnd={this.onTransitionEnd}
+            />
           )}
-        </TransitionGroup>
+        </EnterState>
       </div>
     )
   }
