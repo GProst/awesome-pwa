@@ -1,54 +1,82 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import {Link as _Link} from 'react-router-dom'
-import {Subscribe} from 'unstated'
+import TransitionGroup from 'react-transition-group/TransitionGroup'
+import Transition from 'react-transition-group/Transition'
 
-import {AuthPageStateContainer, AUTH_TYPE} from '../stateAuthPage'
+import {Action} from './Action'
+import {AUTH_TYPE} from '../stateAuthPage'
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
+export class BottomAction extends React.Component {
+  static displayName = 'BottomAction'
 
-const Desc = styled.span`
-  font-size: 14px;
-  color: white;
-  line-height: 24px;
-`
+  static propTypes = {
+    className: PropTypes.string,
+    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
+  }
 
-const Link = styled(_Link)`
-  font-size: 16px;
-  color: #64FFDA;
-  font-weight: bold;
-  background: none;
-  border: none;
-  outline: none;
-  text-decoration: none;
-`
+  state = {
+    height: 'auto',
+    actionView: this.props.authType
+  }
 
-export const BottomAction = props => {
-  const {className} = props
-  return (
-    <Subscribe to={[AuthPageStateContainer]}>
-      {stateContainer => {
-        const {authType} = stateContainer.state
-        const isSignUp = authType === AUTH_TYPE.signUp
-        return (
-          <Container className={className}>
-            <Desc>{isSignUp ? 'Already have an account?' : 'Don’t have an account?'}</Desc>
-            <Link to={`/authorization?authType=${isSignUp ? AUTH_TYPE.signIn : AUTH_TYPE.signUp}`}>
-              {isSignUp ? 'Sign In' : 'Sign Up'}
-            </Link>
-          </Container>
-        )
-      }}
-    </Subscribe>
-  )
-}
-BottomAction.displayName = 'BottomAction'
-BottomAction.propTypes = {
-  className: PropTypes.string
+  toggleAction = () => {
+    this.setState({
+      actionView: this.state.actionView === AUTH_TYPE.signUp ? AUTH_TYPE.signIn : AUTH_TYPE.signUp
+    })
+  }
+
+  onTransitionEnd = () => {
+    this.setState({
+      height: 'auto'
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.authType !== nextProps.authType) {
+      this.setState({
+        height: this.container.offsetHeight
+      })
+    }
+  }
+
+  render() {
+    const {className, authType} = this.props
+    const {actionView} = this.state
+    return (
+      <div ref={(elem) => { this.container = elem }} className={className} style={{height: this.state.height}}>
+        <TransitionGroup>
+          {actionView === AUTH_TYPE.signUp && (
+            <Transition timeout={{enter: 125, exit: 0}} key='signUp'>
+              {(status) => (
+                <Action
+                  desc='Already have an account?'
+                  linkText='Sign In'
+                  toAuthType={AUTH_TYPE.signIn}
+                  authType={authType}
+                  transitionStatus={status}
+                  toggleAction={this.toggleAction}
+                  onTransitionEnd={this.onTransitionEnd}
+                />
+              )}
+            </Transition>
+          )}
+          {actionView === AUTH_TYPE.signIn && (
+            <Transition timeout={{enter: 125, exit: 0}} key='signIn'>
+              {(status) => (
+                <Action
+                  desc='Don’t have an account?'
+                  linkText='Sign Up'
+                  toAuthType={AUTH_TYPE.signUp}
+                  authType={authType}
+                  transitionStatus={status}
+                  toggleAction={this.toggleAction}
+                  onTransitionEnd={this.onTransitionEnd}
+                />
+              )}
+            </Transition>
+          )}
+        </TransitionGroup>
+      </div>
+    )
+  }
 }

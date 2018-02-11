@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import queryString from 'query-string'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Provider} from 'unstated'
+import {Provider, Subscribe} from 'unstated'
 
 import {requireNoAuth} from '../../../hocs/requireNoAuth'
 import {AuthPageStateContainer} from './stateAuthPage'
@@ -73,13 +73,17 @@ class AuthPage extends React.Component {
   render() {
     return (
       <Provider inject={[authPageStateContainer]}>
-        <PageContainer>
-          <Content>
-            <LogoWithTitle />
-            <AuthForm />
-            <BottomAction />
-          </Content>
-        </PageContainer>
+        <Subscribe to={[AuthPageStateContainer]}>
+          {stateContainer => (
+            <PageContainer>
+              <Content>
+                <LogoWithTitle />
+                <AuthForm />
+                <BottomAction authType={stateContainer.state.authType} />
+              </Content>
+            </PageContainer>
+          )}
+        </Subscribe>
       </Provider>
     )
   }
