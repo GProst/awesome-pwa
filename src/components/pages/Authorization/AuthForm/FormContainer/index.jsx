@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../../stateAuthPage'
-import {duration, easeOut} from '../../animAuthPage'
+import {baseDuration, easeOut} from '../../animAuthPage'
 
 export class FormContainer extends React.Component {
   static displayName = 'FormContainer'
@@ -24,7 +24,7 @@ export class FormContainer extends React.Component {
     Animated.timing(this.state.animHeight, {
       toValue: nextHeight,
       easing: easeOut,
-      duration
+      duration: baseDuration
     })
       .start(({finished}) => {
         if (finished) {
