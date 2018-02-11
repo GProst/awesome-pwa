@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button'
 import {withStyles} from 'material-ui/styles'
 
-import {AUTH_TYPE} from '../../StateAuthPage'
+import {AUTH_TYPE} from '../../stateAuthPage'
 
 const commonButtonStyles = {
   marginTop: '15px',

@@ -6,7 +6,7 @@ import {ForgotPasswordLink} from './ForgotPasswordLink'
 import {SubmitButton} from './SubmitButton'
 import {FormContainer} from './FormContainer'
 
-import {AuthPageStateContainer, AUTH_TYPE} from '../StateAuthPage'
+import {AuthPageStateContainer, AUTH_TYPE} from '../stateAuthPage'
 
 export class AuthForm extends React.Component {
   static displayName = 'AuthForm'
