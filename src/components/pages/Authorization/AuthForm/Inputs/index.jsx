@@ -6,7 +6,7 @@ import IconButton from 'material-ui/IconButton'
 import {Subscribe} from 'unstated'
 
 import {MaterialIcon} from '../../../../reusable/MaterialIcon'
-import {AuthPageStateContainer, AUTH_TYPE} from '../../state'
+import {AuthPageStateContainer, AUTH_TYPE} from '../../StateAuthPage'
 
 const Container = styled.div`
   width: 100%;

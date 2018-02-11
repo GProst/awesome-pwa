@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {Provider} from 'unstated'
 
 import {requireNoAuth} from '../../../hocs/requireNoAuth'
-import {AuthPageStateContainer} from './state'
+import {AuthPageStateContainer} from './StateAuthPage'
 
 import {AuthForm} from './AuthForm'
 import {BottomAction as _BottomAction} from './BottomAction'

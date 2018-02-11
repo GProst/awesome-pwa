@@ -6,7 +6,7 @@ import {Inputs} from './Inputs'
 import {ForgotPasswordLink} from './ForgotPasswordLink'
 import {SubmitButton} from './SubmitButton'
 
-import {AuthPageStateContainer, AUTH_TYPE} from '../state'
+import {AuthPageStateContainer, AUTH_TYPE} from '../StateAuthPage'
 
 export const Container = styled.div`
   background: white;
