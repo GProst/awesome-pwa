@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export class EnterState extends React.Component {
-  static displayName = 'EnterState'
+export class OnceMounted extends React.Component {
+  static displayName = 'OnceMounted'
 
   static propTypes = {
     children: PropTypes.node.isRequired

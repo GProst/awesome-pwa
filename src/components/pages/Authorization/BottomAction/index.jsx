@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {EnterState} from '../../../../lib/react-once-mounted'
+import {OnceMounted} from '../../../../lib/react-once-mounted'
 import {Action} from './Action'
 import {AUTH_TYPE} from '../stateAuthPage'
 
@@ -43,7 +43,7 @@ export class BottomAction extends React.Component {
     const {actionView} = this.state
     return (
       <div ref={(elem) => { this.container = elem }} className={className} style={{height: this.state.height}}>
-        <EnterState>
+        <OnceMounted>
           {actionView === AUTH_TYPE.signUp && (
             <Action
               key='signUp'
@@ -66,7 +66,7 @@ export class BottomAction extends React.Component {
               onTransitionEnd={this.onTransitionEnd}
             />
           )}
-        </EnterState>
+        </OnceMounted>
       </div>
     )
   }
