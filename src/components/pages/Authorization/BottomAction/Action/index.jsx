@@ -8,6 +8,9 @@ import {AUTH_TYPE} from '../../stateAuthPage'
 import {baseDuration} from '../../animAuthPage'
 import {easeIn, easeOut} from '../../../../../constants/animation'
 
+const enterDuration = baseDuration
+const leaveDuration = baseDuration / 2
+
 const Desc = styled.span`
   font-size: 14px;
   color: white;
@@ -45,7 +48,10 @@ export class Action extends React.Component {
     if (this.props.transitionStatus !== 'entered') {
       const {animOpacity} = this.state
       animOpacity.setValue(0)
-      Animated.timing(animOpacity, {toValue: 1, duration: baseDuration, easing: easeIn})
+      Animated.sequence([
+        Animated.delay(baseDuration),
+        Animated.timing(animOpacity, {toValue: 1, duration: enterDuration, easing: easeIn})
+      ])
         .start(({finished}) => {
           if (finished) {
             this.props.onTransitionEnd()
@@ -58,14 +64,14 @@ export class Action extends React.Component {
     const {toAuthType, authType} = this.props
     if (authType !== nextProps.authType) {
       if (toAuthType === nextProps.authType) { // if we need to switch to another authType
-        Animated.timing(this.state.animOpacity, {toValue: 0, duration: baseDuration, easing: easeOut})
+        Animated.timing(this.state.animOpacity, {toValue: 0, duration: leaveDuration, easing: easeOut})
           .start(({finished}) => {
             if (finished) {
               this.props.toggleAction()
             }
           })
       } else { // if switch was cancelled and we need to return to the state of current authType
-        Animated.timing(this.state.animOpacity, {toValue: 1, duration: baseDuration, easing: easeOut}).start()
+        Animated.timing(this.state.animOpacity, {toValue: 1, duration: leaveDuration, easing: easeOut}).start()
       }
     }
   }
