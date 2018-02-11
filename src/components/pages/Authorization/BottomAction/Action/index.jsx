@@ -35,7 +35,7 @@ export class Action extends React.Component {
     linkText: PropTypes.string.isRequired,
     toAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    onceMounted: PropTypes.bool,
+    onceMounted: PropTypes.bool.isRequired,
     toggleAction: PropTypes.func.isRequired,
     onTransitionEnd: PropTypes.func.isRequired
   }

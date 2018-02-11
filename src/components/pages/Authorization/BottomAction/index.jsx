@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 
 import {OnceMounted} from '../../../../lib/react-once-mounted'
@@ -44,27 +44,33 @@ export class BottomAction extends React.Component {
     return (
       <div ref={(elem) => { this.container = elem }} className={className} style={{height: this.state.height}}>
         <OnceMounted>
-          {actionView === AUTH_TYPE.signUp && (
-            <Action
-              key='signUp'
-              desc='Already have an account?'
-              linkText='Sign In'
-              toAuthType={AUTH_TYPE.signIn}
-              authType={authType}
-              toggleAction={this.toggleAction}
-              onTransitionEnd={this.onTransitionEnd}
-            />
-          )}
-          {actionView === AUTH_TYPE.signIn && (
-            <Action
-              key='signIn'
-              desc='Don’t have an account?'
-              linkText='Sign Up'
-              toAuthType={AUTH_TYPE.signUp}
-              authType={authType}
-              toggleAction={this.toggleAction}
-              onTransitionEnd={this.onTransitionEnd}
-            />
+          {onceMounted => (
+            <Fragment>
+              {actionView === AUTH_TYPE.signUp && (
+                <Action
+                  key='signUp'
+                  desc='Already have an account?'
+                  linkText='Sign In'
+                  toAuthType={AUTH_TYPE.signIn}
+                  authType={authType}
+                  toggleAction={this.toggleAction}
+                  onTransitionEnd={this.onTransitionEnd}
+                  onceMounted={onceMounted}
+                />
+              )}
+              {actionView === AUTH_TYPE.signIn && (
+                <Action
+                  key='signIn'
+                  desc='Don’t have an account?'
+                  linkText='Sign Up'
+                  toAuthType={AUTH_TYPE.signUp}
+                  authType={authType}
+                  toggleAction={this.toggleAction}
+                  onTransitionEnd={this.onTransitionEnd}
+                  onceMounted={onceMounted}
+                />
+              )}
+            </Fragment>
           )}
         </OnceMounted>
       </div>
