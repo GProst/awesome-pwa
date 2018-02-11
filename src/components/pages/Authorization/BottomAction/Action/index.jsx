@@ -5,7 +5,8 @@ import {Link as _Link} from 'react-router-dom'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../../stateAuthPage'
-import {baseDuration, easeOut, easeIn} from '../../animAuthPage'
+import {baseDuration} from '../../animAuthPage'
+import {easeIn, easeOut} from '../../../../../constants/animation'
 
 const Desc = styled.span`
   font-size: 14px;
