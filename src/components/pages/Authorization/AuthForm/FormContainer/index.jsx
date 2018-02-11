@@ -38,8 +38,8 @@ export class FormContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.authType !== nextProps.authType) {
-      const container = this.animContainer.refs.node
       if (!this.state.animating) {
+        const container = this.animContainer.refs.node
         const prevHeight = container.offsetHeight
         this.setState({
           prevHeight,
