@@ -9,7 +9,7 @@ import {baseDuration} from '../../animAuthPage'
 import {easeIn, easeOut} from '../../../../../constants/animation'
 
 const enterDuration = baseDuration
-const leaveDuration = baseDuration / 2
+const leaveDuration = baseDuration / 4
 
 const Desc = styled.span`
   font-size: 14px;
@@ -49,7 +49,7 @@ export class Action extends React.Component {
       const {animOpacity} = this.state
       animOpacity.setValue(0)
       Animated.sequence([
-        Animated.delay(baseDuration),
+        Animated.delay(baseDuration * 1.25),
         Animated.timing(animOpacity, {toValue: 1, duration: enterDuration, easing: easeIn})
       ])
         .start(({finished}) => {
