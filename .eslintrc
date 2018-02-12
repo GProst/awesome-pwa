@@ -12,6 +12,7 @@
     "react"
   ],
   "rules": {
+    "no-empty-function": "error",
     "arrow-parens": ["error", "as-needed"],
     "space-before-function-paren": [
       "error",
