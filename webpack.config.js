@@ -47,7 +47,7 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       chunks: ['app'],
-      minChunks: (module) => {
+      minChunks: module => {
         return _isVendor(module)
       }
     }),

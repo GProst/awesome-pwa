@@ -43,7 +43,7 @@ const BottomAction = styled(_BottomAction)`
 const authPageStateContainer = new AuthPageStateContainer()
 
 const connector = connect(
-  (state) => {
+  state => {
     const {authType} = queryString.parse(state.router.location.search)
     return {
       authType

@@ -42,7 +42,7 @@ export class BottomAction extends React.Component {
     const {className, authType} = this.props
     const {actionView} = this.state
     return (
-      <div ref={(elem) => { this.container = elem }} className={className} style={{height: this.state.height}}>
+      <div ref={elem => { this.container = elem }} className={className} style={{height: this.state.height}}>
         <OnceMounted>
           {onceMounted => (
             <Fragment>

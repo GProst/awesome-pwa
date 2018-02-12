@@ -7,7 +7,7 @@ export const api = {
         })
       }, 4000)
     })
-      .catch((err) => {
+      .catch(err => {
         throw err
       })
   }

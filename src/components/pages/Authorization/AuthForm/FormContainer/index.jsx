@@ -74,7 +74,7 @@ export class FormContainer extends React.Component {
           alignItems: 'center',
           height: this.state.animHeight
         }}
-        ref={(elem) => { this.animContainer = elem }}
+        ref={elem => { this.animContainer = elem }}
       >
         {this.props.children}
       </Animated.div>

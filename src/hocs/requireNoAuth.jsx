@@ -11,7 +11,7 @@ const connector = connect(
   })
 )
 
-export const requireNoAuth = (WrappedComponent) => {
+export const requireNoAuth = WrappedComponent => {
   const displayName = WrappedComponent.displayName || WrappedComponent.prototype.constructor.name
 
   return (

@@ -10,7 +10,7 @@ export class AuthPageStateContainer extends Container {
     authType: AUTH_TYPE.signUp
   }
 
-  setAuthType = (authType) => {
+  setAuthType = authType => {
     if (authType !== this.state.authType && Object.values(AUTH_TYPE).includes(authType)) {
       this.setState({
         authType
