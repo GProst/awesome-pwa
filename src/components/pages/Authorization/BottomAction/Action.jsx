@@ -4,9 +4,9 @@ import styled from 'styled-components'
 import {Link as _Link} from 'react-router-dom'
 import Animated from 'animated/lib/targets/react-dom'
 
-import {AUTH_TYPE} from '../../stateAuthPage'
-import {baseDuration} from '../../animAuthPage'
-import {easeIn, easeOut} from '../../../../../constants/animation'
+import {AUTH_TYPE} from '../stateAuthPage'
+import {baseDuration} from '../animAuthPage'
+import {easeIn, easeOut} from '../../../../constants/animation'
 
 const enterDuration = baseDuration
 const leaveDuration = baseDuration / 4

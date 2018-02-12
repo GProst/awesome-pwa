@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Animated from 'animated/lib/targets/react-dom'
 
-import {AUTH_TYPE} from '../../stateAuthPage'
-import {baseDuration} from '../../animAuthPage'
-import {easeOut} from '../../../../../constants/animation'
+import {AUTH_TYPE} from '../stateAuthPage'
+import {baseDuration} from '../animAuthPage'
+import {easeOut} from '../../../../constants/animation'
 
 export class PaperContainer extends React.Component {
   static displayName = 'PaperContainer'
