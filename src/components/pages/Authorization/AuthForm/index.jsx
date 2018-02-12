@@ -1,12 +1,10 @@
 import React from 'react'
 import {Subscribe} from 'unstated'
 
-import {Inputs} from './Inputs'
-import {ForgotPasswordLink} from './ForgotPasswordLink'
-import {SubmitButton} from './SubmitButton'
-import {FormContainer} from './FormContainer'
+import {Form} from './Form'
+import {PaperContainer} from './PaperContainer'
 
-import {AuthPageStateContainer, AUTH_TYPE} from '../stateAuthPage'
+import {AuthPageStateContainer} from '../stateAuthPage'
 
 export class AuthForm extends React.Component {
   static displayName = 'AuthForm'
@@ -15,13 +13,9 @@ export class AuthForm extends React.Component {
     return (
       <Subscribe to={[AuthPageStateContainer]}>
         {stateContainer => (
-          <FormContainer authType={stateContainer.state.authType}>
-            <Inputs />
-            {stateContainer.state.authType === AUTH_TYPE.signIn && (
-              <ForgotPasswordLink />
-            )}
-            <SubmitButton authType={stateContainer.state.authType} />
-          </FormContainer>
+          <PaperContainer authType={stateContainer.state.authType}>
+            <Form authType={stateContainer.state.authType} />
+          </PaperContainer>
         )}
       </Subscribe>
     )

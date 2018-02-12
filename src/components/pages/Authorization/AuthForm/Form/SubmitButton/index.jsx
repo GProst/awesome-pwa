@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button'
 import {withStyles} from 'material-ui/styles'
 
-import {AUTH_TYPE} from '../../stateAuthPage'
-
 const commonButtonStyles = {
   marginTop: '15px',
   color: 'white!important',
@@ -30,13 +28,13 @@ class _SubmitButton extends React.Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
+    children: PropTypes.node.isRequired
   }
 
   render() {
     return (
       <Button fullWidth color='primary' size='small' variant='raised' type='button' classes={{...this.props.classes}}>
-        {this.props.authType === AUTH_TYPE.signIn ? 'Sign In' : 'Sign Up'}
+        {this.props.children}
       </Button>
     )
   }

@@ -6,8 +6,8 @@ import {AUTH_TYPE} from '../../stateAuthPage'
 import {baseDuration} from '../../animAuthPage'
 import {easeOut} from '../../../../../constants/animation'
 
-export class FormContainer extends React.Component {
-  static displayName = 'FormContainer'
+export class PaperContainer extends React.Component {
+  static displayName = 'PaperContainer'
 
   static propTypes = {
     children: PropTypes.node.isRequired,
@@ -72,6 +72,7 @@ export class FormContainer extends React.Component {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          position: 'relative',
           height: this.state.animHeight
         }}
         ref={elem => { this.animContainer = elem }}
