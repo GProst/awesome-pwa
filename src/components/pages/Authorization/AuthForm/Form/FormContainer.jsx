@@ -28,7 +28,11 @@ export class FormContainer extends React.Component {
 
   _getParentPadding() {
     const parent = this.props.getParentNode()
-    return window.getComputedStyle(parent).getPropertyValue('padding')
+    const computed = window.getComputedStyle(parent)
+    const getProp = computed.getPropertyValue.bind(computed)
+    // can't just get 'padding' because of FireFox...
+    const padding = `${getProp('padding-top')} ${getProp('padding-right')} ${getProp('padding-bottom')} ${getProp('padding-left')}`
+    return padding
   }
 
   componentWillMount() {
