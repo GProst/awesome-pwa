@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 
-import {OnceMounted} from '../../../../lib/react-once-mounted'
+import {OnceMounted} from '../../../reusable/OnceMounted'
 import {Action} from './Action'
 import {AUTH_TYPE} from '../stateAuthPage'
 
