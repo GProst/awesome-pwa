@@ -75,6 +75,10 @@ export class FormContainer extends React.Component {
   }
 
   render() {
+    const clipPathInterpolation = this.state.animClipPath.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['circle(0px at center)', 'circle(240px at center)']
+    })
     return (
       <Animated.div
         style={{
@@ -87,10 +91,8 @@ export class FormContainer extends React.Component {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          clipPath: this.state.animClipPath.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['circle(0px at center)', 'circle(240px at center)']
-          })
+          clipPath: clipPathInterpolation,
+          WebkitClipPath: clipPathInterpolation
         }}
       >
         {this.props.children}
