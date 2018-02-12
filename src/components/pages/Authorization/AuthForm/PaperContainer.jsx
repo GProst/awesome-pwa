@@ -6,6 +6,8 @@ import {AUTH_TYPE} from '../stateAuthPage'
 import {baseDuration} from '../animAuthPage'
 import {easeOut} from '../../../../constants/animation'
 
+const duration = baseDuration
+
 export class PaperContainer extends React.Component {
   static displayName = 'PaperContainer'
 
@@ -25,14 +27,19 @@ export class PaperContainer extends React.Component {
     Animated.timing(this.state.animHeight, {
       toValue: nextHeight,
       easing: easeOut,
-      duration: baseDuration
+      duration
     })
       .start(({finished}) => {
         if (finished) {
-          this.setState({
-            animating: false,
-            animHeight: 'auto'
-          })
+          // I do it in case if form animation will over little bit faster (and it uses position: absolute)
+          setTimeout(() => {
+            if (this.state.animating) {
+              this.setState({
+                animating: false,
+                animHeight: 'auto'
+              })
+            }
+          }, 50)
         }
       })
   }
@@ -73,6 +80,7 @@ export class PaperContainer extends React.Component {
           justifyContent: 'center',
           alignItems: 'center',
           position: 'relative',
+          overflow: 'hidden',
           height: this.state.animHeight
         }}
         ref={elem => { this.animContainer = elem }}
