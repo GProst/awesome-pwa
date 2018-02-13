@@ -4,10 +4,7 @@ import Animated from 'animated/lib/targets/react-dom'
 import styled from 'styled-components'
 
 import {AUTH_TYPE} from '../stateAuthPage'
-import {baseDuration} from '../animationsAuthPage'
-import {easeOut} from '../../../../constants/animation'
-
-const duration = baseDuration
+import {animState} from '../animationsAuthPage'
 
 const InnerContainer = styled.div`
   height: 100%;
@@ -24,59 +21,32 @@ export class PaperContainer extends React.Component {
 
   static propTypes = {
     children: PropTypes.node.isRequired,
+    animating: PropTypes.bool.isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
   state = {
-    animHeight: 'auto',
-    animating: false,
-    prevHeight: null
+    height: 'auto'
   }
 
-  _startAnimation(nextHeight) {
-    if (!this.state.animating) this.setState({animating: true})
-    Animated.timing(this.state.animHeight, {
-      toValue: nextHeight,
-      easing: easeOut,
-      duration
-    })
-      .start(({finished}) => {
-        if (finished) {
-          // I do it in case if form animation will over little bit faster (and it uses position: absolute)
-          setTimeout(() => {
-            if (this.state.animating) {
-              this.setState({
-                animating: false,
-                animHeight: 'auto'
-              })
-            }
-          }, 50)
-        }
-      })
+  componentWillMount() {
+    animState.paperContainer.setValue(
+      this.props.authType === AUTH_TYPE.signUp ? 1 : 0
+    )
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.authType !== nextProps.authType) {
-      if (!this.state.animating) {
-        const container = this.animContainer.refs.node
-        const prevHeight = container.offsetHeight
-        this.setState({
-          prevHeight,
-          animHeight: new Animated.Value(prevHeight)
-        }, () => {
-          const inputHeight = 59 // TODO: no hardcoding
-          const nextHeight = nextProps.authType === AUTH_TYPE.signUp
-            ? prevHeight + inputHeight
-            : prevHeight - inputHeight
-          this._startAnimation(nextHeight)
-        })
-      } else {
-        this._startAnimation(this.state.prevHeight)
-      }
+    if (this.props.animating !== nextProps.animating) {
+      this.setState({height: nextProps.animating ? null : 'auto'})
     }
   }
 
   render() {
+    const heightInterpolation = animState.paperContainer.interpolate({
+      inputRange: [0, 1],
+      outputRange: [288, 347] // TODO: remove hardcoding
+    })
+
     return (
       <Animated.div
         style={{
@@ -92,9 +62,8 @@ export class PaperContainer extends React.Component {
           alignItems: 'center',
           position: 'relative',
           overflow: 'hidden',
-          height: this.state.animHeight
+          height: this.state.height || heightInterpolation
         }}
-        ref={elem => { this.animContainer = elem }}
       >
         <InnerContainer>
           {this.props.children}
