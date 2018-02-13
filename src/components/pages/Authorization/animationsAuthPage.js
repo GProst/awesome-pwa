@@ -53,6 +53,7 @@ export function switchAuthType({to = AUTH_TYPE.signIn}) {
   ])
     .start(({finished}) => {
       if (finished) {
+        currentAnimation = null
         authPageStateContainer.setAnimationStatus(false)
       }
     })
