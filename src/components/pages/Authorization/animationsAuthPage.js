@@ -42,10 +42,10 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
       Animated.timing(appearingAction, {toValue: 1, duration: baseDuration / 2, easing: easeIn})
     ])
   ])
-    .start(({finished}) => {
-      if (finished) {
-        currentAnimation = null
-        authPageStateContainer.setAnimationStatus(false)
-      }
-    })
+  currentAnimation.start(({finished}) => {
+    if (finished) {
+      currentAnimation = null
+      authPageStateContainer.setAnimationStatus(false)
+    }
+  })
 }
