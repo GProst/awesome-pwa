@@ -1,12 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Animated from 'animated/lib/targets/react-dom'
+import styled from 'styled-components'
 
 import {AUTH_TYPE} from '../stateAuthPage'
 import {baseDuration} from '../animAuthPage'
 import {easeOut} from '../../../../constants/animation'
 
 const duration = baseDuration
+
+const InnerContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 export class PaperContainer extends React.Component {
   static displayName = 'PaperContainer'
@@ -85,7 +96,9 @@ export class PaperContainer extends React.Component {
         }}
         ref={elem => { this.animContainer = elem }}
       >
-        {this.props.children}
+        <InnerContainer>
+          {this.props.children}
+        </InnerContainer>
       </Animated.div>
     )
   }

@@ -9,19 +9,12 @@ import {AuthPageStateContainer} from '../stateAuthPage'
 export class AuthForm extends React.Component {
   static displayName = 'AuthForm'
 
-  getParentNode = () => {
-    return this.container.animContainer.refs.node
-  }
-
   render() {
     return (
       <Subscribe to={[AuthPageStateContainer]}>
         {stateContainer => (
-          <PaperContainer
-            ref={elem => { this.container = elem }}
-            authType={stateContainer.state.authType}
-          >
-            <Form authType={stateContainer.state.authType} getParentNode={this.getParentNode} />
+          <PaperContainer authType={stateContainer.state.authType}>
+            <Form authType={stateContainer.state.authType} />
           </PaperContainer>
         )}
       </Subscribe>

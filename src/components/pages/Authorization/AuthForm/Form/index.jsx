@@ -42,8 +42,7 @@ export class Form extends React.Component {
   static displayName = 'Form'
 
   static propTypes = {
-    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    getParentNode: PropTypes.func.isRequired
+    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
   state = {
@@ -133,20 +132,20 @@ export class Form extends React.Component {
   }
 
   render() {
-    const {authType, getParentNode} = this.props
+    const {authType} = this.props
     const {formView} = this.state
     return (
       <OnceMounted>
         {onceMounted => (
           <Fragment>
             {formView === AUTH_TYPE.signUp && (
-              <FormContainer getParentNode={getParentNode} onceMounted={onceMounted} toggleView={this.toggleView} formType={AUTH_TYPE.signUp} authType={authType}>
+              <FormContainer onceMounted={onceMounted} toggleView={this.toggleView} formType={AUTH_TYPE.signUp} authType={authType}>
                 {this.renderInputs()}
                 <SubmitButton>Sign Up</SubmitButton>
               </FormContainer>
             )}
             {formView === AUTH_TYPE.signIn && (
-              <FormContainer getParentNode={getParentNode} onceMounted={onceMounted} toggleView={this.toggleView} formType={AUTH_TYPE.signIn} authType={authType}>
+              <FormContainer onceMounted={onceMounted} toggleView={this.toggleView} formType={AUTH_TYPE.signIn} authType={authType}>
                 {this.renderInputs({isSignUp: false})}
                 <ForgotPasswordLink />
                 <SubmitButton>Sign In</SubmitButton>

@@ -16,39 +16,26 @@ export class FormContainer extends React.Component {
     onceMounted: PropTypes.bool.isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
     formType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    toggleView: PropTypes.func.isRequired,
-    getParentNode: PropTypes.func.isRequired
+    toggleView: PropTypes.func.isRequired
   }
 
   state = {
     animClipPath: new Animated.Value(1),
-    position: 'relative',
-    padding: 0
-  }
-
-  _getParentPadding() {
-    const parent = this.props.getParentNode()
-    const computed = window.getComputedStyle(parent)
-    const getProp = computed.getPropertyValue.bind(computed)
-    // can't just get 'padding' because of FireFox...
-    const padding = `${getProp('padding-top')} ${getProp('padding-right')} ${getProp('padding-bottom')} ${getProp('padding-left')}`
-    return padding
+    position: 'relative'
   }
 
   componentWillMount() {
     if (this.props.onceMounted) {
       const {animClipPath} = this.state
       this.setState({
-        position: 'absolute',
-        padding: this._getParentPadding()
+        position: 'absolute'
       })
       animClipPath.setValue(0)
       Animated.timing(animClipPath, {toValue: 1, duration, easing: easeIn})
         .start(({finished}) => {
           if (finished) {
             this.setState({
-              position: 'relative',
-              padding: 0
+              position: 'relative'
             })
           }
         })
@@ -60,8 +47,7 @@ export class FormContainer extends React.Component {
     if (authType !== nextProps.authType) {
       if (this.state.position !== 'absolute') {
         this.setState({
-          position: 'absolute',
-          padding: this._getParentPadding()
+          position: 'absolute'
         })
       }
 
@@ -89,7 +75,6 @@ export class FormContainer extends React.Component {
           width: '100%',
           boxSizing: 'border-box',
           position: this.state.position,
-          padding: this.state.padding,
           flexGrow: 1,
           display: 'flex',
           flexDirection: 'column',
