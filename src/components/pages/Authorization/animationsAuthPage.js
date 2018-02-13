@@ -39,7 +39,7 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
     Animated.sequence([
       Animated.timing(disappearingAction, {toValue: 0, duration: baseDuration / 2, easing: easeOut}),
       Animated.delay(baseDuration * 1.25),
-      Animated.timing(appearingAction, {toValue: 1, duration: baseDuration / 2, easing: easeIn})
+      Animated.timing(appearingAction, {toValue: 1, duration: baseDuration, easing: easeIn})
     ])
   ])
   currentAnimation.start(({finished}) => {
