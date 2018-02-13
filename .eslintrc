@@ -12,6 +12,7 @@
     "react"
   ],
   "rules": {
+    "quotes": ["error", "single"],
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-empty-function": "error",
     "arrow-parens": ["error", "as-needed"],
