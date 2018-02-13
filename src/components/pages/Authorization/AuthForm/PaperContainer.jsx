@@ -4,7 +4,7 @@ import Animated from 'animated/lib/targets/react-dom'
 import styled from 'styled-components'
 
 import {AUTH_TYPE} from '../stateAuthPage'
-import {baseDuration} from '../animAuthPage'
+import {baseDuration} from '../animationsAuthPage'
 import {easeOut} from '../../../../constants/animation'
 
 const duration = baseDuration

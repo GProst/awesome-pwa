@@ -7,7 +7,14 @@ export const AUTH_TYPE = {
 
 export class AuthPageStateContainer extends Container {
   state = {
-    authType: AUTH_TYPE.signUp
+    authType: AUTH_TYPE.signUp,
+    animating: false
+  }
+
+  setAnimationStatus = status => {
+    this.setState({
+      animating: status
+    })
   }
 
   setAuthType = authType => {
@@ -18,3 +25,5 @@ export class AuthPageStateContainer extends Container {
     }
   }
 }
+
+export const authPageStateContainer = new AuthPageStateContainer()

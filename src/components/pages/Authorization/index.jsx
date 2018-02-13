@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {Provider, Subscribe} from 'unstated'
 
 import {requireNoAuth} from '../../../hocs/requireNoAuth'
-import {AuthPageStateContainer} from './stateAuthPage'
+import {AuthPageStateContainer, authPageStateContainer} from './stateAuthPage'
 
 import {AuthForm} from './AuthForm'
 import {BottomAction as _BottomAction} from './BottomAction'
@@ -39,8 +39,6 @@ const LogoWithTitle = styled(_LogoWithTitle)`
 const BottomAction = styled(_BottomAction)`
   margin-top: 28px;
 `
-
-const authPageStateContainer = new AuthPageStateContainer()
 
 const connector = connect(
   state => {

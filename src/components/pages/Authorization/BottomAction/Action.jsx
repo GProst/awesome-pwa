@@ -5,7 +5,7 @@ import {Link as _Link} from 'react-router-dom'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../stateAuthPage'
-import {baseDuration} from '../animAuthPage'
+import {baseDuration} from '../animationsAuthPage'
 import {easeIn, easeOut} from '../../../../constants/animation'
 
 const enterDuration = baseDuration
