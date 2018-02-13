@@ -5,11 +5,7 @@ import {Link as _Link} from 'react-router-dom'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../stateAuthPage'
-import {baseDuration} from '../animationsAuthPage'
-import {easeIn, easeOut} from '../../../../constants/animation'
-
-const enterDuration = baseDuration
-const leaveDuration = baseDuration / 4
+import {animState} from '../animationsAuthPage'
 
 const Desc = styled.span`
   font-size: 14px;
@@ -34,45 +30,31 @@ export class Action extends React.Component {
     desc: PropTypes.string.isRequired,
     linkText: PropTypes.string.isRequired,
     toAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    onceMounted: PropTypes.bool.isRequired,
-    toggleAction: PropTypes.func.isRequired,
-    onTransitionEnd: PropTypes.func.isRequired
+    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
   state = {
-    animOpacity: new Animated.Value(1)
+    position: 'relative',
+    animValue: this.props.toAuthType === AUTH_TYPE.signIn ? animState.toSignInAction : animState.toSignUpAction
+  }
+
+  _setCSSAttributes(props) {
+    this.setState({
+      position: props.authType === props.toAuthType ? 'absolute' : 'relative',
+      pointerEvents: props.authType === props.toAuthType ? 'none' : 'initial'
+    })
   }
 
   componentWillMount() {
-    if (this.props.onceMounted) {
-      const {animOpacity} = this.state
-      animOpacity.setValue(0)
-      Animated.sequence([
-        Animated.delay(baseDuration * 1.25),
-        Animated.timing(animOpacity, {toValue: 1, duration: enterDuration, easing: easeIn})
-      ])
-        .start(({finished}) => {
-          if (finished) {
-            this.props.onTransitionEnd()
-          }
-        })
-    }
+    this.state.animValue.setValue(
+      this.props.authType === this.props.toAuthType ? 0 : 1
+    )
+    this._setCSSAttributes(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
-    const {toAuthType, authType} = this.props
-    if (authType !== nextProps.authType) {
-      if (toAuthType === nextProps.authType) { // if we need to switch to another authType
-        Animated.timing(this.state.animOpacity, {toValue: 0, duration: leaveDuration, easing: easeOut})
-          .start(({finished}) => {
-            if (finished) {
-              this.props.toggleAction()
-            }
-          })
-      } else { // if switch was cancelled and we need to return to the state of current authType
-        Animated.timing(this.state.animOpacity, {toValue: 1, duration: leaveDuration, easing: easeOut}).start()
-      }
+    if (nextProps.authType !== this.props.authType) {
+      this._setCSSAttributes(nextProps)
     }
   }
 
@@ -85,7 +67,11 @@ export class Action extends React.Component {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          opacity: this.state.animOpacity
+          whiteSpace: 'nowrap',
+          top: 0,
+          position: this.state.position,
+          pointerEvents: this.state.pointerEvents,
+          opacity: this.state.animValue
         }}
       >
         <Desc>{desc}</Desc>
