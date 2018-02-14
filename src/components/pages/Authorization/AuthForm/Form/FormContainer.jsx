@@ -48,6 +48,7 @@ export class FormContainer extends React.Component {
   }
 
   render() {
+    const {position} = this.state
     const clipPathInterpolation = this.state.animValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['circle(0px at center)', 'circle(240px at center)']
@@ -64,8 +65,8 @@ export class FormContainer extends React.Component {
           justifyContent: 'center',
           alignItems: 'center',
           pointerEvents: this.state.pointerEvents,
-          clipPath: clipPathInterpolation,
-          WebkitClipPath: clipPathInterpolation
+          clipPath: position === 'absolute' ? clipPathInterpolation : null, // this is a fix for flickering on Android: show clipPath only when animating or when not active
+          WebkitClipPath: position === 'absolute' ? clipPathInterpolation : null
         }}
         ref={elem => { this.animContainer = elem }}
       >
