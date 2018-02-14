@@ -8,7 +8,8 @@ export const AUTH_TYPE = {
 export class AuthPageStateContainer extends Container {
   state = {
     authType: AUTH_TYPE.signUp,
-    animating: false
+    animating: false,
+    forms: {}
   }
 
   setAnimationStatus = status => {
@@ -23,6 +24,21 @@ export class AuthPageStateContainer extends Container {
         authType
       })
     }
+  }
+
+  setFormNode = ({node, type}) => {
+    this.setState({
+      forms: {
+        ...this.state.forms,
+        [type]: node
+      }
+    })
+  }
+
+  getFormHeight = ({type}) => {
+    const node = this.state.forms[type]
+    const {height} = window.getComputedStyle(node)
+    return parseFloat(height, 10)
   }
 }
 

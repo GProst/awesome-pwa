@@ -42,6 +42,7 @@ export class Form extends React.Component {
 
   static propTypes = {
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
+    setFormNode: PropTypes.func.isRequired,
     animating: PropTypes.bool.isRequired
   }
 
@@ -125,14 +126,14 @@ export class Form extends React.Component {
   }
 
   render() {
-    const {authType, animating} = this.props
+    const {authType, animating, setFormNode} = this.props
     return (
       <Fragment>
-        <FormContainer formType={AUTH_TYPE.signUp} authType={authType} animating={animating}>
+        <FormContainer setFormNode={setFormNode} formType={AUTH_TYPE.signUp} authType={authType} animating={animating}>
           {this.renderInputs()}
           <SubmitButton>Sign Up</SubmitButton>
         </FormContainer>
-        <FormContainer formType={AUTH_TYPE.signIn} authType={authType} animating={animating}>
+        <FormContainer setFormNode={setFormNode} formType={AUTH_TYPE.signIn} authType={authType} animating={animating}>
           {this.renderInputs({isSignUp: false})}
           <ForgotPasswordLink />
           <SubmitButton>Sign In</SubmitButton>

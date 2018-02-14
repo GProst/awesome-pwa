@@ -22,11 +22,14 @@ export class PaperContainer extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     animating: PropTypes.bool.isRequired,
+    getFormHeight: PropTypes.func.isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
   state = {
-    height: 'auto'
+    height: 'auto',
+    signInFormHeight: 0,
+    signUpFormHeight: 1
   }
 
   componentWillMount() {
@@ -36,6 +39,15 @@ export class PaperContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.authType !== this.props.authType) {
+      const container = this.animContainer.refs.node
+      const {paddingTop, paddingBottom} = window.getComputedStyle(container)
+      const verticalPadding = parseFloat(paddingTop, 10) + parseFloat(paddingBottom, 10)
+      this.setState({
+        signInFormHeight: this.props.getFormHeight({type: AUTH_TYPE.signIn}) + verticalPadding,
+        signUpFormHeight: this.props.getFormHeight({type: AUTH_TYPE.signUp}) + verticalPadding
+      })
+    }
     if (this.props.animating !== nextProps.animating) {
       this.setState({height: nextProps.animating ? null : 'auto'})
     }
@@ -44,7 +56,7 @@ export class PaperContainer extends React.Component {
   render() {
     const heightInterpolation = animState.paperContainer.interpolate({
       inputRange: [0, 1],
-      outputRange: [288, 347] // TODO: remove hardcoding
+      outputRange: [this.state.signInFormHeight, this.state.signUpFormHeight]
     })
 
     return (
@@ -64,6 +76,7 @@ export class PaperContainer extends React.Component {
           overflow: 'hidden',
           height: this.state.height || heightInterpolation
         }}
+        ref={elem => { this.animContainer = elem }}
       >
         <InnerContainer>
           {this.props.children}

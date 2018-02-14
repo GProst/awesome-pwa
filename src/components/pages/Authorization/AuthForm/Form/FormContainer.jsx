@@ -12,6 +12,7 @@ export class FormContainer extends React.Component {
     children: PropTypes.node.isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
     animating: PropTypes.bool.isRequired,
+    setFormNode: PropTypes.func.isRequired,
     formType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
@@ -28,6 +29,10 @@ export class FormContainer extends React.Component {
       position: this.props.authType === this.props.formType ? 'relative' : 'absolute',
       pointerEvents: this.props.authType === this.props.formType ? 'initial' : 'none'
     })
+  }
+
+  componentDidMount() {
+    this.props.setFormNode({node: this.animContainer.refs.node, type: this.props.formType})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -62,6 +67,7 @@ export class FormContainer extends React.Component {
           clipPath: clipPathInterpolation,
           WebkitClipPath: clipPathInterpolation
         }}
+        ref={elem => { this.animContainer = elem }}
       >
         {this.props.children}
       </Animated.div>
