@@ -6,7 +6,6 @@ import {InputAdornment} from 'material-ui/Input'
 import IconButton from 'material-ui/IconButton'
 
 import {MaterialIcon} from '../../../../reusable/MaterialIcon'
-import {OnceMounted} from '../../../../reusable/OnceMounted'
 import {FormContainer} from './FormContainer'
 import {ForgotPasswordLink} from './ForgotPasswordLink'
 import {SubmitButton} from './SubmitButton'
@@ -42,23 +41,17 @@ export class Form extends React.Component {
   static displayName = 'Form'
 
   static propTypes = {
-    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
+    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
+    animating: PropTypes.bool.isRequired
   }
 
   state = {
-    formView: this.props.authType,
     showPassword: false
   }
 
   togglePasswordVisibility = () => {
     this.setState({
       showPassword: !this.state.showPassword
-    })
-  }
-
-  toggleView = () => {
-    this.setState({
-      formView: this.state.formView === AUTH_TYPE.signUp ? AUTH_TYPE.signIn : AUTH_TYPE.signUp
     })
   }
 
@@ -132,28 +125,19 @@ export class Form extends React.Component {
   }
 
   render() {
-    const {authType} = this.props
-    const {formView} = this.state
+    const {authType, animating} = this.props
     return (
-      <OnceMounted>
-        {onceMounted => (
-          <Fragment>
-            {formView === AUTH_TYPE.signUp && (
-              <FormContainer onceMounted={onceMounted} toggleView={this.toggleView} formType={AUTH_TYPE.signUp} authType={authType}>
-                {this.renderInputs()}
-                <SubmitButton>Sign Up</SubmitButton>
-              </FormContainer>
-            )}
-            {formView === AUTH_TYPE.signIn && (
-              <FormContainer onceMounted={onceMounted} toggleView={this.toggleView} formType={AUTH_TYPE.signIn} authType={authType}>
-                {this.renderInputs({isSignUp: false})}
-                <ForgotPasswordLink />
-                <SubmitButton>Sign In</SubmitButton>
-              </FormContainer>
-            )}
-          </Fragment>
-        )}
-      </OnceMounted>
+      <Fragment>
+        <FormContainer formType={AUTH_TYPE.signUp} authType={authType} animating={animating}>
+          {this.renderInputs()}
+          <SubmitButton>Sign Up</SubmitButton>
+        </FormContainer>
+        <FormContainer formType={AUTH_TYPE.signIn} authType={authType} animating={animating}>
+          {this.renderInputs({isSignUp: false})}
+          <ForgotPasswordLink />
+          <SubmitButton>Sign In</SubmitButton>
+        </FormContainer>
+      </Fragment>
     )
   }
 }

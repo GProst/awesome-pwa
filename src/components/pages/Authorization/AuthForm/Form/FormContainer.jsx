@@ -3,69 +3,47 @@ import PropTypes from 'prop-types'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../../stateAuthPage'
-import {easeIn, easeOut} from '../../../../../constants/animation'
-import {baseDuration} from '../../animationsAuthPage'
-
-const duration = baseDuration / 2
+import {animState} from '../../animationsAuthPage'
 
 export class FormContainer extends React.Component {
   static displayName = 'FormContainer'
 
   static propTypes = {
     children: PropTypes.node.isRequired,
-    onceMounted: PropTypes.bool.isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    formType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    toggleView: PropTypes.func.isRequired
+    animating: PropTypes.bool.isRequired,
+    formType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
   state = {
-    animClipPath: new Animated.Value(1),
+    animValue: this.props.formType === AUTH_TYPE.signIn ? animState.signInFrom : animState.signUpForm,
     position: 'relative'
   }
 
   componentWillMount() {
-    if (this.props.onceMounted) {
-      const {animClipPath} = this.state
-      this.setState({
-        position: 'absolute'
-      })
-      animClipPath.setValue(0)
-      Animated.timing(animClipPath, {toValue: 1, duration, easing: easeIn})
-        .start(({finished}) => {
-          if (finished) {
-            this.setState({
-              position: 'relative'
-            })
-          }
-        })
-    }
+    this.state.animValue.setValue(
+      this.props.authType === this.props.formType ? 1 : 0
+    )
+    this.setState({
+      position: this.props.authType === this.props.formType ? 'relative' : 'absolute',
+      pointerEvents: this.props.authType === this.props.formType ? 'initial' : 'none'
+    })
   }
 
   componentWillReceiveProps(nextProps) {
-    const {formType, authType} = this.props
-    if (authType !== nextProps.authType) {
-      if (this.state.position !== 'absolute') {
-        this.setState({
-          position: 'absolute'
-        })
-      }
-
-      if (formType !== nextProps.authType) { // if we need to switch to another authType
-        Animated.timing(this.state.animClipPath, {toValue: 0, duration, easing: easeOut})
-          .start(({finished}) => {
-            if (finished) {
-              this.props.toggleView()
-            }
-          })
-      } else { // if switch was cancelled and we need to return to the state of current authType
-        Animated.timing(this.state.animClipPath, {toValue: 1, duration, easing: easeOut}).start()
-      }
+    if (nextProps.authType !== this.props.authType) {
+      this.setState({
+        pointerEvents: nextProps.authType === this.props.formType ? 'initial' : 'none'
+      })
+    }
+    if (this.props.animating !== nextProps.animating) {
+      if (nextProps.animating) this.setState({position: 'absolute'})
+      if (!nextProps.animating && this.props.authType === this.props.formType) this.setState({position: 'relative'})
     }
   }
 
   render() {
-    const clipPathInterpolation = this.state.animClipPath.interpolate({
+    const clipPathInterpolation = this.state.animValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['circle(0px at center)', 'circle(240px at center)']
     })
@@ -80,6 +58,7 @@ export class FormContainer extends React.Component {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          pointerEvents: this.state.pointerEvents,
           clipPath: clipPathInterpolation,
           WebkitClipPath: clipPathInterpolation
         }}

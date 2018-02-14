@@ -3,7 +3,7 @@ import Animated from 'animated/lib/targets/react-dom'
 import {AUTH_TYPE, authPageStateContainer} from './stateAuthPage'
 import {easeIn, easeOut} from '../../../constants/animation'
 
-export const baseDuration = 250 // TODO: remove export
+const baseDuration = 250
 let currentAnimation = null
 
 // these values can be configured in each component in componentWillMount method, so keep in mind
