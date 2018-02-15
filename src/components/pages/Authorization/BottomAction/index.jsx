@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Animated from 'animated/lib/targets/react-dom'
 
 import {Action} from './Action'
 import {AUTH_TYPE} from '../stateAuthPage'
+import {animState} from '../animationsAuthPage'
 
-const Container = styled.div`
+const Container = styled(Animated.div)`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +26,12 @@ export class BottomAction extends React.Component {
   render() {
     const {className, authType} = this.props
     return (
-      <Container className={className}>
+      <Container
+        className={className}
+        style={{
+          transform: [{translateY: animState.bottomActions}]
+        }}
+      >
         <Action
           key='signUp'
           desc='Already have an account?'
