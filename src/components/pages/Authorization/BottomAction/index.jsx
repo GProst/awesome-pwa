@@ -18,28 +18,13 @@ export class BottomAction extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    animating: PropTypes.bool.isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
-  }
-
-  state = {
-    height: 'auto'
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.animating !== nextProps.animating) {
-      this.setState({height: nextProps.animating ? this.container.offsetHeight : 'auto'})
-    }
   }
 
   render() {
     const {className, authType} = this.props
     return (
-      <Container
-        ref={elem => { this.container = elem }}
-        className={className}
-        style={{height: this.state.height}}
-      >
+      <Container className={className}>
         <Action
           key='signUp'
           desc='Already have an account?'

@@ -38,28 +38,27 @@ export class Action extends React.Component {
     animValue: this.props.toAuthType === AUTH_TYPE.signIn ? animState.toSignInAction : animState.toSignUpAction
   }
 
-  _setCSSAttributes(props) {
-    this.setState({
-      position: props.authType === props.toAuthType ? 'absolute' : 'relative',
-      pointerEvents: props.authType === props.toAuthType ? 'none' : 'initial'
-    })
-  }
-
   componentWillMount() {
+    this.setState({
+      position: this.props.authType === this.props.toAuthType ? 'absolute' : 'relative',
+      inactive: this.props.authType === this.props.toAuthType
+    })
     this.state.animValue.setValue(
       this.props.authType === this.props.toAuthType ? 0 : 1
     )
-    this._setCSSAttributes(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.authType !== this.props.authType) {
-      this._setCSSAttributes(nextProps)
+      this.setState({
+        inactive: nextProps.authType === this.props.toAuthType
+      })
     }
   }
 
   render() {
     const {desc, linkText, toAuthType} = this.props
+    const {position, inactive, animValue} = this.state
     return (
       <Animated.div
         style={{
@@ -69,9 +68,9 @@ export class Action extends React.Component {
           alignItems: 'center',
           whiteSpace: 'nowrap',
           top: 0,
-          position: this.state.position,
-          pointerEvents: this.state.pointerEvents,
-          opacity: this.state.animValue
+          position,
+          pointerEvents: inactive ? 'none' : 'initial',
+          opacity: animValue
         }}
       >
         <Desc>{desc}</Desc>

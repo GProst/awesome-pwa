@@ -82,7 +82,7 @@ class AuthPage extends React.Component {
               <Content>
                 <LogoWithTitle />
                 <AuthForm />
-                <BottomAction authType={stateContainer.state.authType} animating={stateContainer.state.animating} />
+                <BottomAction authType={stateContainer.state.authType} />
               </Content>
             </PageContainer>
           )}
