@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import {AUTH_TYPE} from '../stateAuthPage'
 import {animState} from '../animationsAuthPage'
 
+import {WhiteBackground, paddingVertical} from './WhiteBackground'
+
 const InnerContainer = styled.div`
   height: 100%;
   width: 100%;
@@ -62,9 +64,8 @@ export class PaperContainer extends React.Component {
     return (
       <Animated.div
         style={{
-          background: 'white',
-          borderRadius: '19px',
-          padding: '38px 36px',
+          background: 'transparent',
+          padding: `${paddingVertical}px 36px`,
           width: '85vw',
           maxWidth: '360px',
           boxSizing: 'border-box',
@@ -78,6 +79,7 @@ export class PaperContainer extends React.Component {
         }}
         ref={elem => { this.animContainer = elem }}
       >
+        <WhiteBackground />
         <InnerContainer>
           {this.props.children}
         </InnerContainer>
