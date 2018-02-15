@@ -19,6 +19,7 @@ export const animState = {
     roundedBottom: new Animated.Value(0)
   },
   bottomActions: new Animated.Value(0),
+  logoWithTitle: new Animated.Value(0),
   toSignInAction: new Animated.Value(0),
   toSignUpAction: new Animated.Value(0),
   signInFrom: new Animated.Value(0),
@@ -31,7 +32,7 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
   const allowedValues = [AUTH_TYPE.signIn, AUTH_TYPE.signUp]
   if (!allowedValues.includes(to)) throw new Error(`Must provide property "to" with value: ${allowedValues.join(' or ')}`)
 
-  const {whiteContainer, toSignUpAction, toSignInAction, signInFrom, signUpForm, bottomActions} = animState
+  const {whiteContainer, toSignUpAction, toSignInAction, signInFrom, signUpForm, bottomActions, logoWithTitle} = animState
   const toSignUp = to === AUTH_TYPE.signUp
   const toSignIn = to === AUTH_TYPE.signIn
   const disappearingAction = toSignUp ? toSignUpAction : toSignInAction
@@ -53,6 +54,7 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
       ? -(diff / 2)
       : (diff / 2)
   const bottomActionsToValue = -roundedTopToValue
+  const logoWithTitleToValue = roundedTopToValue
 
   if (currentAnimation) currentAnimation.stop()
   currentAnimation = Animated.parallel([
@@ -60,6 +62,7 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
     Animated.timing(whiteContainer.roundedTop, {toValue: roundedTopToValue, duration: baseDuration, easing: easeOut}),
     Animated.timing(whiteContainer.roundedBottom, {toValue: -roundedTopToValue, duration: baseDuration, easing: easeOut}),
     Animated.timing(bottomActions, {toValue: bottomActionsToValue, duration: baseDuration, easing: easeOut}),
+    Animated.timing(logoWithTitle, {toValue: logoWithTitleToValue, duration: baseDuration, easing: easeOut}),
     Animated.sequence([
       Animated.timing(disappearingForm, {toValue: 0, duration: baseDuration / 2, easing: easeOut}),
       Animated.timing(appearingForm, {toValue: 1, duration: baseDuration / 2, easing: easeOut})
