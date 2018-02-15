@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {Provider, Subscribe} from 'unstated'
 
 import {requireNoAuth} from '../../../hocs/requireNoAuth'
-import {AuthPageStateContainer, authPageStateContainer} from './stateAuthPage'
+import {AUTH_TYPE, AuthPageStateContainer, authPageStateContainer} from './stateAuthPage'
 import {animateSwitchAuthType, setInitialAuthType} from './animationsAuthPage'
 
 import {AuthForm} from './AuthForm'
@@ -45,7 +45,7 @@ const connector = connect(
   state => {
     const {authType} = queryString.parse(state.router.location.search)
     return {
-      authType
+      authType: authType || AUTH_TYPE.signUp
     }
   }
 )
