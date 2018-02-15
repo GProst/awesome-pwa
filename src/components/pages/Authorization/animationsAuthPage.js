@@ -5,10 +5,19 @@ import {easeIn, easeOut} from '../../../constants/animation'
 
 const baseDuration = 250
 let currentAnimation = null
+let initialAuthType
+
+export function setInitialAuthType(type) {
+  initialAuthType = type
+}
 
 // these values can be configured in each component in componentWillMount method, so keep in mind
 export const animState = {
-  paperContainer: new Animated.Value(0),
+  whiteContainer: {
+    rect: new Animated.Value(1),
+    roundedTop: new Animated.Value(0),
+    roundedBottom: new Animated.Value(0)
+  },
   toSignInAction: new Animated.Value(0),
   toSignUpAction: new Animated.Value(0),
   signInFrom: new Animated.Value(0),
@@ -21,7 +30,7 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
   const allowedValues = [AUTH_TYPE.signIn, AUTH_TYPE.signUp]
   if (!allowedValues.includes(to)) throw new Error(`Must provide property "to" with value: ${allowedValues.join(' or ')}`)
 
-  const {paperContainer, toSignUpAction, toSignInAction, signInFrom, signUpForm} = animState
+  const {whiteContainer, toSignUpAction, toSignInAction, signInFrom, signUpForm} = animState
   const toSignUp = to === AUTH_TYPE.signUp
   const toSignIn = to === AUTH_TYPE.signIn
   const disappearingAction = toSignUp ? toSignUpAction : toSignInAction
@@ -29,9 +38,25 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
   const appearingAction = toSignIn ? toSignUpAction : toSignInAction
   const appearingForm = toSignIn ? signInFrom : signUpForm
 
+  const diff = authPageStateContainer.getFormHeightDiff()
+  const signInFormHeight = authPageStateContainer.getFormHeight({type: AUTH_TYPE.signIn})
+  const signUpFormHeight = authPageStateContainer.getFormHeight({type: AUTH_TYPE.signUp})
+  const rectToValue = initialAuthType === to
+    ? 1
+    : toSignUp
+      ? signUpFormHeight / signInFormHeight
+      : signInFormHeight / signUpFormHeight
+  const roundedTopToValue = initialAuthType === to
+    ? 0
+    : toSignUp
+      ? -(diff / 2)
+      : (diff / 2)
+
   if (currentAnimation) currentAnimation.stop()
   currentAnimation = Animated.parallel([
-    Animated.timing(paperContainer, {toValue: toSignUp ? 1 : 0, duration: baseDuration, easing: easeOut}),
+    Animated.timing(whiteContainer.rect, {toValue: rectToValue, duration: baseDuration, easing: easeOut}),
+    Animated.timing(whiteContainer.roundedTop, {toValue: roundedTopToValue, duration: baseDuration, easing: easeOut}),
+    Animated.timing(whiteContainer.roundedBottom, {toValue: -roundedTopToValue, duration: baseDuration, easing: easeOut}),
     Animated.sequence([
       Animated.timing(disappearingForm, {toValue: 0, duration: baseDuration / 2, easing: easeOut}),
       Animated.timing(appearingForm, {toValue: 1, duration: baseDuration / 2, easing: easeOut})

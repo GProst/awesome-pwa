@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import Animated from 'animated/lib/targets/react-dom'
+
+import {animState} from '../animationsAuthPage'
 
 export const paddingVertical = 38 // in pixels
 
 const Container = styled.div`
-  background: white;
   position: absolute;
   top: ${paddingVertical}px;
   left: 0;
@@ -13,13 +15,22 @@ const Container = styled.div`
   box-sizing: border-box;
 `
 
-const Rounded = styled.div`
+const Rounded = styled(({upper, ...props}) => <Animated.div {...props} />)`
   border-radius: 19px;
   background: white;
   height: ${paddingVertical * 2}px;
   width: 100%;
   position: absolute;
-  ${props => props.onTop ? 'top' : 'bottom'}: -${paddingVertical}px;
+  ${props => props.upper ? 'top' : 'bottom'}: -${paddingVertical}px;
+`
+
+const Rect = styled(Animated.div)`
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `
 
 export class WhiteBackground extends React.Component {
@@ -28,8 +39,15 @@ export class WhiteBackground extends React.Component {
   render() {
     return (
       <Container>
-        <Rounded onTop />
-        <Rounded />
+        <Rounded upper style={{
+          transform: [{translateY: animState.whiteContainer.roundedTop}]
+        }} />
+        <Rect style={{
+          transform: [{scaleY: animState.whiteContainer.rect}]
+        }} />
+        <Rounded style={{
+          transform: [{translateY: animState.whiteContainer.roundedBottom}]
+        }} />
       </Container>
     )
   }

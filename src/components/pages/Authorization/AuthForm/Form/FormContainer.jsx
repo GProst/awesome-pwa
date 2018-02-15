@@ -27,7 +27,7 @@ export class FormContainer extends React.Component {
     )
     this.setState({
       position: this.props.authType === this.props.formType ? 'relative' : 'absolute',
-      pointerEvents: this.props.authType === this.props.formType ? 'initial' : 'none'
+      inactive: this.props.authType !== this.props.formType
     })
   }
 
@@ -38,17 +38,14 @@ export class FormContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.authType !== this.props.authType) {
       this.setState({
-        pointerEvents: nextProps.authType === this.props.formType ? 'initial' : 'none'
+        inactive: nextProps.authType !== this.props.formType
       })
-    }
-    if (this.props.animating !== nextProps.animating) {
-      if (nextProps.animating) this.setState({position: 'absolute'})
-      if (!nextProps.animating && this.props.authType === this.props.formType) this.setState({position: 'relative'})
     }
   }
 
   render() {
-    const {position} = this.state
+    const {position, inactive} = this.state
+    const {animating} = this.props
     const clipPathInterpolation = this.state.animValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['circle(0px at center)', 'circle(240px at center)']
@@ -58,15 +55,15 @@ export class FormContainer extends React.Component {
         style={{
           width: '100%',
           boxSizing: 'border-box',
-          position: this.state.position,
+          position,
           flexGrow: 1,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          pointerEvents: this.state.pointerEvents,
-          clipPath: position === 'absolute' ? clipPathInterpolation : null, // this is a fix for flickering on Android: show clipPath only when animating or when not active
-          WebkitClipPath: position === 'absolute' ? clipPathInterpolation : null
+          pointerEvents: inactive ? 'none' : 'initial',
+          clipPath: (animating || inactive) ? clipPathInterpolation : undefined, // this is a fix for flickering on Android: show clipPath only when animating or when not active
+          WebkitClipPath: (animating || inactive) ? clipPathInterpolation : undefined
         }}
         ref={elem => { this.animContainer = elem }}
       >

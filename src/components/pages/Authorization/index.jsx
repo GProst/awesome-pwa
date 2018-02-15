@@ -7,7 +7,7 @@ import {Provider, Subscribe} from 'unstated'
 
 import {requireNoAuth} from '../../../hocs/requireNoAuth'
 import {AuthPageStateContainer, authPageStateContainer} from './stateAuthPage'
-import {animateSwitchAuthType} from './animationsAuthPage'
+import {animateSwitchAuthType, setInitialAuthType} from './animationsAuthPage'
 
 import {AuthForm} from './AuthForm'
 import {BottomAction as _BottomAction} from './BottomAction'
@@ -63,6 +63,7 @@ class AuthPage extends React.Component {
 
   componentWillMount() {
     this._updateState(this.props.authType)
+    setInitialAuthType(this.props.authType)
   }
 
   componentWillReceiveProps(nextProps) {

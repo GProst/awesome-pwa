@@ -13,11 +13,7 @@ export class AuthForm extends React.Component {
     return (
       <Subscribe to={[AuthPageStateContainer]}>
         {stateContainer => (
-          <PaperContainer
-            authType={stateContainer.state.authType}
-            animating={stateContainer.state.animating}
-            getFormHeight={stateContainer.getFormHeight}
-          >
+          <PaperContainer>
             <Form setFormNode={stateContainer.setFormNode} authType={stateContainer.state.authType} animating={stateContainer.state.animating} />
           </PaperContainer>
         )}

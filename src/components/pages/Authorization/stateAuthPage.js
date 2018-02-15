@@ -40,6 +40,15 @@ export class AuthPageStateContainer extends Container {
     const {height} = window.getComputedStyle(node)
     return parseFloat(height, 10)
   }
+
+  getFormHeightDiff = () => {
+    const signInNode = this.state.forms[AUTH_TYPE.signIn]
+    const signUpNode = this.state.forms[AUTH_TYPE.signUp]
+    const {height: signInHeight} = window.getComputedStyle(signInNode)
+    const {height: signUpHeight} = window.getComputedStyle(signUpNode)
+    const diff = Math.abs(parseFloat(signInHeight, 10) - parseFloat(signUpHeight, 10))
+    return diff
+  }
 }
 
 export const authPageStateContainer = new AuthPageStateContainer()
