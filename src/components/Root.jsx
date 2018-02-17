@@ -9,7 +9,7 @@ import {Routes} from '../routes'
 import {ThemeProvider} from './global/ThemeProvider'
 
 import {GoalsPage} from './pages/Goals'
-import {AuthPage} from './pages/Authorization'
+import {AuthPage} from './pages/Authentication'
 
 import {AppBackground} from './global/AppBackground'
 
@@ -30,7 +30,7 @@ class Root extends React.Component {
             <ConnectedRouter history={history} store={store}>
               <Switch>
                 <Route exact path={Routes.goals} component={GoalsPage} />
-                <Route exact path={Routes.authorization} component={AuthPage} />
+                <Route exact path={Routes.authentication} component={AuthPage} />
                 <Redirect to={Routes.goals} />
               </Switch>
             </ConnectedRouter>

@@ -30,7 +30,7 @@ export const requireAuth = WrappedComponent => {
           if (authToken !== null) {
             return <WrappedComponent {...clearedProps} />
           } else {
-            return <Redirect to={{pathname: Routes.authorization, state: {redirect: location.pathname}}} />
+            return <Redirect to={{pathname: Routes.authentication, state: {redirect: location.pathname}}} />
           }
         }
       }
