@@ -6,6 +6,7 @@ import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../stateAuthPage'
 import {animState} from '../animations/switchAuthType'
+import {Routes} from '../../../../routes'
 
 const Desc = styled.span`
   font-size: 14px;
@@ -78,7 +79,7 @@ export class Action extends React.Component {
         }}
       >
         <Desc>{desc}</Desc>
-        <Link to={`/authorization?authType=${toAuthType}`}>
+        <Link to={`${Routes.authentication}?authType=${toAuthType}`}>
           {linkText}
         </Link>
       </Animated.div>
