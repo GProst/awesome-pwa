@@ -7,7 +7,7 @@ import {Provider, Subscribe} from 'unstated'
 
 import {requireNoAuth} from '../../../hocs/requireNoAuth'
 import {AUTH_TYPE, AuthPageStateContainer, authPageStateContainer} from './stateAuthPage'
-import {animateSwitchAuthType, setInitialAuthType} from './animationsAuthPage'
+import {animateSwitchAuthType, setInitialAuthType} from './animations/switchAuthType'
 
 import {AuthForm} from './AuthForm'
 import {BottomAction as _BottomAction} from './BottomAction'

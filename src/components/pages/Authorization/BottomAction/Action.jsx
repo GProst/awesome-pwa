@@ -5,7 +5,7 @@ import {Link as _Link} from 'react-router-dom'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../stateAuthPage'
-import {animState} from '../animationsAuthPage'
+import {animState} from '../animations/switchAuthType'
 
 const Desc = styled.span`
   font-size: 14px;

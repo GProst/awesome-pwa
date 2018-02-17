@@ -1,7 +1,7 @@
 import Animated from 'animated/lib/targets/react-dom'
 
-import {AUTH_TYPE, authPageStateContainer} from './stateAuthPage'
-import {easeIn, easeOut} from '../../../constants/animation'
+import {AUTH_TYPE, authPageStateContainer} from '../stateAuthPage'
+import {easeIn, easeOut} from '../../../../constants/animation'
 
 const baseDuration = 250
 let currentAnimation = null

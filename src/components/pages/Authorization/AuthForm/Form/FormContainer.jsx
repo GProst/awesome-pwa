@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../../stateAuthPage'
-import {animState} from '../../animationsAuthPage'
+import {animState} from '../../animations/switchAuthType'
 
 export class FormContainer extends React.Component {
   static displayName = 'FormContainer'

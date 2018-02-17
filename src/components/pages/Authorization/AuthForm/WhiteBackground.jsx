@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Animated from 'animated/lib/targets/react-dom'
 
-import {animState} from '../animationsAuthPage'
+import {animState} from '../animations/switchAuthType'
 
 export const paddingVertical = 38 // in pixels
 

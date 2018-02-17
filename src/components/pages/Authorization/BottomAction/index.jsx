@@ -5,7 +5,7 @@ import Animated from 'animated/lib/targets/react-dom'
 
 import {Action} from './Action'
 import {AUTH_TYPE} from '../stateAuthPage'
-import {animState} from '../animationsAuthPage'
+import {animState} from '../animations/switchAuthType'
 
 const Container = styled(Animated.div)`
     display: flex;
