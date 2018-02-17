@@ -1,10 +1,6 @@
 {
   "name": "priority-book-pwa",
   "version": "1.0.0",
-  "engines": {
-    "node": "^8.3.0",
-    "npm": "^5.3.0"
-  },
   "description": "Priority Book PWA",
   "author": "GProst a.k.a German Prostakov <gprostmail@gmail.com>",
   "scripts": {
