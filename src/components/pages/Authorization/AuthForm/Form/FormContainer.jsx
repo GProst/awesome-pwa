@@ -17,7 +17,7 @@ export class FormContainer extends React.Component {
   }
 
   state = {
-    animValue: this.props.formType === AUTH_TYPE.signIn ? animState.signInFrom : animState.signUpForm,
+    animValue: this.props.formType === AUTH_TYPE.signIn ? animState.signInForm : animState.signUpForm,
     position: 'relative'
   }
 

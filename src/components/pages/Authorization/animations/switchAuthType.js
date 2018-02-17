@@ -22,7 +22,7 @@ export const animState = {
   logoWithTitle: new Animated.Value(0),
   toSignInAction: new Animated.Value(0),
   toSignUpAction: new Animated.Value(0),
-  signInFrom: new Animated.Value(0),
+  signInForm: new Animated.Value(0),
   signUpForm: new Animated.Value(0)
 }
 
@@ -32,13 +32,13 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
   const allowedValues = [AUTH_TYPE.signIn, AUTH_TYPE.signUp]
   if (!allowedValues.includes(to)) throw new Error(`Must provide property "to" with value: ${allowedValues.join(' or ')}`)
 
-  const {whiteContainer, toSignUpAction, toSignInAction, signInFrom, signUpForm, bottomActions, logoWithTitle} = animState
+  const {whiteContainer, toSignUpAction, toSignInAction, signInForm, signUpForm, bottomActions, logoWithTitle} = animState
   const toSignUp = to === AUTH_TYPE.signUp
   const toSignIn = to === AUTH_TYPE.signIn
   const disappearingAction = toSignUp ? toSignUpAction : toSignInAction
-  const disappearingForm = toSignUp ? signInFrom : signUpForm
+  const disappearingForm = toSignUp ? signInForm : signUpForm
   const appearingAction = toSignIn ? toSignUpAction : toSignInAction
-  const appearingForm = toSignIn ? signInFrom : signUpForm
+  const appearingForm = toSignIn ? signInForm : signUpForm
 
   const diff = authPageStateContainer.getFormHeightDiff()
   const signInFormHeight = authPageStateContainer.getFormHeight({type: AUTH_TYPE.signIn})
