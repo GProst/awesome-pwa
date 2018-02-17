@@ -22,9 +22,6 @@ export class FormContainer extends React.Component {
   }
 
   componentWillMount() {
-    this.state.animValue.setValue(
-      this.props.authType === this.props.formType ? 1 : 0
-    )
     this.setState({
       position: this.props.authType === this.props.formType ? 'relative' : 'absolute',
       inactive: this.props.authType !== this.props.formType
@@ -33,6 +30,10 @@ export class FormContainer extends React.Component {
 
   componentDidMount() {
     this.props.setFormNode({node: this.animContainer.refs.node, type: this.props.formType})
+    const onResize = () => {
+      this.setState({position: this.props.authType === this.props.formType ? 'relative' : 'absolute'})
+    }
+    window.addEventListener('resize', onResize)
   }
 
   componentWillReceiveProps(nextProps) {

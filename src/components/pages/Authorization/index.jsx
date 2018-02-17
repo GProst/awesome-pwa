@@ -7,7 +7,7 @@ import {Provider, Subscribe} from 'unstated'
 
 import {requireNoAuth} from '../../../hocs/requireNoAuth'
 import {AUTH_TYPE, AuthPageStateContainer, authPageStateContainer} from './stateAuthPage'
-import {animateSwitchAuthType, setInitialAuthType} from './animations/switchAuthType'
+import {animateSwitchAuthType, initAnimationValues} from './animations/switchAuthType'
 
 import {AuthForm} from './AuthForm'
 import {BottomAction as _BottomAction} from './BottomAction'
@@ -63,7 +63,12 @@ class AuthPage extends React.Component {
 
   componentWillMount() {
     this._updateState(this.props.authType)
-    setInitialAuthType(this.props.authType)
+    initAnimationValues(this.props.authType)
+  }
+
+  componentDidMount() {
+    const onResize = () => { initAnimationValues(this.props.authType) }
+    window.addEventListener('resize', onResize)
   }
 
   componentWillReceiveProps(nextProps) {

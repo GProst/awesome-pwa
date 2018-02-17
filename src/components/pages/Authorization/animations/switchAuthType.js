@@ -7,11 +7,6 @@ const baseDuration = 250
 let currentAnimation = null
 let initialAuthType
 
-export function setInitialAuthType(type) {
-  initialAuthType = type
-}
-
-// these values can be configured in each component in componentWillMount method, so keep in mind
 export const animState = {
   whiteContainer: {
     rect: new Animated.Value(1),
@@ -24,6 +19,23 @@ export const animState = {
   toSignUpAction: new Animated.Value(0),
   signInForm: new Animated.Value(0),
   signUpForm: new Animated.Value(0)
+}
+
+export const initAnimationValues = authType => {
+  if (currentAnimation) currentAnimation.stop()
+  initialAuthType = authType
+  const {
+    signUpForm, signInForm, toSignUpAction, toSignInAction, bottomActions, logoWithTitle, whiteContainer: {rect, roundedBottom, roundedTop}
+  } = animState
+  signInForm.setValue(authType === AUTH_TYPE.signIn ? 1 : 0)
+  signUpForm.setValue(authType === AUTH_TYPE.signUp ? 1 : 0)
+  toSignInAction.setValue(authType === AUTH_TYPE.signIn ? 0 : 1)
+  toSignUpAction.setValue(authType === AUTH_TYPE.signUp ? 0 : 1)
+  bottomActions.setValue(0)
+  logoWithTitle.setValue(0)
+  rect.setValue(1)
+  roundedTop.setValue(0)
+  roundedBottom.setValue(0)
 }
 
 export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {

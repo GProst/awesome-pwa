@@ -43,9 +43,13 @@ export class Action extends React.Component {
       position: this.props.authType === this.props.toAuthType ? 'absolute' : 'relative',
       inactive: this.props.authType === this.props.toAuthType
     })
-    this.state.animValue.setValue(
-      this.props.authType === this.props.toAuthType ? 0 : 1
-    )
+  }
+
+  componentDidMount() {
+    const onResize = () => {
+      this.setState({position: this.props.authType === this.props.toAuthType ? 'absolute' : 'relative'})
+    }
+    window.addEventListener('resize', onResize)
   }
 
   componentWillReceiveProps(nextProps) {
