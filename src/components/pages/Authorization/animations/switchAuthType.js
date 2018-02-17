@@ -51,8 +51,8 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
   const roundedTopToValue = initialAuthType === to
     ? 0
     : toSignUp
-      ? -(diff / 2)
-      : (diff / 2)
+      ? Math.round(-diff / 2)
+      : Math.round(diff / 2)
   const bottomActionsToValue = -roundedTopToValue
   const logoWithTitleToValue = roundedTopToValue
 
