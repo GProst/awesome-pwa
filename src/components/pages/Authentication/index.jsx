@@ -22,7 +22,7 @@ const Content = styled.div`
   position: relative;
   
   ${props => {
-    if (process.env.isMobile === true) {
+    if (process.env.isMobile === true && !props.noScroll) {
       return `
         @media screen and (orientation: landscape) {
           padding: 40px 0;
@@ -57,8 +57,18 @@ class AuthPage extends React.Component {
     authType: PropTypes.string
   }
 
+  state = {}
+
   _updateState(queryAuthType) {
     authPageStateContainer.setAuthType(queryAuthType)
+  }
+
+  _checkScrollNecessity() {
+    const height = parseInt(window.getComputedStyle(this.content).height, 10)
+    const verticalPadding = 80
+    this.setState({
+      noScroll: (height + verticalPadding) <= window.innerHeight
+    })
   }
 
   componentWillMount() {
@@ -67,8 +77,12 @@ class AuthPage extends React.Component {
   }
 
   componentDidMount() {
-    const onResize = () => { initAnimationValues(this.props.authType) }
+    const onResize = () => {
+      initAnimationValues(this.props.authType)
+      this._checkScrollNecessity()
+    }
     window.addEventListener('resize', onResize)
+    this._checkScrollNecessity()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,12 +93,13 @@ class AuthPage extends React.Component {
   }
 
   render() {
+    const {noScroll} = this.state
     return (
       <Provider inject={[authPageStateContainer]}>
         <Subscribe to={[AuthPageStateContainer]}>
           {stateContainer => (
-            <PageContainer>
-              <Content>
+            <PageContainer noScroll={noScroll}>
+              <Content innerRef={elem => { this.content = elem }} noScroll={noScroll}>
                 <LogoWithTitle />
                 <AuthForm />
                 <BottomAction authType={stateContainer.state.authType} />
