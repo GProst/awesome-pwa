@@ -33,6 +33,7 @@ export const validateNewPassword = value => {
     validation.status = false
     validation.error = 'Please provide your passport'
   }
+  // TODO
   return validation
 }
 
