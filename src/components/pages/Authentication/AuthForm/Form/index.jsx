@@ -141,6 +141,7 @@ export class Form extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.authType !== nextProps.authType) {
       this.setState({
+        showPassword: false,
         fields: {
           ...this.state.fields,
           [FIELD.password]: '',
