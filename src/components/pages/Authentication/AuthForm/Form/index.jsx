@@ -130,6 +130,12 @@ export class Form extends React.Component {
     this.validateField(field, value)
   }
 
+  onSubmit = e => {
+    e.preventDefault()
+    this.validateFields()
+    // TODO
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.authType !== nextProps.authType) {
       this.setState({
@@ -236,12 +242,12 @@ export class Form extends React.Component {
       <Fragment>
         <FormContainer setFormNode={setFormNode} formType={AUTH_TYPE.signUp} authType={authType} animating={animating}>
           {this.renderInputs()}
-          <SubmitButton>Sign Up</SubmitButton>
+          <SubmitButton onClick={this.onSubmit}>Sign Up</SubmitButton>
         </FormContainer>
         <FormContainer setFormNode={setFormNode} formType={AUTH_TYPE.signIn} authType={authType} animating={animating}>
           {this.renderInputs({isSignUp: false})}
           <ForgotPasswordLink />
-          <SubmitButton>Sign In</SubmitButton>
+          <SubmitButton onClick={this.onSubmit}>Sign In</SubmitButton>
         </FormContainer>
       </Fragment>
     )

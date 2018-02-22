@@ -28,12 +28,13 @@ class _SubmitButton extends React.Component {
 
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    onClick: PropTypes.func.isRequired
   }
 
   render() {
     return (
-      <Button fullWidth color='primary' size='small' variant='raised' type='button' classes={{...this.props.classes}}>
+      <Button onClick={this.props.onClick} fullWidth color='primary' size='small' variant='raised' type='button' classes={{...this.props.classes}}>
         {this.props.children}
       </Button>
     )
