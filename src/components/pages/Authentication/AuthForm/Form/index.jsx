@@ -82,10 +82,12 @@ export class Form extends React.Component {
         break
       }
       case FIELD.newPassword: {
+        if (this.props.authType === AUTH_TYPE.signIn) break
         validationState = validateNewPassword(value)
         break
       }
       case FIELD.password: {
+        if (this.props.authType === AUTH_TYPE.signUp) break
         validationState = validatePassword(value)
         break
       }
