@@ -11,6 +11,7 @@ import {ForgotPasswordLink} from './ForgotPasswordLink'
 import {SubmitButton} from './SubmitButton'
 
 import {AUTH_TYPE} from '../../stateAuthPage'
+import {validateEmail, validateName, validateNewPassword, validatePassword} from './validation'
 
 const Inputs = styled.div`
   width: 100%;
@@ -40,7 +41,8 @@ const IconContainer = styled.div`
 const FIELD = {
   name: 'name',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  newPassword: 'newPassword'
 }
 
 export class Form extends React.Component {
@@ -57,13 +59,50 @@ export class Form extends React.Component {
     fields: {
       [FIELD.name]: '',
       [FIELD.email]: '',
-      [FIELD.password]: ''
+      [FIELD.password]: '',
+      [FIELD.newPassword]: ''
     },
     errors: {
       [FIELD.name]: null,
       [FIELD.email]: null,
-      [FIELD.password]: null
+      [FIELD.password]: null,
+      [FIELD.newPassword]: null
     }
+  }
+
+  validateField = (field, value) => {
+    let validationState = {status: true, error: null}
+    switch (field) {
+      case FIELD.name: {
+        validationState = validateName(value)
+        break
+      }
+      case FIELD.email: {
+        validationState = validateEmail(value)
+        break
+      }
+      case FIELD.newPassword: {
+        validationState = validateNewPassword(value)
+        break
+      }
+      case FIELD.password: {
+        validationState = validatePassword(value)
+        break
+      }
+    }
+    this.setState(prevState => ({
+      errors: {
+        ...prevState.errors,
+        [field]: validationState.error
+      }
+    }))
+    return validationState.status
+  }
+
+  validateFields = () => {
+    return Object.values(FIELD).reduce((validationStatus, fieldType) => {
+      return this.validateField(fieldType, this.state.fields[fieldType]) && validationStatus
+    }, true)
   }
 
   togglePasswordVisibility = () => {
@@ -86,16 +125,23 @@ export class Form extends React.Component {
     })
   }
 
+  onInputBlur = (field, e) => {
+    const {value} = e.target
+    this.validateField(field, value)
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.authType !== nextProps.authType) {
       this.setState({
         fields: {
           ...this.state.fields,
-          [FIELD.password]: ''
+          [FIELD.password]: '',
+          [FIELD.newPassword]: ''
         },
         errors: {
           ...this.state.errors,
-          [FIELD.password]: null
+          [FIELD.password]: null,
+          [FIELD.newPassword]: null
         }
       })
     }
@@ -103,6 +149,7 @@ export class Form extends React.Component {
 
   renderInputs({isSignUp = true} = {}) {
     const {fields, errors} = this.state
+    const passportField = this.props.authType === AUTH_TYPE.signIn ? FIELD.password : FIELD.newPassword
     return (
       <Inputs>
         {isSignUp && (
@@ -113,6 +160,7 @@ export class Form extends React.Component {
             <TextField
               value={fields[FIELD.name]}
               onChange={e => { this.onInputChange(FIELD.name, e) }}
+              onBlur={e => { this.onInputBlur(FIELD.name, e) }}
               label='Full Name'
               autoComplete='name'
               placeholder='John Doe'
@@ -121,6 +169,7 @@ export class Form extends React.Component {
                 shrink: true
               }}
               helperText={errors[FIELD.name] || ' '}
+              error={Boolean(errors[FIELD.name])}
             />
           </InputContainer>
         )}
@@ -131,6 +180,7 @@ export class Form extends React.Component {
           <TextField
             value={fields[FIELD.email]}
             onChange={e => { this.onInputChange(FIELD.email, e) }}
+            onBlur={e => { this.onInputBlur(FIELD.email, e) }}
             label='Email'
             placeholder='johndoe@example.com'
             autoComplete='email'
@@ -139,6 +189,7 @@ export class Form extends React.Component {
               shrink: true
             }}
             helperText={errors[FIELD.email] || ' '}
+            error={Boolean(errors[FIELD.email])}
           />
         </InputContainer>
         <InputContainer>
@@ -146,8 +197,9 @@ export class Form extends React.Component {
             <MaterialIcon name='Lock' />
           </IconContainer>
           <TextField
-            value={fields[FIELD.password]}
-            onChange={e => { this.onInputChange(FIELD.password, e) }}
+            value={fields[passportField]}
+            onChange={e => { this.onInputChange(passportField, e) }}
+            onBlur={e => { this.onInputBlur(passportField, e) }}
             type={this.state.showPassword ? 'text' : 'password'}
             label='Password'
             autoComplete={isSignUp ? 'new-password' : 'current-password'}
@@ -155,7 +207,8 @@ export class Form extends React.Component {
             InputLabelProps={{
               shrink: true
             }}
-            helperText={errors[FIELD.password] || ' '}
+            helperText={errors[passportField] || ' '}
+            error={Boolean(errors[passportField])}
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
