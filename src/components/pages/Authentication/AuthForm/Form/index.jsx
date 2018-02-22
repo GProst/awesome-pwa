@@ -240,16 +240,17 @@ export class Form extends React.Component {
 
   render() {
     const {authType, animating, setFormNode} = this.props
+    const disabled = Object.values(this.state.errors).some(error => error !== null)
     return (
       <Fragment>
         <FormContainer setFormNode={setFormNode} formType={AUTH_TYPE.signUp} authType={authType} animating={animating}>
           {this.renderInputs()}
-          <SubmitButton onClick={this.onSubmit}>Sign Up</SubmitButton>
+          <SubmitButton onClick={this.onSubmit} disabled={disabled}>Sign Up</SubmitButton>
         </FormContainer>
         <FormContainer setFormNode={setFormNode} formType={AUTH_TYPE.signIn} authType={authType} animating={animating}>
           {this.renderInputs({isSignUp: false})}
           <ForgotPasswordLink />
-          <SubmitButton onClick={this.onSubmit}>Sign In</SubmitButton>
+          <SubmitButton onClick={this.onSubmit} disabled={disabled}>Sign In</SubmitButton>
         </FormContainer>
       </Fragment>
     )
