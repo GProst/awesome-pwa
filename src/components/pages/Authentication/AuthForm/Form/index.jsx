@@ -37,6 +37,12 @@ const IconContainer = styled.div`
   height: 32px;
 `
 
+const FIELD = {
+  name: 'name',
+  email: 'email',
+  password: 'password'
+}
+
 export class Form extends React.Component {
   static displayName = 'Form'
 
@@ -47,7 +53,17 @@ export class Form extends React.Component {
   }
 
   state = {
-    showPassword: false
+    showPassword: false,
+    fields: {
+      [FIELD.name]: '',
+      [FIELD.email]: '',
+      [FIELD.password]: ''
+    },
+    errors: {
+      [FIELD.name]: null,
+      [FIELD.email]: null,
+      [FIELD.password]: null
+    }
   }
 
   togglePasswordVisibility = () => {
@@ -56,7 +72,37 @@ export class Form extends React.Component {
     })
   }
 
+  onInputChange = (field, e) => {
+    const {value} = e.target
+    this.setState({
+      fields: {
+        ...this.state.fields,
+        [field]: value
+      },
+      errors: {
+        ...this.state.errors,
+        [field]: null
+      }
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.authType !== nextProps.authType) {
+      this.setState({
+        fields: {
+          ...this.state.fields,
+          [FIELD.password]: ''
+        },
+        errors: {
+          ...this.state.errors,
+          [FIELD.password]: null
+        }
+      })
+    }
+  }
+
   renderInputs({isSignUp = true} = {}) {
+    const {fields, errors} = this.state
     return (
       <Inputs>
         {isSignUp && (
@@ -65,6 +111,8 @@ export class Form extends React.Component {
               <MaterialIcon name='AccountBox' />
             </IconContainer>
             <TextField
+              value={fields[FIELD.name]}
+              onChange={e => { this.onInputChange(FIELD.name, e) }}
               label='Full Name'
               autoComplete='name'
               placeholder='John Doe'
@@ -72,7 +120,7 @@ export class Form extends React.Component {
               InputLabelProps={{
                 shrink: true
               }}
-              helperText=' '
+              helperText={errors[FIELD.name] || ' '}
             />
           </InputContainer>
         )}
@@ -81,6 +129,8 @@ export class Form extends React.Component {
             <MaterialIcon name='Email' />
           </IconContainer>
           <TextField
+            value={fields[FIELD.email]}
+            onChange={e => { this.onInputChange(FIELD.email, e) }}
             label='Email'
             placeholder='johndoe@example.com'
             autoComplete='email'
@@ -88,7 +138,7 @@ export class Form extends React.Component {
             InputLabelProps={{
               shrink: true
             }}
-            helperText=' '
+            helperText={errors[FIELD.email] || ' '}
           />
         </InputContainer>
         <InputContainer>
@@ -96,6 +146,8 @@ export class Form extends React.Component {
             <MaterialIcon name='Lock' />
           </IconContainer>
           <TextField
+            value={fields[FIELD.password]}
+            onChange={e => { this.onInputChange(FIELD.password, e) }}
             type={this.state.showPassword ? 'text' : 'password'}
             label='Password'
             autoComplete={isSignUp ? 'new-password' : 'current-password'}
@@ -103,7 +155,7 @@ export class Form extends React.Component {
             InputLabelProps={{
               shrink: true
             }}
-            helperText=' '
+            helperText={errors[FIELD.password] || ' '}
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
