@@ -52,7 +52,7 @@ export const validateNewPassword = value => {
   switch (true) {
     case value.length === 0: {
       validation.status = false
-      validation.error = 'Please provide your passport'
+      validation.error = 'Please provide your password'
       break
     }
     case value.length < 8: {
@@ -78,7 +78,7 @@ export const validatePassword = value => {
   const validation = {...defaultValidationState}
   if (value.length === 0) {
     validation.status = false
-    validation.error = 'Please provide your passport'
+    validation.error = 'Please provide your password'
   }
   return validation
 }

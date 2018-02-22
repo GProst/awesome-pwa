@@ -157,7 +157,7 @@ export class Form extends React.Component {
 
   renderInputs({isSignUp = true} = {}) {
     const {fields, errors} = this.state
-    const passportField = this.props.authType === AUTH_TYPE.signIn ? FIELD.password : FIELD.newPassword
+    const passwordField = this.props.authType === AUTH_TYPE.signIn ? FIELD.password : FIELD.newPassword
     return (
       <Inputs>
         {isSignUp && (
@@ -205,9 +205,9 @@ export class Form extends React.Component {
             <MaterialIcon name='Lock' />
           </IconContainer>
           <TextField
-            value={fields[passportField]}
-            onChange={e => { this.onInputChange(passportField, e) }}
-            onBlur={e => { this.onInputBlur(passportField, e) }}
+            value={fields[passwordField]}
+            onChange={e => { this.onInputChange(passwordField, e) }}
+            onBlur={e => { this.onInputBlur(passwordField, e) }}
             type={this.state.showPassword ? 'text' : 'password'}
             label='Password'
             autoComplete={isSignUp ? 'new-password' : 'current-password'}
@@ -215,8 +215,8 @@ export class Form extends React.Component {
             InputLabelProps={{
               shrink: true
             }}
-            helperText={errors[passportField] || ' '}
-            error={Boolean(errors[passportField])}
+            helperText={errors[passwordField] || ' '}
+            error={Boolean(errors[passwordField])}
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
