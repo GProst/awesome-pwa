@@ -169,7 +169,9 @@ export class Form extends React.Component {
             <TextField
               value={fields[FIELD.name]}
               onChange={e => { this.onInputChange(FIELD.name, e) }}
-              onBlur={e => { this.onInputBlur(FIELD.name, e) }}
+              inputProps={{
+                onBlur: e => { this.onInputBlur(FIELD.name, e) }
+              }}
               label='Full Name'
               autoComplete='name'
               placeholder='John Doe'
@@ -189,7 +191,9 @@ export class Form extends React.Component {
           <TextField
             value={fields[FIELD.email]}
             onChange={e => { this.onInputChange(FIELD.email, e) }}
-            onBlur={e => { this.onInputBlur(FIELD.email, e) }}
+            inputProps={{
+              onBlur: e => { this.onInputBlur(FIELD.email, e) }
+            }}
             label='Email'
             placeholder='johndoe@example.com'
             autoComplete='email'
@@ -208,7 +212,9 @@ export class Form extends React.Component {
           <TextField
             value={fields[passwordField]}
             onChange={e => { this.onInputChange(passwordField, e) }}
-            onBlur={e => { this.onInputBlur(passwordField, e) }}
+            inputProps={{
+              onBlur: e => { this.onInputBlur(passwordField, e) }
+            }}
             type={this.state.showPassword ? 'text' : 'password'}
             label='Password'
             autoComplete={isSignUp ? 'new-password' : 'current-password'}
