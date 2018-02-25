@@ -28,11 +28,6 @@ export const validateName = value => {
       validation.error = 'Please provide your name'
       break
     }
-    case !/^(\w+\s*)+$/.test(value): {
-      validation.status = false
-      validation.error = 'Full name must contain only letters, numbers and underscores'
-      break
-    }
     case /^_*[0-9]*$/.test(value): {
       validation.status = false
       validation.error = 'Username must contain letters'
