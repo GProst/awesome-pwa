@@ -5,8 +5,8 @@ import Animated from 'animated/lib/targets/react-dom'
 import {AUTH_TYPE} from '../../stateAuthPage'
 import {animState} from '../../animations/switchAuthType'
 
-export class FormContainer extends React.Component {
-  static displayName = 'FormContainer'
+export class FormContent extends React.Component {
+  static displayName = 'FormContent'
 
   static propTypes = {
     children: PropTypes.node.isRequired,

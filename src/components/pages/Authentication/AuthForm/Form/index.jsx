@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import TextField from 'material-ui/TextField'
@@ -6,12 +6,22 @@ import {InputAdornment} from 'material-ui/Input'
 import IconButton from 'material-ui/IconButton'
 
 import {MaterialIcon} from '../../../../reusable/MaterialIcon'
-import {FormContainer} from './FormContainer'
+import {FormContent} from './FormContent'
 import {ForgotPasswordLink} from './ForgotPasswordLink'
 import {SubmitButton} from './SubmitButton'
 
 import {AUTH_TYPE} from '../../stateAuthPage'
 import {validateEmail, validateName, validateNewPassword, validatePassword} from './validation'
+
+const FormContainer = styled.form`
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 const Inputs = styled.div`
   width: 100%;
@@ -249,17 +259,17 @@ export class Form extends React.Component {
     const {authType, animating, setFormNode} = this.props
     const disabled = Object.values(this.state.errors).some(error => error !== null)
     return (
-      <Fragment>
-        <FormContainer setFormNode={setFormNode} formType={AUTH_TYPE.signUp} authType={authType} animating={animating}>
+      <FormContainer onSubmit={this.onSubmit}>
+        <FormContent setFormNode={setFormNode} formType={AUTH_TYPE.signUp} authType={authType} animating={animating}>
           {this.renderInputs()}
-          <SubmitButton onClick={this.onSubmit} disabled={disabled}>Sign Up</SubmitButton>
-        </FormContainer>
-        <FormContainer setFormNode={setFormNode} formType={AUTH_TYPE.signIn} authType={authType} animating={animating}>
+          <SubmitButton disabled={disabled}>Sign Up</SubmitButton>
+        </FormContent>
+        <FormContent setFormNode={setFormNode} formType={AUTH_TYPE.signIn} authType={authType} animating={animating}>
           {this.renderInputs({isSignUp: false})}
           <ForgotPasswordLink />
-          <SubmitButton onClick={this.onSubmit} disabled={disabled}>Sign In</SubmitButton>
-        </FormContainer>
-      </Fragment>
+          <SubmitButton disabled={disabled}>Sign In</SubmitButton>
+        </FormContent>
+      </FormContainer>
     )
   }
 }
