@@ -55,6 +55,13 @@ const FIELD = {
   newPassword: 'newPassword'
 }
 
+const defaultFieldErrors = {
+  [FIELD.name]: null,
+  [FIELD.email]: null,
+  [FIELD.password]: null,
+  [FIELD.newPassword]: null
+}
+
 export class Form extends React.Component {
   static displayName = 'Form'
 
@@ -73,10 +80,7 @@ export class Form extends React.Component {
       [FIELD.newPassword]: ''
     },
     errors: {
-      [FIELD.name]: null,
-      [FIELD.email]: null,
-      [FIELD.password]: null,
-      [FIELD.newPassword]: null
+      ...defaultFieldErrors
     }
   }
 
@@ -158,9 +162,7 @@ export class Form extends React.Component {
           [FIELD.newPassword]: ''
         },
         errors: {
-          ...this.state.errors,
-          [FIELD.password]: null,
-          [FIELD.newPassword]: null
+          ...defaultFieldErrors
         }
       })
     }
