@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
-import {Routes} from '../routes'
+import {ROUTES} from '../routes'
 
 const connector = connect(
   state => ({
@@ -30,7 +30,7 @@ export const requireAuth = WrappedComponent => {
           if (authToken !== null) {
             return <WrappedComponent {...clearedProps} />
           } else {
-            return <Redirect to={{pathname: Routes.authentication, state: {redirect: location.pathname}}} />
+            return <Redirect to={{pathname: ROUTES.authentication, state: {redirect: location.pathname}}} />
           }
         }
       }

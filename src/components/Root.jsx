@@ -5,7 +5,7 @@ import {Provider} from 'react-redux'
 
 import {store} from '../redux/store'
 import {history} from '../history'
-import {Routes} from '../routes'
+import {ROUTES} from '../routes'
 import {ThemeProvider} from './global/ThemeProvider'
 
 import {GoalsPage} from './pages/Goals'
@@ -29,9 +29,9 @@ class Root extends React.Component {
             {this.renderDevToolsComp()}
             <ConnectedRouter history={history} store={store}>
               <Switch>
-                <Route exact path={Routes.goals} component={GoalsPage} />
-                <Route exact path={Routes.authentication} component={AuthPage} />
-                <Redirect to={Routes.goals} />
+                <Route exact path={ROUTES.goals} component={GoalsPage} />
+                <Route exact path={ROUTES.authentication} component={AuthPage} />
+                <Redirect to={ROUTES.goals} />
               </Switch>
             </ConnectedRouter>
           </AppBackground>
