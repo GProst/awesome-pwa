@@ -60,7 +60,7 @@ const config = {
       template: './src/index.html',
       filename: 'index.html',
       inject: 'body',
-      cashe: true,
+      cache: true,
       showErrors: true
     }),
 
