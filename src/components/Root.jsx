@@ -29,8 +29,8 @@ class Root extends React.Component {
             {this.renderDevToolsComp()}
             <ConnectedRouter history={history} store={store}>
               <Switch>
-                <Route exact path={ROUTES.goals} component={GoalsPage} />
-                <Route exact path={ROUTES.authentication} component={AuthPage} />
+                <Route exact strict path={ROUTES.goals} component={GoalsPage} />
+                <Route exact strict path={ROUTES.authentication} component={AuthPage} />
                 <Redirect to={ROUTES.goals} />
               </Switch>
             </ConnectedRouter>
