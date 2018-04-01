@@ -16,32 +16,36 @@ export class FormContent extends React.Component {
     formType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
-  state = {
-    animValue: this.props.formType === AUTH_TYPE.signIn ? animState.signInForm : animState.signUpForm,
-    position: 'relative'
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.authType !== prevState.authType) {
+      let additionalState = {}
+      if (prevState.authType !== null) {
+        additionalState = {
+          inactive: nextProps.authType !== prevState.formType
+        }
+      }
+      return {
+        authType: nextProps.authType,
+        ...additionalState
+      }
+    }
+    return null
   }
 
-  componentWillMount() {
-    this.setState({
-      position: this.props.authType === this.props.formType ? 'relative' : 'absolute',
-      inactive: this.props.authType !== this.props.formType
-    })
+  state = {
+    animValue: this.props.formType === AUTH_TYPE.signIn ? animState.signInForm : animState.signUpForm,
+    position: this.props.authType === this.props.formType ? 'relative' : 'absolute',
+    inactive: this.props.authType !== this.props.formType,
+    authType: null,
+    formType: this.props.formType
   }
 
   componentDidMount() {
-    this.props.setFormNode({node: this.animContainer.refs.node, type: this.props.formType})
+    this.props.setFormNode({node: this.animContainer.refs.node, type: this.state.formType})
     const onResize = () => {
-      this.setState({position: this.props.authType === this.props.formType ? 'relative' : 'absolute'})
+      this.setState({position: this.props.authType === this.state.formType ? 'relative' : 'absolute'})
     }
     window.addEventListener('resize', onResize)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.authType !== this.props.authType) {
-      this.setState({
-        inactive: nextProps.authType !== this.props.formType
-      })
-    }
   }
 
   render() {
