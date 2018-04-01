@@ -71,6 +71,24 @@ export class Form extends React.Component {
     animating: PropTypes.bool.isRequired
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.authType !== nextProps.authType) {
+      return {
+        showPassword: false,
+        fields: {
+          ...prevState.fields,
+          [FIELD.password]: '',
+          [FIELD.newPassword]: ''
+        },
+        errors: {
+          ...defaultFieldErrors
+        },
+        authType: nextProps.authType
+      }
+    }
+    return null
+  }
+
   state = {
     showPassword: false,
     fields: {
@@ -81,7 +99,8 @@ export class Form extends React.Component {
     },
     errors: {
       ...defaultFieldErrors
-    }
+    },
+    authType: this.props.authType
   }
 
   validateField = (field, value) => {
@@ -150,22 +169,6 @@ export class Form extends React.Component {
     e.preventDefault()
     this.validateFields()
     // TODO
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.authType !== nextProps.authType) {
-      this.setState({
-        showPassword: false,
-        fields: {
-          ...this.state.fields,
-          [FIELD.password]: '',
-          [FIELD.newPassword]: ''
-        },
-        errors: {
-          ...defaultFieldErrors
-        }
-      })
-    }
   }
 
   renderInputs({isSignUp = true} = {}) {
