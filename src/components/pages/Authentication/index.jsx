@@ -63,17 +63,17 @@ class AuthPage extends React.Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     AuthPage.updateState(nextProps.authType)
-    if (prevState.lastAuthType !== nextProps.authType) {
-      if (prevState.lastAuthType !== null) animateSwitchAuthType({to: nextProps.authType})
+    if (prevState.authType !== nextProps.authType) {
+      if (prevState.authType !== null) animateSwitchAuthType({to: nextProps.authType})
       return {
-        lastAuthType: nextProps.authType
+        authType: nextProps.authType
       }
     }
     return null
   }
 
   state = {
-    lastAuthType: null
+    authType: null
   }
 
   constructor(props) {
