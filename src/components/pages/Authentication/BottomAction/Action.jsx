@@ -34,36 +34,33 @@ export class Action extends React.Component {
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
-  state = {
-    position: 'relative',
-    animValue: this.props.toAuthType === AUTH_TYPE.signIn ? animState.toSignInAction : animState.toSignUpAction
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.authType !== prevState.authType) {
+      return {
+        authType: nextProps.authType,
+        inactive: nextProps.authType === prevState.toAuthType
+      }
+    }
+    return null
   }
 
-  componentWillMount() {
-    this.setState({
-      position: this.props.authType === this.props.toAuthType ? 'absolute' : 'relative',
-      inactive: this.props.authType === this.props.toAuthType
-    })
+  state = {
+    position: this.props.authType === this.props.toAuthType ? 'absolute' : 'relative',
+    animValue: this.props.toAuthType === AUTH_TYPE.signIn ? animState.toSignInAction : animState.toSignUpAction,
+    authType: null,
+    toAuthType: this.props.toAuthType
   }
 
   componentDidMount() {
     const onResize = () => {
-      this.setState({position: this.props.authType === this.props.toAuthType ? 'absolute' : 'relative'})
+      this.setState({position: this.props.authType === this.state.toAuthType ? 'absolute' : 'relative'})
     }
     window.addEventListener('resize', onResize)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.authType !== this.props.authType) {
-      this.setState({
-        inactive: nextProps.authType === this.props.toAuthType
-      })
-    }
-  }
-
   render() {
-    const {desc, linkText, toAuthType} = this.props
-    const {position, inactive, animValue} = this.state
+    const {desc, linkText} = this.props
+    const {position, inactive, animValue, toAuthType} = this.state
     return (
       <Animated.div
         style={{
