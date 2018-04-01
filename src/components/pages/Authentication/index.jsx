@@ -57,10 +57,29 @@ class AuthPage extends React.Component {
     authType: PropTypes.string
   }
 
-  state = {}
-
-  _updateState(queryAuthType) {
+  static updateState(queryAuthType) {
     authPageStateContainer.setAuthType(queryAuthType)
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    AuthPage.updateState(nextProps.authType)
+    if (prevState.lastAuthType !== nextProps.authType) {
+      if (prevState.lastAuthType !== null) animateSwitchAuthType({to: nextProps.authType})
+      return {
+        lastAuthType: nextProps.authType
+      }
+    }
+    return null
+  }
+
+  state = {
+    lastAuthType: null
+  }
+
+  constructor(props) {
+    super(props)
+
+    initAnimationValues(props.authType)
   }
 
   _checkScrollNecessity() {
@@ -71,11 +90,6 @@ class AuthPage extends React.Component {
     })
   }
 
-  componentWillMount() {
-    this._updateState(this.props.authType)
-    initAnimationValues(this.props.authType)
-  }
-
   componentDidMount() {
     const onResize = () => {
       initAnimationValues(this.props.authType)
@@ -83,13 +97,6 @@ class AuthPage extends React.Component {
     }
     window.addEventListener('resize', onResize)
     this._checkScrollNecessity()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this._updateState(nextProps.authType)
-    if (this.props.authType !== nextProps.authType) {
-      animateSwitchAuthType({to: nextProps.authType})
-    }
   }
 
   render() {
