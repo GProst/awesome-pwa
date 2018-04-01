@@ -18,15 +18,9 @@ export class FormContent extends React.Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.authType !== prevState.authType) {
-      let additionalState = {}
-      if (prevState.authType !== null) {
-        additionalState = {
-          inactive: nextProps.authType !== prevState.formType
-        }
-      }
       return {
         authType: nextProps.authType,
-        ...additionalState
+        inactive: nextProps.authType !== prevState.formType
       }
     }
     return null
@@ -35,7 +29,6 @@ export class FormContent extends React.Component {
   state = {
     animValue: this.props.formType === AUTH_TYPE.signIn ? animState.signInForm : animState.signUpForm,
     position: this.props.authType === this.props.formType ? 'relative' : 'absolute',
-    inactive: this.props.authType !== this.props.formType,
     authType: null,
     formType: this.props.formType
   }
