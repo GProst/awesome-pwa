@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --port 3000 --output-public-path=\"http://localhost:3000/\" --public=\"localhost:3000/\" --hot --inline",
     "build": "webpack",
+    "gzip-public": "chmod +x ./gzip.sh && ./gzip.sh",
     "lint": "eslint --ext .js --ext .jsx --ignore-path .gitignore ./",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ignore-path .gitignore ./",
     "precommit": "lint-staged"
