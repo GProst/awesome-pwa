@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import Amplify from 'aws-amplify'
-import awsExports from './aws-exports'
+import awsExports from './dynamic-aws-exports'
 
 import './styles'
 import './font'
