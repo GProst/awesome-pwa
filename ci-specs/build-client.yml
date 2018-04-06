@@ -1,0 +1,13 @@
+version: 0.2
+
+env:
+  variables:
+    NODE_ENV: production
+
+phases:
+  install:
+    commands:
+      - yarn --production=false
+  build:
+    commands:
+      - yarn webpack && yarn run gzip-public
