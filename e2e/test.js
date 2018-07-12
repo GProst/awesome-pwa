@@ -24,24 +24,20 @@ const driver = new swd.Builder()
   .withCapabilities(capabilities)
   .build()
 
-setWindowSize({
-  driver,
-  windowInnerSize: _400_X_728,
-  resolution: _1920x1080
-})
-  .then(() => {
-    driver.get('https://dwgo2lfl43tk4.cloudfront.net/')
-      .then(() => {
-        driver
-          .sleep(3000)
-          .then(() => {
-            driver.quit()
-          })
-      })
-      .catch(() => {
-        driver.quit()
-      })
-  })
-  .catch(() => {
+const runInitialTest = async () => {
+  try {
+    await setWindowSize({
+      driver,
+      windowInnerSize: _400_X_728,
+      resolution: _1920x1080
+    })
+    await driver.get('https://dwgo2lfl43tk4.cloudfront.net/')
+    await driver.sleep(3000)
     driver.quit()
-  })
+  } catch(err) {
+    console.error('Error in initial test!', err)
+    driver.quit()
+  }
+}
+
+runInitialTest()
