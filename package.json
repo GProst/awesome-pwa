@@ -9,7 +9,7 @@
     "gzip-public": "chmod +x ./gzip.sh && ./gzip.sh",
     "lint": "eslint --ext .js --ext .jsx --ignore-path .gitignore ./",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ignore-path .gitignore ./",
-    "e2e": "source ./set-env.sh && node ./e2e/test.js",
+    "e2e": "source ./set-env.sh && yarn babel-node --plugins babel-plugin-transform-es2015-modules-commonjs ./e2e/test.js",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -34,13 +34,14 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-styled-components": "^1.2.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",

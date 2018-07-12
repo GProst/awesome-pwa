@@ -1,7 +1,5 @@
-'use strict'
-
-const swd = require('selenium-webdriver')
-const {setWindowSize} = require('./utils')
+import swd from 'selenium-webdriver'
+import {setWindowSize} from './utils'
 const {WINDOW_SIZE: {_400_X_728}, RESOLUTION: {_1920x1080}} = require('./constants')
 
 const {BROWSERSTACK_USER, BROWSERSTACK_KEY} = process.env

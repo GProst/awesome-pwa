@@ -1,6 +1,4 @@
-'use strict'
-
-const WINDOW_SIZE = {
+export const WINDOW_SIZE = {
   _320_X_568: {
     width: 320,
     height: 568
@@ -12,7 +10,7 @@ const WINDOW_SIZE = {
 }
 
 // available on BrowserStack
-const RESOLUTION = {
+export const RESOLUTION = {
   _1024x768: {
     width: 1024,
     height: 768
@@ -33,9 +31,4 @@ const RESOLUTION = {
     width: 1920,
     height: 1080
   }
-}
-
-module.exports = {
-  WINDOW_SIZE,
-  RESOLUTION
 }

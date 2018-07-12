@@ -1,8 +1,6 @@
-'use strict'
+import {equals} from 'ramda'
 
-const {equals} = require('ramda')
-
-const setWindowSize = ({driver, windowInnerSize, resolution}) => {
+export const setWindowSize = ({driver, windowInnerSize, resolution}) => {
   return driver
     .manage()
     .window()
@@ -59,8 +57,4 @@ const setWindowSize = ({driver, windowInnerSize, resolution}) => {
           throw err
         })
     })
-}
-
-module.exports = {
-  setWindowSize
 }
