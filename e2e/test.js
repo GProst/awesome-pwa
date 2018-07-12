@@ -15,7 +15,7 @@ const capabilities = {
   'browserstack.key': BROWSERSTACK_KEY,
   resolution: `${_1920x1080.width}x${_1920x1080.height}`,
   chromeOptions: {
-    args: ['--disable-infobars']
+    args: ['--disable-infobars'] // won't show infobar that browser is run by driver
   }
 }
 
