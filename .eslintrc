@@ -1,15 +1,18 @@
 {
-  "parser": "babel-eslint",
+  "root": true,
   "env": {
-    "browser": true,
-    "jest": true
+    "es6": true,
+    "node": true,
+    "commonjs": true,
+    "shared-node-browser": true
   },
+  "parserOptions": {
+    "sourceType": "script",
+    "allowImportExportEverywhere": true
+  },
+  "parser": "babel-eslint",
   "extends": [
-    "standard",
-    "standard-jsx"
-  ],
-  "plugins": [
-    "react"
+    "standard"
   ],
   "rules": {
     "quotes": ["error", "single"],
@@ -24,53 +27,6 @@
       "error",
       "never"
     ],
-    "react/sort-comp": [
-      "error",
-      {
-        "order": [
-          "static-methods",
-          "static-react",
-          "everything-else",
-          "/^on.+$/",
-          "lifecycle",
-          "rendering"
-        ],
-        "groups": {
-          "static-react": [
-            "displayName",
-            "propTypes",
-            "defaultProps",
-            "contextTypes",
-            "childContextTypes",
-            "getChildContext",
-            "state",
-            "constructor"
-          ],
-          "lifecycle": [
-            "componentWillMount",
-            "componentDidMount",
-            "componentWillReceiveProps",
-            "shouldComponentUpdate",
-            "componentWillUpdate",
-            "componentDidUpdate",
-            "componentWillUnmount"
-          ],
-          "rendering": [
-            "/^render.+$/",
-            "render"
-          ]
-        }
-      }
-    ],
-    "react/prop-types": [
-      "error"
-    ],
-    "react/no-unused-prop-types": [
-      "error"
-    ],
-    "react/display-name": [
-      "error",
-      { "ignoreTranspilerName": true }
-    ]
+    "strict": ["error", "global"]
   }
 }

@@ -1,3 +1,5 @@
+'use strict'
+
 const webpack = require('webpack')
 const WebpackChunkHash = require('webpack-chunk-hash')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
