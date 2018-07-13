@@ -21,12 +21,17 @@ export const setWindowSize = async ({driver, windowInnerSize, resolution}) => {
     width: windowInnerSize.width + padding.horizontal,
     height: windowInnerSize.height + padding.vertical
   }
-  await driver.manage().window().setRect({
-    width: windowSize.width,
-    height: windowSize.height,
-    x: (resolution.width - windowSize.width) / 2,
-    y: (resolution.height - windowSize.height) / 2
-  })
+  try {
+    await driver.manage().window().setRect({
+      width: windowSize.width,
+      height: windowSize.height,
+      x: (resolution.width - windowSize.width) / 2,
+      y: (resolution.height - windowSize.height) / 2
+    })
+  } catch(err) {
+    console.error('Error setting window sizes and position', err)
+    throw err
+  }
   const JS_GET_WINDOW_INNER_SIZE = `
     return {
       width: window.innerWidth,
