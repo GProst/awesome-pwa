@@ -13,10 +13,10 @@ const testProps = {
   type: 'screenshot',
   capability: {
   //   only: {
-  //     [TEST_PARAM.BROWSER_VERSION]: [BROWSER_VERSION[BROWSER.CHROME].v67]
+  //     [FILTER_PARAMS.BROWSER_VERSIONS]: [BROWSER_VERSIONS[BROWSERS.CHROME].v67]
   //   },
   //   exclude: {
-  //     [TEST_PARAM.BROWSER_VERSION]: [BROWSER_VERSION[BROWSER.CHROME].v67]
+  //     [FILTER_PARAMS.BROWSER_VERSIONS]: [BROWSER_VERSIONS[BROWSERS.CHROME].v67]
   //   }
   }
 }

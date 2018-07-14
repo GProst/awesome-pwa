@@ -1,11 +1,11 @@
-import {TEST_PARAM} from '../../constants/test-params'
+import {FILTER_PARAMS} from '../../constants/test-params'
 
 export const doesTestMatchFilter = (params, testProps) => {
   const {capability} = testProps
-  if (params[TEST_PARAM.PRIORITY].toString() !== testProps.priority.toString()) {
+  if (params[FILTER_PARAMS.PRIORITIES].toString() !== testProps.priority.toString()) {
     return false
   }
-  if (params[TEST_PARAM.TYPE] !== testProps.type) {
+  if (params[FILTER_PARAMS.TYPES] !== testProps.type) {
     return false
   }
   if (!capability.only && !capability.exclude) {

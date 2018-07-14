@@ -1,4 +1,4 @@
-import {TEST_PARAM} from '../../constants/test-params'
+import {FILTER_PARAMS} from '../../constants/test-params'
 import {RESOLUTION} from '../../constants/supported-capabilities'
 import childProcess from 'child_process'
 
@@ -26,10 +26,10 @@ export const getCapabilities = ({params, testId}) => {
     project: 'Priority Book PWA',
     build: `git-commit:${gitCommitSHA}---build-id:${CODEBUILD_BUILD_ID || 'local-build'}`,
     name: `test-id-${testId}`,
-    os: params[TEST_PARAM.OS],
-    os_version: params[TEST_PARAM.OS_VERSION],
-    browserName: params[TEST_PARAM.BROWSER],
-    browser_version: params[TEST_PARAM.BROWSER_VERSION],
+    os: params[FILTER_PARAMS.OSS],
+    os_version: params[FILTER_PARAMS.OS_VERSIONS],
+    browserName: params[FILTER_PARAMS.BROWSERS],
+    browser_version: params[FILTER_PARAMS.BROWSER_VERSIONS],
     'browserstack.local': 'false',
     'browserstack.user': BROWSERSTACK_USER,
     'browserstack.key': BROWSERSTACK_KEY,

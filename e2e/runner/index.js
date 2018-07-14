@@ -1,8 +1,8 @@
 import minimist from 'minimist'
 import glob from 'glob'
 
-import {BROWSERS_OF_OS, OS, BROWSER, WINDOW_SIZE} from '../constants/supported-capabilities'
-import {TEST_PARAM} from '../constants/test-params'
+import {BROWSERS_OF_OSS, OSS, BROWSERS, WINDOW_SIZES} from '../constants/supported-capabilities'
+import {FILTER_PARAMS} from '../constants/test-params'
 import {TEST_STATUS} from '../constants/test-status'
 import {getFiltersFromArgs} from './helpers/getFiltersFromArgs'
 
@@ -25,32 +25,32 @@ const addTest = ({filename, params}) => {
 
 // Collecting all tests and params to execute
 // os -> os-version -> browser -> browser-version -> window-size -> type -> priority -> id (if provided)
-Object.entries(filter[TEST_PARAM.OS]).forEach(([os, osVersions]) => {
-  const supportedBrowsers = BROWSERS_OF_OS[os]
+Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
+  const supportedBrowsers = BROWSERS_OF_OSS[os]
   osVersions.forEach(osVersion => {
-    Object.entries(filter[TEST_PARAM.BROWSER])
+    Object.entries(filter[FILTER_PARAMS.BROWSERS])
       .filter(([browser, browserVersions]) => supportedBrowsers.includes(browser))
       .forEach(([browser, browserVersions]) => {
         browserVersions.forEach(browserVersion => {
-          filter[TEST_PARAM.WINDOW_SIZE]
+          filter[FILTER_PARAMS.WINDOW_SIZES]
             .filter(windowSize => {
-              return !(os === OS.MAC_OSX && browser === BROWSER.CHROME && windowSize === WINDOW_SIZE._320_X_568) // Chrome on MacOSX has min 400px wide window: TODO: create tests
+              return !(os === OSS.MAC_OSX && browser === BROWSERS.CHROME && windowSize === WINDOW_SIZES._320_X_568) // Chrome on MacOSX has min 400px wide window: TODO: create tests
             })
             .forEach(windowSize => {
-              filter[TEST_PARAM.TYPE].forEach(type => {
-                filter[TEST_PARAM.PRIORITY].forEach(priority => {
+              filter[FILTER_PARAMS.TYPES].forEach(type => {
+                filter[FILTER_PARAMS.PRIORITIES].forEach(priority => {
                   const params = {
-                    [TEST_PARAM.OS]: os,
-                    [TEST_PARAM.OS_VERSION]: osVersion,
-                    [TEST_PARAM.BROWSER]: browser,
-                    [TEST_PARAM.BROWSER_VERSION]: browserVersion,
-                    [TEST_PARAM.WINDOW_SIZE]: windowSize,
-                    [TEST_PARAM.TYPE]: type,
-                    [TEST_PARAM.PRIORITY]: priority
+                    [FILTER_PARAMS.OSS]: os,
+                    [FILTER_PARAMS.OS_VERSIONS]: osVersion,
+                    [FILTER_PARAMS.BROWSERS]: browser,
+                    [FILTER_PARAMS.BROWSER_VERSIONS]: browserVersion,
+                    [FILTER_PARAMS.WINDOW_SIZES]: windowSize,
+                    [FILTER_PARAMS.TYPES]: type,
+                    [FILTER_PARAMS.PRIORITIES]: priority
                   }
-                  if (filter[TEST_PARAM.ID]) {
+                  if (filter[FILTER_PARAMS.IDS]) {
                     // if certain ids provided -> run just these tests
-                    filter[TEST_PARAM.ID].forEach(id => {
+                    filter[FILTER_PARAMS.IDS].forEach(id => {
                       try {
                         const [filename] = glob.sync(`../tests/**/${id}.test.js`, {cwd: __dirname})
                         addTest({filename, params})

@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-import {TEST_PARAM} from '../../constants/test-params'
+import {FILTER_PARAMS} from '../../constants/test-params'
 
 const screenshotsDir = path.join(__dirname, '../../screenshots/')
 
@@ -12,7 +12,7 @@ const saveScreenshotFile = ({filename, data}) => {
 export const takeScreenshot = async ({driver, testId, stepNumber, params}) => {
   let filename
   try {
-    filename = path.join(screenshotsDir, `id-${testId}.step-${stepNumber}---os-${params[TEST_PARAM.OS]}:${params[TEST_PARAM.OS_VERSION]}---browser-${params[TEST_PARAM.BROWSER]}:${params[TEST_PARAM.BROWSER_VERSION]}---window-size-${params[TEST_PARAM.WINDOW_SIZE].width}x${params[TEST_PARAM.WINDOW_SIZE].height}.png`)
+    filename = path.join(screenshotsDir, `id-${testId}.step-${stepNumber}---os-${params[FILTER_PARAMS.OSS]}:${params[FILTER_PARAMS.OS_VERSIONS]}---browser-${params[FILTER_PARAMS.BROWSERS]}:${params[FILTER_PARAMS.BROWSER_VERSIONS]}---window-size-${params[FILTER_PARAMS.WINDOW_SIZES].width}x${params[FILTER_PARAMS.WINDOW_SIZES].height}.png`)
     const data = await driver.takeScreenshot()
     try {
       saveScreenshotFile({filename, data})
