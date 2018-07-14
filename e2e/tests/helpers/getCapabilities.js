@@ -1,4 +1,4 @@
-import {FILTER_PARAMS} from '../../constants/test-params'
+import {FILTER_PARAMS} from '../../constants/filter-params'
 import {RESOLUTION} from '../../constants/supported-capabilities'
 import childProcess from 'child_process'
 

@@ -1,4 +1,4 @@
-import {MAP_FILTER_PARAM_TO_SUPPORTED, FILTER_PARAMS} from '../../constants/test-params'
+import {MAP_FILTER_PARAM_TO_SUPPORTED, FILTER_PARAMS} from '../../constants/filter-params'
 
 export const getFiltersFromArgs = args => {
   try {

@@ -2,7 +2,7 @@ import minimist from 'minimist'
 import glob from 'glob'
 
 import {BROWSERS_OF_OSS, OSS, BROWSERS, WINDOW_SIZES} from '../constants/supported-capabilities'
-import {FILTER_PARAMS} from '../constants/test-params'
+import {FILTER_PARAMS} from '../constants/filter-params'
 import {TEST_STATUS} from '../constants/test-status'
 import {getFiltersFromArgs} from './helpers/getFiltersFromArgs'
 

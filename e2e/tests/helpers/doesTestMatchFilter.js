@@ -1,4 +1,4 @@
-import {FILTER_PARAMS} from '../../constants/test-params'
+import {FILTER_PARAMS} from '../../constants/filter-params'
 
 export const doesTestMatchFilter = (params, testProps) => {
   const {capability} = testProps

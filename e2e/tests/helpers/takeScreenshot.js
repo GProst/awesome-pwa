@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-import {FILTER_PARAMS} from '../../constants/test-params'
+import {FILTER_PARAMS} from '../../constants/filter-params'
 
 const screenshotsDir = path.join(__dirname, '../../screenshots/')
 

@@ -2,7 +2,7 @@ import swd from 'selenium-webdriver'
 
 import {getCapabilities} from './getCapabilities'
 import {setWindowSize} from './setWindowSize'
-import {FILTER_PARAMS} from '../../constants/test-params'
+import {FILTER_PARAMS} from '../../constants/filter-params'
 import {RESOLUTION} from '../../constants/supported-capabilities'
 import {doesTestMatchFilter} from './doesTestMatchFilter'
 import {TEST_STATUS} from '../../constants/test-status'
