@@ -38,7 +38,7 @@ export const startTest = async ({params, testProps, testBody}) => {
       return result
     }
     driver = await loadApp(params, testProps.id)
-    await testBody(driver)
+    await testBody({driver, params})
     driver.quit()
     result.status = TEST_STATUS.SUCCESS
     return result

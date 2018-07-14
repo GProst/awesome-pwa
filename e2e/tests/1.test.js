@@ -1,15 +1,16 @@
 import path from 'path'
 
 import {startTest} from './helpers/startTest'
+import {takeScreenshot} from './helpers/takeScreenshot'
 
 const TEST_ID = path.basename(__filename).match(/(\d*)\./)[1]
 
 // Pick 'only' or 'exclude', not both
 const testProps = {
   id: TEST_ID,
-  description: 'Just initial test :)',
+  description: 'App opens correctly on / route for NOT logged user in on different window sizes',
   priority: '10',
-  type: 'other',
+  type: 'screenshot',
   capability: {
   //   only: {
   //     [TEST_PARAM.BROWSER_VERSION]: [BROWSER_VERSION[BROWSER.CHROME].v67]
@@ -20,9 +21,10 @@ const testProps = {
   }
 }
 
-const testBody = async driver => {
-  // write unique test part here
-  await driver.sleep(3000)
+// write unique test part inside 'testBody'
+const testBody = async ({driver, params}) => {
+  await driver.sleep(300)
+  await takeScreenshot({driver, testId: TEST_ID, stepNumber: 1, params})
 }
 
 export const runTest = async params => startTest({params, testProps, testBody})
