@@ -23,6 +23,7 @@ const addTest = ({filename, params}) => {
   })
 }
 
+// Collecting all tests and params to execute
 // os -> os-version -> browser -> browser-version -> window-size -> type -> priority -> id (if provided)
 Object.entries(filter[TEST_PARAM.OS]).forEach(([os, osVersions]) => {
   const supportedBrowsers = BROWSERS_OF_OS[os]
