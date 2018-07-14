@@ -1,28 +1,26 @@
-import {FILTER_PARAMS} from '../../constants/filter-params'
-
-export const doesTestMatchFilter = (params, testProps) => {
-  const {capability} = testProps
-  if (params[FILTER_PARAMS.PRIORITIES].toString() !== testProps.priority.toString()) {
+export const doesTestMatchFilter = (testParams, testProps) => {
+  const {capabilities} = testProps
+  if (testParams.priority.toString() !== testProps.priority.toString()) {
     return false
   }
-  if (params[FILTER_PARAMS.TYPES] !== testProps.type) {
+  if (testParams.type !== testProps.type) {
     return false
   }
-  if (!capability.only && !capability.exclude) {
+  if (!capabilities.only && !capabilities.exclude) {
     return true
   }
-  if (capability.only && capability.exclude) {
+  if (capabilities.only && capabilities.exclude) {
     throw new Error('testProps cant contain both \'only\' and \'exclude\' props')
   }
-  if (capability.only) {
-    return capability.only.reduce(
-      (isMatch, testParamName, testParamValue) => isMatch && testParamValue.includes(params[testParamName]),
+  if (capabilities.only) {
+    return capabilities.only.reduce(
+      (isMatch, capabilityKey, capabilityValue) => isMatch && capabilityValue.includes(testParams.capabilities[capabilityKey]),
       true
     )
   }
-  if (capability.exclude) {
-    return capability.exclude.reduce(
-      (isMatch, testParamName, testParamValue) => isMatch && !testParamValue.includes(params[testParamName]),
+  if (capabilities.exclude) {
+    return capabilities.exclude.reduce(
+      (isMatch, testParamName, testParamValue) => isMatch && !testParamValue.includes(testParams[testParamName]),
       true
     )
   }

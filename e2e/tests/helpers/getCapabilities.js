@@ -1,6 +1,6 @@
-import {FILTER_PARAMS} from '../../constants/filter-params'
-import {RESOLUTION} from '../../constants/supported-capabilities'
 import childProcess from 'child_process'
+
+import {RESOLUTION} from '../../constants/supported-capabilities'
 
 const {
   CODEBUILD_RESOLVED_SOURCE_VERSION, // git commit id in AWS, see https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html
@@ -20,16 +20,16 @@ if (!gitCommitSHA) {
   }
 }
 
-export const getCapabilities = ({params, testId}) => {
+export const getCapabilities = ({testParams: {capabilities}, testId}) => {
   const {BROWSERSTACK_USER, BROWSERSTACK_KEY} = process.env
   return {
     project: 'Priority Book PWA',
     build: `git-commit:${gitCommitSHA}---build-id:${CODEBUILD_BUILD_ID || 'local-build'}`,
     name: `test-id-${testId}`,
-    os: params[FILTER_PARAMS.OSS],
-    os_version: params[FILTER_PARAMS.OS_VERSIONS],
-    browserName: params[FILTER_PARAMS.BROWSERS],
-    browser_version: params[FILTER_PARAMS.BROWSER_VERSIONS],
+    os: capabilities.os,
+    os_version: capabilities.osVersion,
+    browserName: capabilities.browser,
+    browser_version: capabilities.browserVersion,
     'browserstack.local': 'false',
     'browserstack.user': BROWSERSTACK_USER,
     'browserstack.key': BROWSERSTACK_KEY,

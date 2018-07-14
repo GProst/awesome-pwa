@@ -16,10 +16,10 @@ const filter = getFiltersFromArgs(args)
 
 const testsToExecute = []
 
-const addTest = ({filename, params}) => {
+const addTest = ({filename, testParams}) => {
   testsToExecute.push({
     run: require(filename).runTest,
-    params
+    testParams
   })
 }
 
@@ -39,21 +39,23 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
             .forEach(windowSize => {
               filter[FILTER_PARAMS.TYPES].forEach(type => {
                 filter[FILTER_PARAMS.PRIORITIES].forEach(priority => {
-                  const params = {
-                    [FILTER_PARAMS.OSS]: os,
-                    [FILTER_PARAMS.OS_VERSIONS]: osVersion,
-                    [FILTER_PARAMS.BROWSERS]: browser,
-                    [FILTER_PARAMS.BROWSER_VERSIONS]: browserVersion,
-                    [FILTER_PARAMS.WINDOW_SIZES]: windowSize,
-                    [FILTER_PARAMS.TYPES]: type,
-                    [FILTER_PARAMS.PRIORITIES]: priority
+                  const testParams = {
+                    type,
+                    priority,
+                    capabilities: {
+                      os,
+                      osVersion,
+                      browser,
+                      browserVersion,
+                      windowSize
+                    }
                   }
                   if (filter[FILTER_PARAMS.IDS]) {
                     // if certain ids provided -> run just these tests
                     filter[FILTER_PARAMS.IDS].forEach(id => {
                       try {
                         const [filename] = glob.sync(`../tests/**/${id}.test.js`, {cwd: __dirname})
-                        addTest({filename, params})
+                        addTest({filename, testParams})
                       } catch(err) {
                         console.error('Error while reading test file with id', id)
                         throw err
@@ -64,7 +66,7 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
                     try {
                       const filenames = glob.sync('../tests/**/*.test.js', {cwd: __dirname})
                       filenames.forEach(filename => {
-                        addTest({filename, params})
+                        addTest({filename, testParams})
                       })
                     } catch(err) {
                       console.error('Error while reading test files')
@@ -81,7 +83,7 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
 
 const testQueue = async function * myGen(testsToExecute) {
   for (let test of testsToExecute) {
-    yield await test.run(test.params)
+    yield await test.run(test.testParams)
       .catch(err => {
         console.error('Test failed.', err)
       })
@@ -98,7 +100,7 @@ const executeTests = async () => {
     }
     if (result.status !== TEST_STATUS.FILTERED) {
       // console.log('Description:', result.testProps.description) // TODO: use logger
-      // console.log('Params:', result.params, '\n') // TODO: use logger
+      // console.log('Params:', result.testParams, '\n') // TODO: use logger
     }
   }
 }

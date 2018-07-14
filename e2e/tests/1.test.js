@@ -5,26 +5,27 @@ import {takeScreenshot} from './helpers/takeScreenshot'
 
 const TEST_ID = path.basename(__filename).match(/(\d*)\./)[1]
 
-// Pick 'only' or 'exclude', not both
+// Keys names of testProps should match keys names of testParams
 const testProps = {
   id: TEST_ID,
   description: 'App opens correctly on / route for NOT logged user in on different window sizes',
   priority: '10',
   type: 'screenshot',
-  capability: {
+  capabilities: {
+  // Pick 'only' or 'exclude', not both
   //   only: {
-  //     [FILTER_PARAMS.BROWSER_VERSIONS]: [BROWSER_VERSIONS[BROWSERS.CHROME].v67]
+  //     browserVersion: [BROWSER_VERSIONS[BROWSERS.CHROME].v67]
   //   },
   //   exclude: {
-  //     [FILTER_PARAMS.BROWSER_VERSIONS]: [BROWSER_VERSIONS[BROWSERS.CHROME].v67]
+  //     browserVersion: [BROWSER_VERSIONS[BROWSERS.CHROME].v67]
   //   }
   }
 }
 
 // write unique test part inside 'testBody'
-const testBody = async ({driver, params}) => {
+const testBody = async ({driver, testParams}) => {
   await driver.sleep(300)
-  await takeScreenshot({driver, testId: TEST_ID, stepNumber: 1, params})
+  await takeScreenshot({driver, testId: TEST_ID, stepNumber: 1, testParams})
 }
 
-export const runTest = async params => startTest({params, testProps, testBody})
+export const runTest = async testParams => startTest({testParams, testProps, testBody})
