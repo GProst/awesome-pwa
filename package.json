@@ -9,8 +9,7 @@
     "gzip-public": "chmod +x ./gzip.sh && ./gzip.sh",
     "lint": "eslint --ext .js --ext .jsx --ignore-path .gitignore ./",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ignore-path .gitignore ./",
-    "e2e-prev": "source ./set-env.sh && yarn babel-node --plugins babel-plugin-transform-es2015-modules-commonjs ./e2e/test.js",
-    "e2e": "source ./set-env.sh && yarn babel-node --plugins babel-plugin-transform-es2015-modules-commonjs ./e2e/runner/index.js $E2E_TESTS_PARAMS",
+    "e2e": "source ./set-env.sh && cd ./e2e && yarn e2e",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -41,6 +40,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-styled-components": "^1.2.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-async-generator-functions": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
