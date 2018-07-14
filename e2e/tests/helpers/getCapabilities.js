@@ -25,7 +25,7 @@ export const getCapabilities = ({params, testId}) => {
   return {
     project: 'Priority Book PWA',
     build: `git-commit:${gitCommitSHA}---build-id:${CODEBUILD_BUILD_ID || 'local-build'}`,
-    name: testId,
+    name: `test-id-${testId}`,
     os: params[TEST_PARAM.OS],
     os_version: params[TEST_PARAM.OS_VERSION],
     browserName: params[TEST_PARAM.BROWSER],
