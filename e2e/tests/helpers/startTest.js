@@ -7,10 +7,10 @@ import {RESOLUTION} from '../../constants/supported-capabilities'
 import {doesTestMatchFilter} from './doesTestMatchFilter'
 import {TEST_STATUS} from '../../constants/test-status'
 
-const loadApp = async (params, id) => {
+const loadApp = async (params, testId) => {
   let driver
   try {
-    const capabilities = getCapabilities(params)
+    const capabilities = getCapabilities({params, testId})
     driver = new swd.Builder()
       .usingServer('http://hub-cloud.browserstack.com/wd/hub')
       .withCapabilities(capabilities)
@@ -23,7 +23,7 @@ const loadApp = async (params, id) => {
     await driver.get('https://dwgo2lfl43tk4.cloudfront.net/')
     return driver
   } catch(err) {
-    console.error(`Error starting test with ID = ${id}:`, err)
+    console.error(`Error starting test with ID = ${testId}:`, err)
     driver.quit()
     throw err
   }
