@@ -13,12 +13,6 @@ export const doesTestMatchFilter = (testParams, testProps) => {
       return false
     }
   }
-  if (testParams.priority.toString() !== testProps.priority.toString()) {
-    return false
-  }
-  if (testParams.type !== testProps.type) {
-    return false
-  }
   if (!capabilities.only && !capabilities.exclude) {
     return true
   }

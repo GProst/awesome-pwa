@@ -1,16 +1,13 @@
-import path from 'path'
-
 import {startTest} from './helpers/startTest'
 import {takeScreenshot} from './helpers/takeScreenshot'
+import {getTestId} from './helpers/getTestId'
 
-const TEST_ID = path.basename(__filename).match(/(\d*)\./)[1]
+const TEST_ID = getTestId(__filename)
 
 // Keys names of testProps should match keys names of testParams
 export const testProps = {
   id: TEST_ID,
   description: 'App opens correctly on / route for NOT logged user in on different window sizes',
-  priority: '10',
-  type: 'screenshot',
   capabilities: {
   //   Pick 'only' or 'exclude', not both
   //   only: {

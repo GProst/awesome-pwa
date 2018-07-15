@@ -38,8 +38,6 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
             filter[FILTER_PARAMS.TYPES].forEach(type => {
               filter[FILTER_PARAMS.PRIORITIES].forEach(priority => {
                 const testParams = {
-                  type,
-                  priority,
                   capabilities: {
                     os,
                     osVersion,
@@ -52,7 +50,7 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
                   // if certain ids provided -> run just these tests
                   filter[FILTER_PARAMS.IDS].forEach(id => {
                     try {
-                      const [filename] = glob.sync(`../tests/**/${id}.test.js`, {cwd: __dirname})
+                      const [filename] = glob.sync(`../tests/**/${id}-${priority}-${type}.test.js`, {cwd: __dirname})
                       addTest({filename, testParams})
                     } catch(err) {
                       console.error('Error while reading test file with id', id)
@@ -62,7 +60,7 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
                 } else {
                   // run over all tests
                   try {
-                    const filenames = glob.sync('../tests/**/*.test.js', {cwd: __dirname})
+                    const filenames = glob.sync(`../tests/**/*-${priority}-${type}.test.js`, {cwd: __dirname})
                     filenames.forEach(filename => {
                       addTest({filename, testParams})
                     })
@@ -79,8 +77,10 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
   })
 })
 
+let calls = 0
 const testQueue = async function * myGen(testsToExecute) {
   for (let test of testsToExecute) {
+    calls++
     yield await test.runTest(test.testParams)
       .catch(err => {
         console.error('Test failed unexpectedly.', err)
@@ -124,4 +124,5 @@ executeTests()
   .finally(() => {
     // console.log('Succeeded:', totalStatus.succeeded)
     // console.log('Failed:', totalStatus.failed)
+    console.log('Total test filter match checks made:', calls) // eslint-disable-line
   })

@@ -1,17 +1,14 @@
-import path from 'path'
-
 import {startTest} from './helpers/startTest'
 import {WINDOW_SIZES, BROWSERS, OSS} from '../constants/supported-capabilities'
 import {TEST_STATUS} from '../constants/test-status'
+import {getTestId} from './helpers/getTestId'
 
-const TEST_ID = path.basename(__filename).match(/(\d*)\./)[1]
+const TEST_ID = getTestId(__filename)
 
 // Keys names of testProps should match keys names of testParams
 export const testProps = {
   id: TEST_ID,
   description: 'Chrome browser window in Mac OSX can\'t shrink less than 400px wide',
-  priority: '10',
-  type: 'other',
   capabilities: {
     //   Pick 'only' or 'exclude', not both
     only: {
