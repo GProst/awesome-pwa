@@ -5,6 +5,10 @@ export const WINDOW_SIZES = {
     width: 320,
     height: 568
   },
+  _360_X_650: {
+    width: 360,
+    height: 650
+  },
   _400_X_728: {
     width: 400,
     height: 728

@@ -46,6 +46,9 @@ export const setWindowSize = async ({driver, windowInnerSize, resolution}) => {
     throw err
   }
   if (!equals(resultInnerSize, windowInnerSize)) {
-    throw new Error('Window inner size was set incorrectly! Make sure if browser can shrink/grow to that size OR if screen has appropriate resolution')
+    const err = new Error('Window inner size was set incorrectly! Make sure if browser can shrink/grow to that size OR if screen has appropriate resolution')
+    err.code = 'ERR_WINDOW_SIZE'
+    err.data = resultInnerSize
+    throw err
   }
 }

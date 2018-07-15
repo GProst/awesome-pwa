@@ -22,13 +22,12 @@ const loadApp = async (testParams, testId) => {
     await driver.get(process.env.APP_URL || 'https://dwgo2lfl43tk4.cloudfront.net/')
     return driver
   } catch(err) {
-    console.error(`Error starting test with ID = ${testId}:`, err)
     driver.quit()
     throw err
   }
 }
 
-export const startTest = async ({testParams, testProps, testBody}) => {
+export const startTest = async ({testParams, testProps, testBody, errorHandler}) => {
   let driver
   const result = {testParams, testProps}
   try {
@@ -42,9 +41,12 @@ export const startTest = async ({testParams, testProps, testBody}) => {
     result.status = TEST_STATUS.SUCCESS
     return result
   } catch(err) {
-    console.error(`Error in test with ID = ${testProps.id}:`, err)
-    driver.quit()
+    if (driver) driver.quit()
     result.status = TEST_STATUS.FAIL
+    if (errorHandler) {
+      return errorHandler({err, testParams, result})
+    }
+    console.error(`Error in startTest function, testID = ${testProps.id}:`, err)
     return result
   }
 }
