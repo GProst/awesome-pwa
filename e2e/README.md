@@ -21,3 +21,11 @@ quickly then it should have low priority value to be executed before other tests
 The other option is to treat priority as a `group`. So that you can partition tests
 in groups (nameless groups).
 
+## Environment variables:
+
+* APP_URL - url of the app to open by WebDriver, defaults to `'https://dwgo2lfl43tk4.cloudfront.net/'`
+* CODEBUILD_RESOLVED_SOURCE_VERSION - used to get Git commit SHA
+* CODEBUILD_BUILD_ID - used to get AWS CodeDeploy build ID
+* BROWSERSTACK_USER - used to get BrowserStack username
+* BROWSERSTACK_KEY - used to get BrowserStack key
+

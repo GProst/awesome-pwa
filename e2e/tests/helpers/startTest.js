@@ -19,7 +19,7 @@ const loadApp = async (testParams, testId) => {
       windowInnerSize: testParams.capabilities.windowSize,
       resolution: RESOLUTION
     })
-    await driver.get('https://dwgo2lfl43tk4.cloudfront.net/')
+    await driver.get(process.env.APP_URL || 'https://dwgo2lfl43tk4.cloudfront.net/')
     return driver
   } catch(err) {
     console.error(`Error starting test with ID = ${testId}:`, err)
