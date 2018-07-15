@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 
+import {logger} from '../../utils/logger'
+
 const screenshotsDir = path.join(__dirname, '../../screenshots/')
 
 const saveScreenshotFile = ({filename, data}) => {
@@ -16,7 +18,7 @@ export const takeScreenshot = async ({driver, testId, stepNumber, testParams: {c
       saveScreenshotFile({filename, data})
     } catch(err) {
       if (err.code === 'ENOENT') {
-        // console.log('Creating directory for screenshots.') // TODO: logger
+        logger.info('Creating directory for screenshots.')
         fs.mkdirSync(screenshotsDir)
         saveScreenshotFile({filename, data})
       } else {
@@ -25,7 +27,7 @@ export const takeScreenshot = async ({driver, testId, stepNumber, testParams: {c
     }
     return stepNumber + 1
   } catch(err) {
-    console.error(`Error while taking screenshot! Filename: ${filename}`)
+    logger.error(`Error while taking screenshot! Filename: ${filename}`)
     throw err
   }
 }

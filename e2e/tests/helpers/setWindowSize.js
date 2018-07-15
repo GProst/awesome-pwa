@@ -1,10 +1,11 @@
 import {equals} from 'ramda'
 
+import {logger} from '../../utils/logger'
+
 export const setWindowSize = async ({driver, windowInnerSize, resolution}) => {
   const {width: outerWidth, height: outerHeight} = await driver.manage().window().getRect()
   const JS_GET_PADDING = `
     const {outerWidth, outerHeight} = arguments[0]
-    console.log('HERE!')
     return {
       horizontal: outerWidth - window.innerWidth,
       vertical: outerHeight - window.innerHeight
@@ -14,7 +15,7 @@ export const setWindowSize = async ({driver, windowInnerSize, resolution}) => {
   try {
     padding = await driver.executeScript(JS_GET_PADDING, {outerWidth, outerHeight})
   } catch(err) {
-    console.error('error getting window sizes', err)
+    logger.error('error getting window sizes', err)
     throw err
   }
   const windowSize = {
@@ -29,7 +30,7 @@ export const setWindowSize = async ({driver, windowInnerSize, resolution}) => {
       y: (resolution.height - windowSize.height) / 2
     })
   } catch(err) {
-    console.error('Error setting window sizes and position', err)
+    logger.error('Error setting window sizes and position', err)
     throw err
   }
   const JS_GET_WINDOW_INNER_SIZE = `
@@ -42,7 +43,7 @@ export const setWindowSize = async ({driver, windowInnerSize, resolution}) => {
   try {
     resultInnerSize = await driver.executeScript(JS_GET_WINDOW_INNER_SIZE)
   } catch(err) {
-    console.error('error getting window sizes', err)
+    logger.error('error getting window sizes', err)
     throw err
   }
   if (!equals(resultInnerSize, windowInnerSize)) {

@@ -1,6 +1,7 @@
 import childProcess from 'child_process'
 
 import {RESOLUTION} from '../../constants/supported-capabilities'
+import {logger} from '../../utils/logger'
 
 const {
   CODEBUILD_RESOLVED_SOURCE_VERSION, // git commit id in AWS, see https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html
@@ -10,13 +11,13 @@ const {
 let gitCommitSHA = CODEBUILD_RESOLVED_SOURCE_VERSION
 if (!gitCommitSHA) {
   try {
-    // console.log('No CODEBUILD_RESOLVED_SOURCE_VERSION env var found. Using local env.') // TODO: logger
+    logger.info('No CODEBUILD_RESOLVED_SOURCE_VERSION env var found. Using local env.\n')
     gitCommitSHA = childProcess
       .execSync('git rev-parse HEAD')
       .toString().trim()
     gitCommitSHA = `${gitCommitSHA}(aprox)`
   } catch(err) {
-    console.error('Error getting git commit SHA', err)
+    logger.error('Error getting git commit SHA', err)
   }
 }
 

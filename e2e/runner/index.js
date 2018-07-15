@@ -5,6 +5,7 @@ import {BROWSERS_OF_OSS} from '../constants/supported-capabilities'
 import {FILTER_PARAMS} from '../constants/filter-params'
 import {TEST_STATUS} from '../constants/test-status'
 import {getFiltersFromArgs} from './helpers/getFiltersFromArgs'
+import {logger} from '../utils/logger'
 
 const args = minimist(process.argv.slice(2).map(arg => arg.replace(/---/g, ' ')))
 Object.entries(args).forEach(([key, value]) => {
@@ -12,7 +13,7 @@ Object.entries(args).forEach(([key, value]) => {
 })
 
 const filter = getFiltersFromArgs(args)
-// console.log('Filter:\n', filter, '\n') // TODO: use logger
+logger.debug('Filter:\n', filter, '\n')
 
 const testsToExecute = []
 
@@ -51,9 +52,9 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
                   filter[FILTER_PARAMS.IDS].forEach(id => {
                     try {
                       const [filename] = glob.sync(`../tests/**/${id}-${priority}-${type}.test.js`, {cwd: __dirname})
-                      addTest({filename, testParams})
+                      if (filename) addTest({filename, testParams})
                     } catch(err) {
-                      console.error('Error while reading test file with id', id)
+                      logger.error('Error while reading test file with id', id)
                       throw err
                     }
                   })
@@ -65,7 +66,7 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
                       addTest({filename, testParams})
                     })
                   } catch(err) {
-                    console.error('Error while reading test files')
+                    logger.error('Error while reading test files')
                     throw err
                   }
                 }
@@ -83,7 +84,7 @@ const testQueue = async function * myGen(testsToExecute) {
     calls++
     yield await test.runTest(test.testParams)
       .catch(err => {
-        console.error('Test failed unexpectedly.', err)
+        logger.error('\nTest failed unexpectedly.\n', err)
         return {
           status: TEST_STATUS.FAIL,
           testProps: test.testProps,
@@ -101,28 +102,28 @@ const executeTests = async () => {
   for await (let result of testQueue(testsToExecute)) {
     if (result.status === TEST_STATUS.SUCCESS) {
       totalStatus.succeeded++
-      // console.log(`Test with ID=${result.testProps.id} SUCCEEDED!`) // TODO: use logger
+      logger.debug(`Test with ID=${result.testProps.id} SUCCEEDED!`)
     }
     if (result.status === TEST_STATUS.FAIL) {
       totalStatus.failed++
-      console.error(`Test with ID=${result.testProps.id} FAILED!`)
+      logger.error(`Test with ID=${result.testProps.id} FAILED!`)
     }
     if (result.status !== TEST_STATUS.FILTERED) {
-      // console.log('Description:', result.testProps.description) // TODO: use logger
-      // console.log('Params:', result.testParams, '\n') // TODO: use logger
+      logger.debug('Description:', result.testProps.description)
+      logger.debug('Params:', result.testParams, '\n')
     }
   }
 }
 
 executeTests()
   .then(() => {
-    // console.log('Tests execution finished') // TODO: use logger
+    logger.info('Tests execution finished')
   })
   .catch(err => {
-    console.error('Tests execution failed unexpectedly', err)
+    logger.error('Tests execution failed unexpectedly\n', err)
   })
   .finally(() => {
-    // console.log('Succeeded:', totalStatus.succeeded)
-    // console.log('Failed:', totalStatus.failed)
-    console.log('Total test filter match checks made:', calls) // eslint-disable-line
+    logger.info('Succeeded:', totalStatus.succeeded)
+    logger.info('Failed:', totalStatus.failed)
+    logger.info('Total test filter match checks made:', calls)
   })

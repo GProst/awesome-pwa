@@ -2,6 +2,7 @@ import {startTest} from './helpers/startTest'
 import {WINDOW_SIZES, BROWSERS, OSS} from '../constants/supported-capabilities'
 import {TEST_STATUS} from '../constants/test-status'
 import {getTestId} from './helpers/getTestId'
+import {logger} from '../utils/logger'
 
 const TEST_ID = getTestId(__filename)
 
@@ -32,7 +33,7 @@ const errorHandler = ({err, testParams, result}) => {
   ) {
     result.status = TEST_STATUS.SUCCESS
   } else {
-    console.error(`Error in startTest function, testID = ${testProps.id}:`, err)
+    logger.error(`Error in startTest function, testID = ${testProps.id}:`, err)
   }
   return result
 }

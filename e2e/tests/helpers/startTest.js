@@ -5,6 +5,7 @@ import {setWindowSize} from './setWindowSize'
 import {RESOLUTION} from '../../constants/supported-capabilities'
 import {doesTestMatchFilter} from './doesTestMatchFilter'
 import {TEST_STATUS} from '../../constants/test-status'
+import {logger} from '../../utils/logger'
 
 const loadApp = async (testParams, testId) => {
   let driver
@@ -22,7 +23,7 @@ const loadApp = async (testParams, testId) => {
     await driver.get(process.env.APP_URL || 'https://dwgo2lfl43tk4.cloudfront.net/')
     return driver
   } catch(err) {
-    driver.quit()
+    if (driver) driver.quit()
     throw err
   }
 }
@@ -35,7 +36,10 @@ export const startTest = async ({testParams, testProps, testBody, errorHandler})
       result.status = TEST_STATUS.FILTERED
       return result
     }
+    logger.debug(`Starting test with ID=${testProps.id}`)
+    logger.debug('Params:\n', testParams)
     driver = await loadApp(testParams, testProps.id)
+    logger.debug('App loaded, invoking testBody')
     await testBody({driver, testParams})
     driver.quit()
     result.status = TEST_STATUS.SUCCESS
@@ -46,7 +50,7 @@ export const startTest = async ({testParams, testProps, testBody, errorHandler})
     if (errorHandler) {
       return errorHandler({err, testParams, result})
     }
-    console.error(`Error in startTest function, testID = ${testProps.id}:`, err)
+    logger.error(`Error in startTest function, testID = ${testProps.id}:`, err)
     return result
   }
 }

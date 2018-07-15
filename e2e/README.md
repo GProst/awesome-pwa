@@ -7,7 +7,7 @@ are properties like `id`, `type`, `description`. Capabilities are `browser`,
 2) CLI accepts arguments to create a filter that'll be used to run limited amount
 of tests. Example of arguments:
 ```
---browsers Chrome:67.0 --OSs OS---X:High---Sierra --types other --priorities 4,3,1
+--browsers Chrome:67.0 --OSs OS---X:High---Sierra --types other --priorities 4,3,1 --IDs 14,24,22
 ```
 
 3) If `--ids` argument is provided, only tests with these ids will be invoked, otherwise
@@ -22,6 +22,10 @@ The other option is to treat priority as a `group`. So that you can partition te
 in groups (nameless groups).
 
 6) Test name convention: `${id}-${priority}-${type}`
+
+7) Arguments that can be provided: `--browsers`, `--OSs`, `--types`, `--priorities`, `--IDs`, `--loglevel`
+
+8) To use debug level for logs, provide `--loglevel debugger`
 
 ## Environment variables:
 

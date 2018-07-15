@@ -1,4 +1,5 @@
 import {MAP_FILTER_PARAM_TO_SUPPORTED, FILTER_PARAMS} from '../../constants/filter-params'
+import {logger} from '../../utils/logger'
 
 export const getFiltersFromArgs = args => {
   try {
@@ -69,7 +70,7 @@ export const getFiltersFromArgs = args => {
 
     return filters
   } catch(err) {
-    console.error('Error while creating filter based on arguments', err)
+    logger.error('Error while creating filter based on arguments', err)
     throw err
   }
 }
