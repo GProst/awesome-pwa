@@ -13,6 +13,8 @@ export const WINDOW_SIZES = {
     width: 400,
     height: 728
   }
+  // TODO: add high, narrow resolutions for desktop, because they are quite possible.
+  // TODO: add low, wide resolutions for desktop, they are rare, but possible
 }
 
 export const RESOLUTION = {

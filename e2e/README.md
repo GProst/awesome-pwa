@@ -23,7 +23,7 @@ in groups (nameless groups).
 
 6) Test name convention: `${id}-${priority}-${type}`
 
-7) Arguments that can be provided: `--browsers`, `--OSs`, `--types`, `--priorities`, `--IDs`, `--loglevel`
+7) Arguments that can be provided: `--browsers`, `--OSs`, `--windowSizes`, `--types`, `--priorities`, `--IDs`, `--loglevel`
 
 8) To use debug level for logs, provide `--loglevel debugger`
 
