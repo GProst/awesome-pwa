@@ -32,6 +32,8 @@ Variants: `priority-book`
 
 ## Environment variables:
 
+* ENABLE_VIDEO - BrowserStack will record video for all tests, not only for
+tests with type = `video`.
 * APP_URL - url of the app to open by WebDriver
 * CODEBUILD_RESOLVED_SOURCE_VERSION - used to get Git commit SHA
 * CODEBUILD_BUILD_ID - used to get AWS CodeDeploy build ID

@@ -7,10 +7,10 @@ import {doesTestMatchFilter} from './doesTestMatchFilter'
 import {TEST_STATUS} from '../../constants/test-status'
 import {logger} from '../../utils/logger'
 
-const loadApp = async (testParams, testId) => {
+const loadApp = async ({testParams, testProps}) => {
   let driver
   try {
-    const capabilities = getCapabilities({testParams, testId})
+    const capabilities = getCapabilities({testParams, testProps})
     driver = new swd.Builder()
       .usingServer('http://hub-cloud.browserstack.com/wd/hub')
       .withCapabilities(capabilities)
@@ -39,7 +39,7 @@ export const startTest = async ({testParams, testProps, testBody, errorHandler})
     logger.debug(`Starting test with ID=${testProps.id}`)
     logger.debug('Description:', testProps.description)
     logger.debug('Params:', testParams)
-    driver = await loadApp(testParams, testProps.id)
+    driver = await loadApp({testParams, testProps})
     logger.debug('App loaded, invoking testBody')
     await testBody({driver, testParams})
     driver.quit()
