@@ -102,15 +102,11 @@ const executeTests = async () => {
   for await (let result of testQueue(testsToExecute)) {
     if (result.status === TEST_STATUS.SUCCESS) {
       totalStatus.succeeded++
-      logger.debug(`Test with ID=${result.testProps.id} SUCCEEDED!`)
+      logger.debug(`Test with ID=${result.testProps.id} SUCCEEDED!\n`)
     }
     if (result.status === TEST_STATUS.FAIL) {
       totalStatus.failed++
-      logger.error(`Test with ID=${result.testProps.id} FAILED!`)
-    }
-    if (result.status !== TEST_STATUS.FILTERED) {
-      logger.debug('Description:', result.testProps.description)
-      logger.debug('Params:', result.testParams, '\n')
+      logger.error(`Test with ID=${result.testProps.id} FAILED!\n`)
     }
   }
 }

@@ -1,13 +1,13 @@
-import {startTest} from './helpers/startTest'
-import {takeScreenshot} from './helpers/takeScreenshot'
-import {getTestId} from './helpers/getTestId'
+import {startTest} from '../helpers/startTest'
+import {takeScreenshot} from '../helpers/takeScreenshot'
+import {getTestId} from '../helpers/getTestId'
 
 const TEST_ID = getTestId(__filename)
 
 // Keys names of testProps should match keys names of testParams
 export const testProps = {
   id: TEST_ID,
-  description: 'App opens correctly on / route for NOT logged user in on different window sizes',
+  description: 'App opens correctly on / route for NOT logged in user on different window sizes',
   capabilities: {
   //   Pick 'only' or 'exclude', not both
   //   only: {

@@ -23,13 +23,16 @@ in groups (nameless groups).
 
 6) Test name convention: `${id}-${priority}-${type}`
 
-7) Arguments that can be provided: `--browsers`, `--OSs`, `--windowSizes`, `--types`, `--priorities`, `--IDs`, `--loglevel`
+7) Arguments that can be provided: `--project`, `--browsers`, `--OSs`, `--windowSizes`, `--types`, `--priorities`, `--IDs`, `--loglevel`
 
 8) To use debug level for logs, provide `--loglevel debugger`
 
+9) You need to provide `--project` with the name of the project, for which you want to run tests.
+Variants: `priority-book`
+
 ## Environment variables:
 
-* APP_URL - url of the app to open by WebDriver, defaults to `'https://dwgo2lfl43tk4.cloudfront.net/'`
+* APP_URL - url of the app to open by WebDriver
 * CODEBUILD_RESOLVED_SOURCE_VERSION - used to get Git commit SHA
 * CODEBUILD_BUILD_ID - used to get AWS CodeDeploy build ID
 * BROWSERSTACK_USER - used to get BrowserStack username

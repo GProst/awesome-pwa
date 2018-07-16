@@ -20,7 +20,7 @@ const loadApp = async (testParams, testId) => {
       windowInnerSize: testParams.capabilities.windowSize,
       resolution: RESOLUTION
     })
-    await driver.get(process.env.APP_URL || 'https://dwgo2lfl43tk4.cloudfront.net/')
+    await driver.get(process.env.APP_URL)
     return driver
   } catch(err) {
     if (driver) driver.quit()
@@ -37,7 +37,8 @@ export const startTest = async ({testParams, testProps, testBody, errorHandler})
       return result
     }
     logger.debug(`Starting test with ID=${testProps.id}`)
-    logger.debug('Params:\n', testParams)
+    logger.debug('Description:', testProps.description)
+    logger.debug('Params:', testParams)
     driver = await loadApp(testParams, testProps.id)
     logger.debug('App loaded, invoking testBody')
     await testBody({driver, testParams})

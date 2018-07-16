@@ -6,3 +6,5 @@ export BROWSERSTACK_KEY=blablablabla
 
 # use '---' for a white space
 export E2E_TESTS_PARAMS="--browsers Chrome:67.0 --OSs OS---X:High---Sierra --types other --priorities 4,3,1 --IDs 15,2,55"
+
+export APP_URL=https://dwgo2lfl43tk4.cloudfront.net/

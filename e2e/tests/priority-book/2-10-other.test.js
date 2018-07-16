@@ -1,8 +1,8 @@
-import {startTest} from './helpers/startTest'
-import {WINDOW_SIZES, BROWSERS, OSS} from '../constants/supported-capabilities'
-import {TEST_STATUS} from '../constants/test-status'
-import {getTestId} from './helpers/getTestId'
-import {logger} from '../utils/logger'
+import {startTest} from '../helpers/startTest'
+import {WINDOW_SIZES, BROWSERS, OSS} from '../../constants/supported-capabilities'
+import {TEST_STATUS} from '../../constants/test-status'
+import {getTestId} from '../helpers/getTestId'
+import {logger} from '../../utils/logger'
 
 const TEST_ID = getTestId(__filename)
 
