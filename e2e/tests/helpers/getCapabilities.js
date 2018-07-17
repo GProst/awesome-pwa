@@ -6,13 +6,14 @@ const {
   CODEBUILD_BUILD_ID,
   ENABLE_VIDEO,
   BROWSERSTACK_USER,
-  BROWSERSTACK_KEY
+  BROWSERSTACK_KEY,
+  PROJECT
 } = process.env
 
 export const getCapabilities = ({testParams: {capabilities}, testProps}) => {
   const isIncognito = capabilities.incognito
   return {
-    project: 'Priority Book PWA',
+    project: PROJECT,
     build: `url:${APP_URL}__git-commit:${CODEBUILD_RESOLVED_SOURCE_VERSION || 'local-build'}__build-id:${CODEBUILD_BUILD_ID || 'local-build'}`,
     name: `test-id-${testProps.id}__window-size: ${capabilities.windowSize.width}x${capabilities.windowSize.height}${isIncognito ? '__incognito' : ''}`,
     os: capabilities.os,

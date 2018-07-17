@@ -27,11 +27,10 @@ in groups (nameless groups).
 
 8) To use debug level for logs, provide `--loglevel debugger`
 
-9) You need to provide `--project` with the name of the project, for which you want to run tests.
-Variants: `priority-book`
-
 ## Environment variables:
 
+* PROJECT - name of the project, for which you want to run tests.
+Variants: `priority-book`
 * ENABLE_VIDEO - BrowserStack will record video for all tests, not only for
 tests with type = `video`.
 * ENABLE_CHROME_INCOGNITO - enable incognito tests for Chrome browser

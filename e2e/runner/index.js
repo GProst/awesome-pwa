@@ -12,6 +12,11 @@ Object.entries(args).forEach(([key, value]) => {
   args[key] = value.toString()
 })
 
+if (!process.env.PROJECT) {
+  throw new Error('PROJECT env var is required!')
+}
+logger.info(`Running tests for project '${process.env.PROJECT}'`)
+
 const filter = getFiltersFromArgs(args)
 logger.debug('Filter:\n', filter, '\n')
 
@@ -53,7 +58,7 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
                     // if certain ids provided -> run just these tests
                     filter[FILTER_PARAMS.IDS].forEach(id => {
                       try {
-                        const [filename] = glob.sync(`../tests/**/${id}-${priority}-${type}.test.js`, {cwd: __dirname})
+                        const [filename] = glob.sync(`../tests/${args.project}/**/${id}-${priority}-${type}.test.js`, {cwd: __dirname})
                         if (filename) addTest({filename, testParams})
                       } catch(err) {
                         logger.error('Error while reading test file with id', id)
