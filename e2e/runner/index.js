@@ -6,6 +6,7 @@ import {FILTER_PARAMS} from '../constants/filter-params'
 import {TEST_STATUS} from '../constants/test-status'
 import {getFiltersFromArgs} from './helpers/getFiltersFromArgs'
 import {logger} from '../utils/logger'
+import {addTestParamsToStats, saveAllStats} from '../utils/stats'
 
 const args = minimist(process.argv.slice(2).map(arg => arg.replace(/---/g, ' ')))
 Object.entries(args).forEach(([key, value]) => {
@@ -116,6 +117,9 @@ const executeTests = async () => {
       totalStatus.failed++
       logger.error(`Test with ID=${result.testProps.id} FAILED!\n`)
     }
+    if (result.status !== TEST_STATUS.FILTERED) {
+      addTestParamsToStats({testId: result.testProps.id, testParams: result.testParams})
+    }
   }
 }
 
@@ -129,5 +133,6 @@ executeTests()
   .finally(() => {
     logger.info('Succeeded:', totalStatus.succeeded)
     logger.info('Failed:', totalStatus.failed)
-    logger.info('Total test filter match checks made:', calls)
+    logger.info('Total test filter match checks made:', calls, '\n')
+    saveAllStats()
   })

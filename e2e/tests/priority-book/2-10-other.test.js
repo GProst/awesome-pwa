@@ -3,6 +3,7 @@ import {WINDOW_SIZES, BROWSERS, OSS} from '../../constants/supported-capabilitie
 import {TEST_STATUS} from '../../constants/test-status'
 import {getTestId} from '../helpers/getTestId'
 import {logger} from '../../utils/logger'
+import {addTestStats} from '../../utils/stats'
 
 const TEST_ID = getTestId(__filename)
 
@@ -23,6 +24,12 @@ export const testProps = {
     //   }
   }
 }
+
+const stats = {
+  props: testProps,
+  paramsCapabilities: []
+}
+addTestStats({dirname: __dirname, stats})
 
 // write unique test part inside 'testBody'
 const testBody = async ({driver, testParams}) => { /* empty */ }

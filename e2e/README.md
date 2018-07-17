@@ -23,9 +23,11 @@ in groups (nameless groups).
 
 6) Test name convention: `${id}-${priority}-${type}`
 
-7) Arguments that can be provided: `--project`, `--browsers`, `--OSs`, `--windowSizes`, `--incognito`, `--types`, `--priorities`, `--IDs`, `--loglevel`
+7) Arguments that can be provided: `--project`, `--browsers`, `--OSs`, `--windowSizes`, `--incognito`, `--types`, `--priorities`, `--IDs`, `--loglevel`, `--saveStats`
 
 8) To use debug level for logs, provide `--loglevel debugger`
+
+9) Use `--saveStats` argument to save stats of tests (is expected to be run without filter arguments for all set of tests)
 
 ## Environment variables:
 

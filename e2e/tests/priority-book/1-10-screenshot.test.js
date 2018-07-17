@@ -1,6 +1,7 @@
 import {startTest} from '../helpers/startTest'
 import {takeScreenshot} from '../helpers/takeScreenshot'
 import {getTestId} from '../helpers/getTestId'
+import {addTestStats} from '../../utils/stats'
 
 const TEST_ID = getTestId(__filename)
 
@@ -18,6 +19,12 @@ export const testProps = {
   //   }
   }
 }
+
+const stats = {
+  props: testProps,
+  paramsCapabilities: []
+}
+addTestStats({dirname: __dirname, stats})
 
 // write unique test part inside 'testBody'
 const testBody = async ({driver, testParams}) => {
