@@ -13,6 +13,10 @@ export const doesTestMatchFilter = (testParams, testProps) => {
       return false
     }
   }
+  if (paramsCapabilities.browser === BROWSERS.CHROME && paramsCapabilities.incognito && process.env.ENABLE_CHROME_INCOGNITO !== 'true') {
+    // test Chrome incognito only if you want, but not by default because Chrome's Incognito just uses temp storage => should work the same
+    return false
+  }
   if (!capabilities.only && !capabilities.exclude) {
     return true
   }

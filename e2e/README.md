@@ -23,7 +23,7 @@ in groups (nameless groups).
 
 6) Test name convention: `${id}-${priority}-${type}`
 
-7) Arguments that can be provided: `--project`, `--browsers`, `--OSs`, `--windowSizes`, `--types`, `--priorities`, `--IDs`, `--loglevel`
+7) Arguments that can be provided: `--project`, `--browsers`, `--OSs`, `--windowSizes`, `--incognito`, `--types`, `--priorities`, `--IDs`, `--loglevel`
 
 8) To use debug level for logs, provide `--loglevel debugger`
 
@@ -34,6 +34,7 @@ Variants: `priority-book`
 
 * ENABLE_VIDEO - BrowserStack will record video for all tests, not only for
 tests with type = `video`.
+* ENABLE_CHROME_INCOGNITO - enable incognito tests for Chrome browser
 * APP_URL - url of the app to open by WebDriver
 * CODEBUILD_RESOLVED_SOURCE_VERSION - used to get Git commit SHA
 * CODEBUILD_BUILD_ID - used to get AWS CodeDeploy build ID

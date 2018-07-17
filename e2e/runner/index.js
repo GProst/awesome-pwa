@@ -36,40 +36,43 @@ Object.entries(filter[FILTER_PARAMS.OSS]).forEach(([os, osVersions]) => {
       .forEach(([browser, browserVersions]) => {
         browserVersions.forEach(browserVersion => {
           filter[FILTER_PARAMS.WINDOW_SIZES].forEach(windowSize => {
-            filter[FILTER_PARAMS.TYPES].forEach(type => {
-              filter[FILTER_PARAMS.PRIORITIES].forEach(priority => {
-                const testParams = {
-                  capabilities: {
-                    os,
-                    osVersion,
-                    browser,
-                    browserVersion,
-                    windowSize
+            filter[FILTER_PARAMS.INCOGNITO].forEach(isIncognito => {
+              filter[FILTER_PARAMS.TYPES].forEach(type => {
+                filter[FILTER_PARAMS.PRIORITIES].forEach(priority => {
+                  const testParams = {
+                    capabilities: {
+                      os,
+                      osVersion,
+                      browser,
+                      browserVersion,
+                      windowSize,
+                      incognito: isIncognito
+                    }
                   }
-                }
-                if (filter[FILTER_PARAMS.IDS]) {
-                  // if certain ids provided -> run just these tests
-                  filter[FILTER_PARAMS.IDS].forEach(id => {
+                  if (filter[FILTER_PARAMS.IDS]) {
+                    // if certain ids provided -> run just these tests
+                    filter[FILTER_PARAMS.IDS].forEach(id => {
+                      try {
+                        const [filename] = glob.sync(`../tests/**/${id}-${priority}-${type}.test.js`, {cwd: __dirname})
+                        if (filename) addTest({filename, testParams})
+                      } catch(err) {
+                        logger.error('Error while reading test file with id', id)
+                        throw err
+                      }
+                    })
+                  } else {
+                    // run over all tests
                     try {
-                      const [filename] = glob.sync(`../tests/**/${id}-${priority}-${type}.test.js`, {cwd: __dirname})
-                      if (filename) addTest({filename, testParams})
+                      const filenames = glob.sync(`../tests/**/*-${priority}-${type}.test.js`, {cwd: __dirname})
+                      filenames.forEach(filename => {
+                        addTest({filename, testParams})
+                      })
                     } catch(err) {
-                      logger.error('Error while reading test file with id', id)
+                      logger.error('Error while reading test files')
                       throw err
                     }
-                  })
-                } else {
-                  // run over all tests
-                  try {
-                    const filenames = glob.sync(`../tests/**/*-${priority}-${type}.test.js`, {cwd: __dirname})
-                    filenames.forEach(filename => {
-                      addTest({filename, testParams})
-                    })
-                  } catch(err) {
-                    logger.error('Error while reading test files')
-                    throw err
                   }
-                }
+                })
               })
             })
           })

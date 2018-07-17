@@ -13,9 +13,10 @@ export const testProps = {
   capabilities: {
     //   Pick 'only' or 'exclude', not both
     only: {
-      os: OSS.MAC_OSX,
-      browser: BROWSERS.CHROME,
-      windowSize: [WINDOW_SIZES._320_X_568, WINDOW_SIZES._360_X_650]
+      os: [OSS.MAC_OSX],
+      browser: [BROWSERS.CHROME],
+      windowSize: [WINDOW_SIZES._320_X_568, WINDOW_SIZES._360_X_650],
+      incognito: [false]
     }
     //   exclude: {
     //     browserVersion: [BROWSER_VERSIONS[BROWSERS.CHROME].v67]

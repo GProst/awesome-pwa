@@ -8,7 +8,8 @@ export const FILTER_PARAMS = {
   PRIORITIES: 'priorities',
   TYPES: 'types',
   WINDOW_SIZES: 'windowSizes',
-  IDS: 'IDs'
+  IDS: 'IDs',
+  INCOGNITO: 'incognito'
 }
 export const MAP_FILTER_PARAM_TO_SUPPORTED = {
   [FILTER_PARAMS.WINDOW_SIZES]: WINDOW_SIZES,

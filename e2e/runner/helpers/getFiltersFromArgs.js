@@ -15,7 +15,10 @@ export const getFiltersFromArgs = args => {
         : Object.values(MAP_FILTER_PARAM_TO_SUPPORTED[FILTER_PARAMS.TYPES]),
       [FILTER_PARAMS.PRIORITIES]: args[FILTER_PARAMS.PRIORITIES]
         ? args[FILTER_PARAMS.PRIORITIES].split(',')
-        : Object.values(MAP_FILTER_PARAM_TO_SUPPORTED[FILTER_PARAMS.PRIORITIES])
+        : Object.values(MAP_FILTER_PARAM_TO_SUPPORTED[FILTER_PARAMS.PRIORITIES]),
+      [FILTER_PARAMS.INCOGNITO]: args[FILTER_PARAMS.INCOGNITO]
+        ? [args[FILTER_PARAMS.INCOGNITO] === 'true']
+        : [true, false]
     }
 
     if (args[FILTER_PARAMS.BROWSERS]) {
