@@ -10,6 +10,3 @@ aws-exports.js
 awsmobilejs/.awsmobile/backend-build
 awsmobilejs/\#current-backend-info
 ~awsmobilejs-*/
-
-set-env.sh
-e2e/screenshots
