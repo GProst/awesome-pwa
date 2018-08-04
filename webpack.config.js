@@ -16,6 +16,7 @@ const isProd = process.env.NODE_ENV === 'production'
 const config = {
   entry: {
     app: [
+      './robots.txt',
       'babel-polyfill',
       'react-hot-loader/patch',
       './src/index.jsx'
@@ -90,6 +91,17 @@ const config = {
         use: [
           {
             loader: 'file-loader'
+          }
+        ]
+      },
+      {
+        test: /robots\.txt$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'robots.txt'
+            }
           }
         ]
       }
