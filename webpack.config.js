@@ -37,7 +37,7 @@ const config = {
       process: {
         env: {
           NODE_ENV: JSON.stringify(isProd ? 'production' : 'development'),
-          isMobile: true
+          isMobile: true // FixMe: revisit this since we use mobile layouts in desktop version also
         }
       }
     }),
