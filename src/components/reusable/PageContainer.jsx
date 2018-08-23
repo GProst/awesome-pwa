@@ -10,9 +10,9 @@ export const PageContainer = styled.div`
   position: relative;
   
   ${props => {
-    if (process.env.isMobile === true && !props.noScroll) {
+    if (!props.noScroll) {
       return `
-        @media screen and (orientation: landscape) {
+        @media screen {
           display: block;
         }
       `

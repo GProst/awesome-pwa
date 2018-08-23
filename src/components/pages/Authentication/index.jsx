@@ -16,6 +16,8 @@ import {LogoWithTitle as _LogoWithTitle} from './LogoWithTitle'
 import {PageContainer} from '../../reusable/PageContainer'
 import {ROUTES} from '../../../routes'
 
+const CONTENT_PADDING_WHEN_SCROLLED = 40
+
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,12 +26,12 @@ const Content = styled.div`
   position: relative;
   
   ${props => {
-    if (process.env.isMobile === true && !props.noScroll) {
+    if (!props.noScroll) {
       return `
-        @media screen and (orientation: landscape) {
-          padding: 40px 0;
+        @media screen {
+          padding: ${CONTENT_PADDING_WHEN_SCROLLED}px 0;
         }
-      `
+`
     }
   }}
 `
@@ -89,8 +91,19 @@ class AuthPage extends React.Component {
   }
 
   _checkScrollNecessity() {
+    // In one particular case we don't make it scrollable (small mobile device in portrait layout)
+    // FixMe: but revise this logic again later (I mean the whole logic of isMobile/isDesktop env vars)
+    if (process.env.isMobile === true) {
+      const isPortrait = window.innerHeight > window.innerWidth
+      if (isPortrait && window.innerHeight <= 568) {
+        this.setState({
+          noScroll: true
+        })
+        return
+      }
+    }
     const height = parseInt(window.getComputedStyle(this.content).height, 10)
-    const verticalPadding = 80
+    const verticalPadding = CONTENT_PADDING_WHEN_SCROLLED * 2
     this.setState({
       noScroll: (height + verticalPadding) <= window.innerHeight
     })
