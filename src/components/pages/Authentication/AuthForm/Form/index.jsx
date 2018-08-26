@@ -71,19 +71,19 @@ export class Form extends React.Component {
     animating: PropTypes.bool.isRequired
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.authType !== nextProps.authType) {
+  static getDerivedStateFromProps(props, state) {
+    if (state.authType !== props.authType) {
       return {
         showPassword: false,
         fields: {
-          ...prevState.fields,
+          ...state.fields,
           [FIELD.password]: '',
           [FIELD.newPassword]: ''
         },
         errors: {
           ...defaultFieldErrors
         },
-        authType: nextProps.authType
+        authType: props.authType
       }
     }
     return null

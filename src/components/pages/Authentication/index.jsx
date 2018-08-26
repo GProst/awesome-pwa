@@ -69,12 +69,12 @@ class AuthPage extends React.Component {
     authPageStateContainer.setAuthType(queryAuthType)
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    AuthPage.updateState(nextProps.authType)
-    if (prevState.authType !== nextProps.authType) {
-      animateSwitchAuthType({to: nextProps.authType})
+  static getDerivedStateFromProps(props, state) {
+    AuthPage.updateState(props.authType)
+    if (state.authType !== props.authType) {
+      animateSwitchAuthType({to: props.authType})
       return {
-        authType: nextProps.authType
+        authType: props.authType
       }
     }
     return null
@@ -118,6 +118,18 @@ class AuthPage extends React.Component {
     window.addEventListener('resize', this.onResize)
     // content may be absent since we can render Redirect
     if (this.content) this._checkScrollNecessity()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {authTypeQueryString: prevAuthTypeQueryString} = prevProps
+    const {authTypeQueryString} = this.props
+    // If we redirected because of wrong auth type in url query, we have to check the need of the scroll
+    if (
+      ![AUTH_TYPE.signIn, AUTH_TYPE.signUp].includes(prevAuthTypeQueryString) &&
+      [AUTH_TYPE.signIn, AUTH_TYPE.signUp].includes(authTypeQueryString)
+    ) {
+      this._checkScrollNecessity()
+    }
   }
 
   componentWillUnmount() {

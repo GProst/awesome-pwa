@@ -9,13 +9,7 @@ export const PageContainer = styled.div`
   align-items: center;
   position: relative;
   
-  ${props => {
-    if (!props.noScroll) {
-      return `
-        @media screen {
-          display: block;
-        }
-      `
-    }
-  }}
+  ${props => !props.noScroll && `
+  display: block;
+  `}}
 `

@@ -16,11 +16,11 @@ export class FormContent extends React.Component {
     formType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.authType !== prevState.authType) {
+  static getDerivedStateFromProps(props, state) {
+    if (props.authType !== state.authType) {
       return {
-        authType: nextProps.authType,
-        inactive: nextProps.authType !== prevState.formType
+        authType: props.authType,
+        inactive: props.authType !== state.formType
       }
     }
     return null
