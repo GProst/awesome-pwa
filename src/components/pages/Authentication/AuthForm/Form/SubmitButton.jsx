@@ -46,6 +46,7 @@ class _SubmitButton extends React.Component {
         variant='raised'
         type='submit'
         classes={{...this.props.classes}}
+        data-test-id='authentication-submit-button'
       >
         {this.props.children}
       </Button>
