@@ -29,6 +29,7 @@ class _SubmitButton extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
+    testId: PropTypes.string.isRequired,
     disabled: PropTypes.bool
   }
 
@@ -46,7 +47,7 @@ class _SubmitButton extends React.Component {
         variant='raised'
         type='submit'
         classes={{...this.props.classes}}
-        data-test-id='authentication-submit-button'
+        data-test-id={this.props.testId}
       >
         {this.props.children}
       </Button>

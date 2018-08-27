@@ -267,12 +267,12 @@ export class Form extends React.Component {
       <FormContainer onSubmit={this.onSubmit}>
         <FormContent setFormNode={setFormNode} formType={AUTH_TYPE.signUp} authType={authType} animating={animating}>
           {this.renderInputs()}
-          <SubmitButton disabled={disabled}>Sign Up</SubmitButton>
+          <SubmitButton disabled={disabled} testId='sign-up-submit-button'>Sign Up</SubmitButton>
         </FormContent>
         <FormContent setFormNode={setFormNode} formType={AUTH_TYPE.signIn} authType={authType} animating={animating}>
           {this.renderInputs({isSignUp: false})}
           <ForgotPasswordLink />
-          <SubmitButton disabled={disabled}>Sign In</SubmitButton>
+          <SubmitButton disabled={disabled} testId='sign-in-submit-button'>Sign In</SubmitButton>
         </FormContent>
       </FormContainer>
     )
