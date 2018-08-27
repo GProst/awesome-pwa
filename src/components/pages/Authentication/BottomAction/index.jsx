@@ -38,6 +38,7 @@ export class BottomAction extends React.Component {
           linkText='Sign In'
           toAuthType={AUTH_TYPE.signIn}
           authType={authType}
+          testId='go-to-sign-in'
         />
         <Action
           key='signIn'
@@ -45,6 +46,7 @@ export class BottomAction extends React.Component {
           linkText='Sign Up'
           toAuthType={AUTH_TYPE.signUp}
           authType={authType}
+          testId='go-to-sign-up'
         />
       </Container>
     )

@@ -30,6 +30,7 @@ export class Action extends React.Component {
   static propTypes = {
     desc: PropTypes.string.isRequired,
     linkText: PropTypes.string.isRequired,
+    testId: PropTypes.string.isRequired,
     toAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
@@ -76,7 +77,7 @@ export class Action extends React.Component {
         }}
       >
         <Desc>{desc}</Desc>
-        <Link to={`${ROUTES.authentication}?authType=${toAuthType}`}>
+        <Link to={`${ROUTES.authentication}?authType=${toAuthType}`} data-test-id={this.props.testId}>
           {linkText}
         </Link>
       </Animated.div>
