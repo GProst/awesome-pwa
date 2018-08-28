@@ -3,7 +3,7 @@ import Animated from 'animated/lib/targets/react-dom'
 import {AUTH_TYPE, authPageStateContainer} from '../stateAuthPage'
 import {easeIn, easeOut} from '../../../../constants/animation'
 
-const baseDuration = 250
+const getBaseDuration = () => window.testAnimationBaseDuration || 250
 let currentAnimation = null
 let initialAuthType
 
@@ -67,6 +67,8 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
       : Math.round(diff / 2)
   const bottomActionsToValue = -roundedTopToValue
   const logoWithTitleToValue = roundedTopToValue
+
+  const baseDuration = getBaseDuration()
 
   if (currentAnimation) currentAnimation.stop()
   currentAnimation = Animated.parallel([
