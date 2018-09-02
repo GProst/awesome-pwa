@@ -4,7 +4,7 @@
   "description": "Priority Book PWA",
   "author": "GProst a.k.a German Prostakov <gprostmail@gmail.com>",
   "scripts": {
-    "start": "webpack-dev-server --port 3000 --output-public-path=\"http://localhost:3000/\" --public=\"localhost:3000/\" --hot --inline",
+    "start": "webpack-dev-server --port 3000 --output-public-path=\"http://localhost:3000/\" --public=\"localhost:3000/\" --inline",
     "build": "webpack",
     "gzip-public": "chmod +x ./gzip.sh && ./gzip.sh",
     "lint": "eslint --ext .js --ext .jsx --ignore-path .gitignore ./",
