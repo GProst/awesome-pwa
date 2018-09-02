@@ -16,17 +16,11 @@ import {AppBackground} from './global/AppBackground'
 class Root extends React.Component {
   static displayName = 'Root'
 
-  renderDevToolsComp() {
-    const DevTools = process.env.NODE_ENV === 'production' ? () => null : require('./global/DevTools').DevTools
-    return <DevTools />
-  }
-
   render() {
     return (
       <Provider store={store}>
         <ThemeProvider>
           <AppBackground>
-            {this.renderDevToolsComp()}
             <ConnectedRouter history={history} store={store}>
               <Switch>
                 <Route exact strict path={ROUTES.goals} component={GoalsPage} />

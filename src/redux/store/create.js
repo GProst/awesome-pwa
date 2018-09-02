@@ -12,9 +12,7 @@ export function createStore() {
 
   if (process.env.NODE_ENV !== 'production') {
     const {logger} = require('redux-logger')
-    const {DevTools} = require('../../components/global/DevTools')
     middleware.push(logger)
-    toCompose.push(DevTools.instrument())
   }
 
   toCompose.unshift(applyMiddleware(...middleware))
