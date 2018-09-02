@@ -16,7 +16,6 @@
     "aws-amplify": "^0.2.14",
     "aws-amplify-react": "^0.1.38",
     "history": "^4.7.2",
-    "lodash-es": "^4.17.4",
     "material-ui": "^1.0.0-beta.32",
     "prop-types": "^15.5.10",
     "query-string": "^5.1.0",
