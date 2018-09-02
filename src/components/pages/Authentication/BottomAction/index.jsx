@@ -20,11 +20,12 @@ export class BottomAction extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
+    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
+    initialAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
   render() {
-    const {className, authType} = this.props
+    const {className, authType, initialAuthType} = this.props
     return (
       <Container
         className={className}
@@ -38,6 +39,7 @@ export class BottomAction extends React.Component {
           linkText='Sign In'
           toAuthType={AUTH_TYPE.signIn}
           authType={authType}
+          initialAuthType={initialAuthType}
           testId='go-to-sign-in'
         />
         <Action
@@ -46,6 +48,7 @@ export class BottomAction extends React.Component {
           linkText='Sign Up'
           toAuthType={AUTH_TYPE.signUp}
           authType={authType}
+          initialAuthType={initialAuthType}
           testId='go-to-sign-up'
         />
       </Container>

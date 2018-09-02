@@ -5,34 +5,19 @@ export const AUTH_TYPE = {
   signIn: 'sign-in'
 }
 
+// FixMe: remove Unstated lib, move this logic into separate helper object
 export class AuthPageStateContainer extends Container {
   state = {
-    authType: AUTH_TYPE.signUp,
-    animating: false,
     forms: {}
   }
 
-  setAnimationStatus = status => {
-    this.setState({
-      animating: status
-    })
-  }
-
-  setAuthType = authType => {
-    if (authType !== this.state.authType && Object.values(AUTH_TYPE).includes(authType)) {
-      this.setState({
-        authType
-      })
-    }
-  }
-
   setFormNode = ({node, type}) => {
-    this.setState({
+    this.setState(prevState => ({
       forms: {
-        ...this.state.forms,
+        ...prevState.forms,
         [type]: node
       }
-    })
+    }))
   }
 
   getFormHeight = ({type}) => {

@@ -38,10 +38,9 @@ export const initAnimationValues = authType => {
   roundedBottom.setValue(0)
 }
 
-export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
-  if (!authPageStateContainer.state.animating) authPageStateContainer.setAnimationStatus(true)
-
+export const animateSwitchAuthType = async ({to = AUTH_TYPE.signIn}) => {
   const allowedValues = [AUTH_TYPE.signIn, AUTH_TYPE.signUp]
+  // FixMe: I need to properly handle errors
   if (!allowedValues.includes(to)) throw new Error(`Must provide property "to" with value: ${allowedValues.join(' or ')}`)
 
   const {whiteContainer, toSignUpAction, toSignInAction, signInForm, signUpForm, bottomActions, logoWithTitle} = animState
@@ -90,7 +89,6 @@ export function animateSwitchAuthType({to = AUTH_TYPE.signIn}) {
   currentAnimation.start(({finished}) => {
     if (finished) {
       currentAnimation = null
-      authPageStateContainer.setAnimationStatus(false)
     }
   })
 }

@@ -67,8 +67,8 @@ export class Form extends React.Component {
 
   static propTypes = {
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    setFormNode: PropTypes.func.isRequired,
-    animating: PropTypes.bool.isRequired
+    initialAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
+    setFormNode: PropTypes.func.isRequired
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -261,15 +261,15 @@ export class Form extends React.Component {
   }
 
   render() {
-    const {authType, animating, setFormNode} = this.props
+    const {authType, initialAuthType, setFormNode} = this.props
     const disabled = Object.values(this.state.errors).some(error => error !== null)
     return (
       <FormContainer onSubmit={this.onSubmit}>
-        <FormContent setFormNode={setFormNode} formType={AUTH_TYPE.signUp} authType={authType} animating={animating}>
+        <FormContent setFormNode={setFormNode} formType={AUTH_TYPE.signUp} authType={authType} initialAuthType={initialAuthType}>
           {this.renderInputs()}
           <SubmitButton disabled={disabled} testId='sign-up-submit-button'>Sign Up</SubmitButton>
         </FormContent>
-        <FormContent setFormNode={setFormNode} formType={AUTH_TYPE.signIn} authType={authType} animating={animating}>
+        <FormContent setFormNode={setFormNode} formType={AUTH_TYPE.signIn} authType={authType} initialAuthType={initialAuthType}>
           {this.renderInputs({isSignUp: false})}
           <ForgotPasswordLink />
           <SubmitButton disabled={disabled} testId='sign-in-submit-button'>Sign In</SubmitButton>

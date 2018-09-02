@@ -32,7 +32,8 @@ export class Action extends React.Component {
     linkText: PropTypes.string.isRequired,
     testId: PropTypes.string.isRequired,
     toAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
+    authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
+    initialAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -46,7 +47,7 @@ export class Action extends React.Component {
   }
 
   state = {
-    position: this.props.authType === this.props.toAuthType ? 'absolute' : 'relative',
+    position: this.props.initialAuthType === this.props.toAuthType ? 'absolute' : 'relative',
     animValue: this.props.toAuthType === AUTH_TYPE.signIn ? animState.toSignInAction : animState.toSignUpAction,
     authType: null,
     toAuthType: this.props.toAuthType

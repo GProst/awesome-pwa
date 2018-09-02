@@ -4,10 +4,10 @@ import queryString from 'query-string'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {Provider, Subscribe} from 'unstated'
+import {Provider} from 'unstated'
 
 import {requireNoAuth} from '../../../hocs/requireNoAuth'
-import {AUTH_TYPE, AuthPageStateContainer, authPageStateContainer} from './stateAuthPage'
+import {AUTH_TYPE, authPageStateContainer} from './stateAuthPage'
 import {animateSwitchAuthType, initAnimationValues} from './animations/switchAuthType'
 
 import {AuthForm} from './AuthForm'
@@ -65,14 +65,8 @@ class AuthPage extends React.Component {
     authTypeQueryString: PropTypes.string
   }
 
-  static updateState(queryAuthType) {
-    authPageStateContainer.setAuthType(queryAuthType)
-  }
-
   static getDerivedStateFromProps(props, state) {
-    AuthPage.updateState(props.authType)
     if (state.authType !== props.authType) {
-      animateSwitchAuthType({to: props.authType})
       return {
         authType: props.authType
       }
@@ -81,7 +75,8 @@ class AuthPage extends React.Component {
   }
 
   state = {
-    authType: this.props.authType
+    authType: this.props.authType,
+    initialAuthType: this.props.authType
   }
 
   constructor(props) {
@@ -121,6 +116,8 @@ class AuthPage extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const {authType: prevAuthType} = prevState
+    const {authType} = this.state
     const {authTypeQueryString: prevAuthTypeQueryString} = prevProps
     const {authTypeQueryString} = this.props
     // If we redirected because of wrong auth type in url query, we have to check the need of the scroll
@@ -130,6 +127,9 @@ class AuthPage extends React.Component {
     ) {
       this._checkScrollNecessity()
     }
+    if (prevAuthType !== authType) {
+      animateSwitchAuthType({to: authType})
+    }
   }
 
   componentWillUnmount() {
@@ -137,7 +137,7 @@ class AuthPage extends React.Component {
   }
 
   render() {
-    const {noScroll} = this.state
+    const {noScroll, initialAuthType, authType} = this.state
     const {authTypeQueryString} = this.props
     // The App should work without it, but I want to make sure I have correct query string in Address Bar
     // in case I will want to parse it again in some other place... and it just feels safer
@@ -146,17 +146,13 @@ class AuthPage extends React.Component {
     }
     return (
       <Provider inject={[authPageStateContainer]}>
-        <Subscribe to={[AuthPageStateContainer]}>
-          {stateContainer => (
-            <PageContainer noScroll={noScroll}>
-              <Content innerRef={elem => { this.content = elem }} noScroll={noScroll}>
-                <LogoWithTitle />
-                <AuthForm />
-                <BottomAction authType={stateContainer.state.authType} />
-              </Content>
-            </PageContainer>
-          )}
-        </Subscribe>
+        <PageContainer noScroll={noScroll}>
+          <Content innerRef={elem => { this.content = elem }} noScroll={noScroll}>
+            <LogoWithTitle />
+            <AuthForm initialAuthType={initialAuthType} authType={authType} />
+            <BottomAction authType={authType} initialAuthType={initialAuthType} />
+          </Content>
+        </PageContainer>
       </Provider>
     )
   }

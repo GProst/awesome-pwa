@@ -11,7 +11,7 @@ export class FormContent extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    animating: PropTypes.bool.isRequired,
+    initialAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
     setFormNode: PropTypes.func.isRequired,
     formType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
@@ -28,7 +28,7 @@ export class FormContent extends React.Component {
 
   state = {
     animValue: this.props.formType === AUTH_TYPE.signIn ? animState.signInForm : animState.signUpForm,
-    position: this.props.authType === this.props.formType ? 'relative' : 'absolute',
+    position: this.props.initialAuthType === this.props.formType ? 'relative' : 'absolute',
     authType: null,
     formType: this.props.formType
   }
@@ -36,6 +36,7 @@ export class FormContent extends React.Component {
   componentDidMount() {
     this.props.setFormNode({node: this.animContainer.refs.node, type: this.state.formType})
     const onResize = () => {
+      // I think we do it just in case, no harm here I think
       this.setState({position: this.props.authType === this.state.formType ? 'relative' : 'absolute'})
     }
     window.addEventListener('resize', onResize)
@@ -43,7 +44,6 @@ export class FormContent extends React.Component {
 
   render() {
     const {position, inactive} = this.state
-    const {animating} = this.props
     const clipPathInterpolation = this.state.animValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['circle(0px at center)', 'circle(240px at center)']
@@ -60,8 +60,8 @@ export class FormContent extends React.Component {
           justifyContent: 'center',
           alignItems: 'center',
           pointerEvents: inactive ? 'none' : 'initial',
-          clipPath: (animating || inactive) ? clipPathInterpolation : undefined, // this is a fix for flickering on Android: show clipPath only when animating or when not active
-          WebkitClipPath: (animating || inactive) ? clipPathInterpolation : undefined
+          clipPath: clipPathInterpolation,
+          WebkitClipPath: clipPathInterpolation
         }}
         ref={elem => { this.animContainer = elem }}
       >
