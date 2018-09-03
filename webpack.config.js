@@ -1,19 +1,15 @@
 'use strict'
 
 const webpack = require('webpack')
-const WebpackChunkHash = require('webpack-chunk-hash')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
-
-function _isVendor(module) {
-  return module.context && module.context.includes('node_modules')
-}
 
 const isProd = process.env.NODE_ENV === 'production'
 
 const config = {
+  mode: 'none',
+  target: 'web',
   entry: {
     app: [
       './robots.txt',
@@ -22,20 +18,63 @@ const config = {
     ]
   },
   output: {
+    pathinfo: !isProd,
     path: path.resolve(__dirname, 'dist'),
     filename: isProd ? '[name].[chunkhash].js' : '[name].js',
     chunkFilename: isProd ? '[name].[chunkhash].js' : '[name].js',
-    publicPath: '/'
+    publicPath: '/',
+    jsonpScriptType: 'module',
+    hashFunction: 'sha256',
+    sourceMapFilename: '[file].map'
   },
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  cache: false,
+  performance: isProd
+    ? {
+      hints: 'warning'
+    }
+    : false,
   devtool: 'source-map',
+  optimization: {
+    removeAvailableModules: true,
+    removeEmptyChunks: true,
+    mergeDuplicateChunks: true,
+    flagIncludedChunks: isProd, // Enables FlagIncludedChunksPlugin plugin
+    occurrenceOrder: isProd, // Enables OccurrenceOrderPlugin plugin
+    providedExports: true,
+    usedExports: isProd, // Enables FlagDependencyUsagePlugin plugin
+    sideEffects: isProd, // Enables SideEffectsFlagPlugin plugin
+    concatenateModules: isProd, // Enables ModuleConcatenationPlugin plugin
+    splitChunks: { // Options for SplitChunksPlugin plugin
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    },
+    runtimeChunk: { // Moves webpack's runtime to a separate file (note: be careful about conflicts if you insert several entrypoints into the page)
+      name: entrypoint => `runtimechunk~${entrypoint.name}`
+    },
+    noEmitOnErrors: isProd, // Enables NoEmitOnErrorsPlugin plugin
+    namedModules: !isProd, // Enables NamedModulesPlugin plugin
+    namedChunks: !isProd, // Enables NamedChunksPlugin plugin
+    nodeEnv: isProd ? 'production' : 'development', // This is the same as DefinePlugin: process.env.NODE_ENV // TODO: check
+    minimize: isProd // Enables UglifyjsWebpackPlugin plugin (but you can set other via 'minimizer' prop)
+  },
+  recordsPath: path.join(__dirname, 'webpack-records.json'),
   plugins: [
     new webpack.DefinePlugin({
       process: {
         env: {
-          NODE_ENV: JSON.stringify(isProd ? 'production' : 'development'),
           isDesktop: true // FixMe: revisit this since we use mobile layouts in desktop version also
         }
       }
@@ -47,32 +86,19 @@ const config = {
       dry: false
     }),
 
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      chunks: ['app'],
-      minChunks: module => {
-        return _isVendor(module)
-      }
+    isProd && new webpack.HashedModuleIdsPlugin({
+      hashFunction: 'sha256',
+      hashDigest: 'hex',
+      hashDigestLength: 20
     }),
-
-    isProd
-      ? new webpack.HashedModuleIdsPlugin()
-      : new webpack.NamedModulesPlugin(),
 
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
       inject: 'body',
-      cache: true,
+      cache: false,
       showErrors: true
-    }),
-
-    new WebpackChunkHash(),
-
-    isProd ? new webpack.optimize.ModuleConcatenationPlugin() : null,
-
-    isProd ? new UglifyWebpackPlugin({sourceMap: true}) : null
-
+    })
   ].filter(Boolean),
   module: {
     rules: [
@@ -107,7 +133,9 @@ const config = {
     ]
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    clientLogLevel: 'none',
+    inline: true
   }
 }
 
