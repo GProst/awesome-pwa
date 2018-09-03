@@ -1,22 +1,31 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
-        "targets": {
-          "browsers": [
-            "last 1 Chrome versions"
-          ]
-        },
+        "targets": "Chrome >= 68",
         "modules": false,
-        "useBuiltIns": true
+        "loose": true,
+        "useBuiltIns": "usage"
       }
     ],
-    "react"
+    [
+      "@babel/preset-react",
+      {
+        "useBuiltIns": true
+      }
+    ]
   ],
   "plugins": [
+    ["@babel/plugin-proposal-object-rest-spread", {
+      "useBuiltIns": true
+    }],
     "babel-plugin-styled-components",
-    "transform-class-properties",
-    "transform-object-rest-spread"
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ]
   ]
 }

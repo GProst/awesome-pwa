@@ -17,7 +17,7 @@ const config = {
   entry: {
     app: [
       './robots.txt',
-      'babel-polyfill',
+      '@babel/polyfill',
       './src/index.jsx'
     ]
   },
