@@ -11,9 +11,9 @@
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ignore-path .gitignore ./"
   },
   "dependencies": {
+    "@material-ui/core": "^3.0.1",
     "animated": "^0.2.1",
     "history": "^4.7.2",
-    "material-ui": "^1.0.0-beta.32",
     "prop-types": "^15.5.10",
     "query-string": "^6.1.0",
     "ramda": "^0.25.0",

@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import TextField from 'material-ui/TextField'
-import {InputAdornment} from 'material-ui/Input'
-import IconButton from 'material-ui/IconButton'
+
+import TextField from '@material-ui/core/TextField'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import IconButton from '@material-ui/core/IconButton'
 
 import {MaterialIcon} from '../../../../reusable/MaterialIcon'
 import {FormContent} from './FormContent'
