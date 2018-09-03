@@ -247,7 +247,8 @@ export class Form extends React.Component {
                     onClick={this.togglePasswordVisibility}
                     style={{
                       color: 'black',
-                      width: '28px'
+                      width: '28px',
+                      height: '28px'
                     }}
                   >
                     {this.state.showPassword ? <MaterialIcon name='VisibilityOff' /> : <MaterialIcon name='Visibility' />}
