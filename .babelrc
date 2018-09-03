@@ -9,7 +9,6 @@
           ]
         },
         "modules": false,
-        "loose": true,
         "useBuiltIns": true
       }
     ],
@@ -18,7 +17,6 @@
   "plugins": [
     "babel-plugin-styled-components",
     "transform-class-properties",
-    "transform-object-rest-spread",
-    "syntax-dynamic-import"
+    "transform-object-rest-spread"
   ]
 }
