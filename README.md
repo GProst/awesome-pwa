@@ -1,8 +1,5 @@
 # Priority Book PWA
 
-[![dependencies](https://david-dm.org/AnoAct/PB-PWA.svg)](https://david-dm.org/AnoAct/PB-PWA)
-[![devDependencies](https://david-dm.org/AnoAct/PB-PWA/dev-status.svg)](https://david-dm.org/AnoAct/PB-PWA?type=dev)
-
 ## Install
 
 ```shell
