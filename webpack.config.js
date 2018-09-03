@@ -1,9 +1,9 @@
 'use strict'
 
+const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const path = require('path')
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -107,7 +107,10 @@ const config = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              configFile: path.join(process.cwd(), '.babelrc.js')
+            }
           }
         ]
       },
