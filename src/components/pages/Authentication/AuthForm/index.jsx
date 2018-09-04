@@ -1,11 +1,10 @@
 import React from 'react'
-import {Subscribe} from 'unstated'
 import PropTypes from 'prop-types'
 
 import {Form} from './Form'
 import {PaperContainer} from './PaperContainer'
 
-import {AUTH_TYPE, AuthPageStateContainer} from '../stateAuthPage'
+import {AUTH_TYPE} from '../constants'
 
 export class AuthForm extends React.Component {
   static displayName = 'AuthForm'
@@ -17,17 +16,12 @@ export class AuthForm extends React.Component {
 
   render() {
     return (
-      <Subscribe to={[AuthPageStateContainer]}>
-        {stateContainer => (
-          <PaperContainer>
-            <Form
-              setFormNode={stateContainer.setFormNode}
-              initialAuthType={this.props.initialAuthType}
-              authType={this.props.authType}
-            />
-          </PaperContainer>
-        )}
-      </Subscribe>
+      <PaperContainer>
+        <Form
+          initialAuthType={this.props.initialAuthType}
+          authType={this.props.authType}
+        />
+      </PaperContainer>
     )
   }
 }

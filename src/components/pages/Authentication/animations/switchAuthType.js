@@ -1,7 +1,8 @@
 import Animated from 'animated/lib/targets/react-dom'
 
-import {AUTH_TYPE, authPageStateContainer} from '../stateAuthPage'
 import {easeIn, easeOut} from '../../../../constants/animation'
+import {AUTH_TYPE} from '../constants'
+import {formLayoutHelper} from '../helpers/formLayoutHelper'
 
 const getBaseDuration = () => window.testAnimationBaseDuration || 250
 let currentAnimation = null
@@ -51,9 +52,9 @@ export const animateSwitchAuthType = async ({to = AUTH_TYPE.signIn}) => {
   const appearingAction = toSignIn ? toSignUpAction : toSignInAction
   const appearingForm = toSignIn ? signInForm : signUpForm
 
-  const diff = authPageStateContainer.getFormHeightDiff()
-  const signInFormHeight = authPageStateContainer.getFormHeight({type: AUTH_TYPE.signIn})
-  const signUpFormHeight = authPageStateContainer.getFormHeight({type: AUTH_TYPE.signUp})
+  const diff = formLayoutHelper.getFormHeightDiff()
+  const signInFormHeight = formLayoutHelper.getFormHeight({type: AUTH_TYPE.signIn})
+  const signUpFormHeight = formLayoutHelper.getFormHeight({type: AUTH_TYPE.signUp})
   const rectToValue = initialAuthType === to
     ? 1
     : toSignUp

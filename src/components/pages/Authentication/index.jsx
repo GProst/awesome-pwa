@@ -4,9 +4,7 @@ import queryString from 'query-string'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {Provider} from 'unstated'
 
-import {AUTH_TYPE, authPageStateContainer} from './stateAuthPage'
 import {animateSwitchAuthType, initAnimationValues} from './animations/switchAuthType'
 
 import {AuthForm} from './AuthForm'
@@ -15,6 +13,7 @@ import {LogoWithTitle as _LogoWithTitle} from './LogoWithTitle'
 import {PageContainer} from '../../reusable/PageContainer'
 import {ROUTES} from '../../../routes'
 import {isMostLikelySmallPortraitDevice} from '../../../utils/isMostLikelySmallPortraitDevice'
+import {AUTH_TYPE} from './constants'
 
 const CONTENT_PADDING_WHEN_SCROLLED = 40
 
@@ -141,15 +140,13 @@ class AuthPage extends React.Component {
       return <Redirect to={{pathname: ROUTES.authentication}} />
     }
     return (
-      <Provider inject={[authPageStateContainer]}>
-        <PageContainer noScroll={noScroll}>
-          <Content innerRef={elem => { this.content = elem }} noScroll={noScroll}>
-            <LogoWithTitle />
-            <AuthForm initialAuthType={initialAuthType} authType={authType} />
-            <BottomAction authType={authType} initialAuthType={initialAuthType} />
-          </Content>
-        </PageContainer>
-      </Provider>
+      <PageContainer noScroll={noScroll}>
+        <Content innerRef={elem => { this.content = elem }} noScroll={noScroll}>
+          <LogoWithTitle />
+          <AuthForm initialAuthType={initialAuthType} authType={authType} />
+          <BottomAction authType={authType} initialAuthType={initialAuthType} />
+        </Content>
+      </PageContainer>
     )
   }
 }

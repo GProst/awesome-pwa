@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {Link as _Link} from 'react-router-dom'
 import Animated from 'animated/lib/targets/react-dom'
 
-import {AUTH_TYPE} from '../stateAuthPage'
+import {AUTH_TYPE} from '../constants/index'
 import {animState} from '../animations/switchAuthType'
 import {ROUTES} from '../../../../routes'
 

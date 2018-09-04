@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Animated from 'animated/lib/targets/react-dom'
 
-import {AUTH_TYPE} from '../../stateAuthPage'
+import {AUTH_TYPE} from '../../constants/index'
 import {animState} from '../../animations/switchAuthType'
+import {formLayoutHelper} from '../../helpers/formLayoutHelper'
 
 export class FormContent extends React.Component {
   static displayName = 'FormContent'
@@ -12,7 +13,6 @@ export class FormContent extends React.Component {
     children: PropTypes.node.isRequired,
     authType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
     initialAuthType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired,
-    setFormNode: PropTypes.func.isRequired,
     formType: PropTypes.oneOf(Object.values(AUTH_TYPE)).isRequired
   }
 
@@ -34,7 +34,7 @@ export class FormContent extends React.Component {
   }
 
   componentDidMount() {
-    this.props.setFormNode({node: this.animContainer.refs.node, type: this.state.formType})
+    formLayoutHelper.setFormNode({node: this.animContainer.refs.node, type: this.state.formType})
     const onResize = () => {
       // I think we do it just in case, no harm here I think
       this.setState({position: this.props.authType === this.state.formType ? 'relative' : 'absolute'})

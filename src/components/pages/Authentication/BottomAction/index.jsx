@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {Action} from './Action'
-import {AUTH_TYPE} from '../stateAuthPage'
+import {AUTH_TYPE} from '../constants/index'
 import {animState} from '../animations/switchAuthType'
 
 const Container = styled(Animated.div)`
