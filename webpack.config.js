@@ -1,7 +1,6 @@
 'use strict'
 
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
@@ -70,14 +69,6 @@ const config = {
     minimize: isProd // Enables UglifyjsWebpackPlugin plugin (but you can set other via 'minimizer' prop)
   },
   plugins: [
-    new webpack.DefinePlugin({
-      process: {
-        env: {
-          isDesktop: true // FixMe: revisit this since we use mobile layouts in desktop version also
-        }
-      }
-    }),
-
     new CleanWebpackPlugin(['dist'], {
       root: path.join(__dirname),
       verbose: true,
