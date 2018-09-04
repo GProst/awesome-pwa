@@ -6,7 +6,6 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {Provider} from 'unstated'
 
-import {requireNoAuth} from '../../../hocs/requireNoAuth'
 import {AUTH_TYPE, authPageStateContainer} from './stateAuthPage'
 import {animateSwitchAuthType, initAnimationValues} from './animations/switchAuthType'
 
@@ -155,8 +154,8 @@ class AuthPage extends React.Component {
   }
 }
 
-const AuthPageGuarded = requireNoAuth(connector(AuthPage))
+const AuthPageConnected = connector(AuthPage)
 
 export {
-  AuthPageGuarded as AuthPage
+  AuthPageConnected as AuthPage
 }

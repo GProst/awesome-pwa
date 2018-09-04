@@ -4,7 +4,6 @@ import thunk from 'redux-thunk'
 
 import {history} from '../../history'
 import * as reducers from '../reducers'
-import {getAuthInitialState} from '../reducers/auth/index'
 
 export function createStore() {
   const middleware = [routerMiddleware(history), thunk]
@@ -23,7 +22,6 @@ export function createStore() {
       ...reducers,
       router: routerReducer
     }),
-    {auth: getAuthInitialState()},
     enhancer
   )
 
