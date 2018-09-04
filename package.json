@@ -4,7 +4,7 @@
   "description": "Priority Book PWA",
   "author": "GProst a.k.a German Prostakov <gprostmail@gmail.com>",
   "scripts": {
-    "start": "webpack-dev-server --port 3000 --output-public-path=\"http://localhost:3000/\" --public=\"localhost:3000/\"",
+    "start": "webpack-dev-server --port 3000 --output-public-path=\"http://localhost:3000/\" --public=\"localhost:3000/\" --hot",
     "build": "webpack",
     "gzip-public": "chmod +x ./gzip.sh && ./gzip.sh",
     "lint": "eslint --ext .js --ext .jsx --ignore-path .gitignore ./",
@@ -47,6 +47,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "react-hot-loader": "^4.3.6",
     "redux-logger": "^3.0.6",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",

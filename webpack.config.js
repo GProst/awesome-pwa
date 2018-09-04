@@ -120,7 +120,6 @@ const config = {
   },
   devServer: {
     historyApiFallback: true,
-    clientLogLevel: 'none',
     inline: true
   }
 }

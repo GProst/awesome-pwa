@@ -35,6 +35,11 @@ class Root extends React.Component {
   }
 }
 
+if (process.env.NODE_ENV !== 'production') {
+  const {hot} = require('react-hot-loader')
+  Root = hot(module)(Root) // eslint-disable-line no-class-assign
+}
+
 export {
   Root
 }
