@@ -69,7 +69,6 @@ const config = {
     nodeEnv: isProd ? 'production' : 'development', // This is the same as DefinePlugin: process.env.NODE_ENV
     minimize: isProd // Enables UglifyjsWebpackPlugin plugin (but you can set other via 'minimizer' prop)
   },
-  recordsPath: path.join(__dirname, 'webpack-records.json'),
   plugins: [
     new webpack.DefinePlugin({
       process: {
