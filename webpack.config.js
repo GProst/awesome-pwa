@@ -65,6 +65,7 @@ const config = {
     noEmitOnErrors: isProd, // Enables NoEmitOnErrorsPlugin plugin
     namedModules: !isProd, // Enables NamedModulesPlugin plugin
     namedChunks: !isProd, // Enables NamedChunksPlugin plugin
+    hashedModuleIds: isProd, // Enables HashedModuleIdsPlugin plugin
     nodeEnv: isProd ? 'production' : 'development', // This is the same as DefinePlugin: process.env.NODE_ENV
     minimize: isProd // Enables UglifyjsWebpackPlugin plugin (but you can set other via 'minimizer' prop)
   },
@@ -82,12 +83,6 @@ const config = {
       root: path.join(__dirname),
       verbose: true,
       dry: false
-    }),
-
-    isProd && new webpack.HashedModuleIdsPlugin({
-      hashFunction: 'sha256',
-      hashDigest: 'hex',
-      hashDigestLength: 20
     }),
 
     new HtmlWebpackPlugin({
