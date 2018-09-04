@@ -25,5 +25,14 @@ export function createStore() {
     enhancer
   )
 
+  if (module.hot) {
+    module.hot.accept('../reducers', () => {
+      store.replaceReducer(combineReducers({
+        ...reducers,
+        router: routerReducer
+      }))
+    })
+  }
+
   return store
 }
