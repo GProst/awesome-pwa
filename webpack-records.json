@@ -9,7 +9,7 @@
         "byName": {},
         "bySource": {},
         "usedIds": [
-          1
+          0
         ]
       }
     }
@@ -26,13 +26,14 @@
     "byName": {
       "app": 0,
       "vendors~app": 1,
-      "runtimechunk~app": 2
+      "runtimechunk~app": 2,
+      "runtime": 3
     },
     "bySource": {},
     "usedIds": [
       0,
       1,
-      2
+      3
     ]
   }
 }

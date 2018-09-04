@@ -4,6 +4,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -61,9 +62,7 @@ const config = {
         }
       }
     },
-    runtimeChunk: { // Moves webpack's runtime to a separate file (note: be careful about conflicts if you insert several entrypoints into the page)
-      name: entrypoint => `runtimechunk~${entrypoint.name}`
-    },
+    runtimeChunk: 'single', // Moves webpack's runtime to a separate file
     noEmitOnErrors: isProd, // Enables NoEmitOnErrorsPlugin plugin
     namedModules: !isProd, // Enables NamedModulesPlugin plugin
     namedChunks: !isProd, // Enables NamedChunksPlugin plugin
@@ -90,6 +89,11 @@ const config = {
       hashFunction: 'sha256',
       hashDigest: 'hex',
       hashDigestLength: 20
+    }),
+
+    isProd && new CompressionPlugin({
+      asset: '[path]',
+      algorithm: 'gzip'
     }),
 
     new HtmlWebpackPlugin({
