@@ -12,7 +12,8 @@ import {BottomAction as _BottomAction} from './BottomAction'
 import {LogoWithTitle as _LogoWithTitle} from './LogoWithTitle'
 import {PageContainer} from '../../reusable/PageContainer'
 import {ROUTES} from '../../../routes'
-import {isMostLikelySmallPortraitDevice} from '../../../utils/isMostLikelySmallPortraitDevice'
+import {isDesktop} from '../../../utils/device'
+import {isPortrait} from '../../../utils/window'
 import {AUTH_TYPE} from './constants'
 
 const CONTENT_PADDING_WHEN_SCROLLED = 40
@@ -86,7 +87,7 @@ class AuthPage extends React.Component {
 
   _checkScrollNecessity() {
     // In one particular case we don't make it scrollable (small mobile device in portrait layout)
-    if (isMostLikelySmallPortraitDevice()) {
+    if (!isDesktop && isPortrait() && window.innerWidth < 400) {
       this.setState({
         noScroll: true
       })
