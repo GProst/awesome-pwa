@@ -19,3 +19,9 @@ To build production version use `NODE_ENV = 'production'`
 ```shell
 yarn start
 ```
+
+## Env vars:
+
+* APP_ENVIRONMENT - used as the env for Sentry, allowed values: `local`, `dev`, `stage`, `prod-l`, `prod-kira`
+* APP_RELEASE - used as the release for Sentry (should be a git commit sha)
+* UPLOAD_MAPS_TO_SENTRY - weather we should send source maps to Sentry or not

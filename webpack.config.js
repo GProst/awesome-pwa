@@ -1,10 +1,14 @@
 'use strict'
 
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const SentryCliPlugin = require('@sentry/webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
+
+const {APP_RELEASE} = process.env
 
 const config = {
   mode: 'none',
@@ -69,6 +73,15 @@ const config = {
     minimize: isProd // Enables UglifyjsWebpackPlugin plugin (but you can set other via 'minimizer' prop)
   },
   plugins: [
+    new webpack.DefinePlugin({
+      process: {
+        env: {
+          APP_ENVIRONMENT: JSON.stringify(process.env.APP_ENVIRONMENT),
+          APP_RELEASE: JSON.stringify(APP_RELEASE)
+        }
+      }
+    }),
+
     new CleanWebpackPlugin(['dist'], {
       root: path.join(__dirname),
       verbose: true,
@@ -81,6 +94,11 @@ const config = {
       inject: 'body',
       cache: false,
       showErrors: true
+    }),
+
+    process.env.UPLOAD_MAPS_TO_SENTRY === 'true' && new SentryCliPlugin({
+      release: APP_RELEASE,
+      include: './dist'
     })
   ].filter(Boolean),
   module: {

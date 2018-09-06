@@ -1,12 +1,14 @@
 import {createStore as _createStore, applyMiddleware, combineReducers, compose} from 'redux'
 import {routerMiddleware, routerReducer} from 'react-router-redux'
 import thunk from 'redux-thunk'
+import Raven from 'raven-js'
 
 import {history} from '../../history'
 import * as reducers from '../reducers'
+import {createRavenMiddleware} from '../middlewares/raven-for-redux'
 
 export function createStore() {
-  const middleware = [routerMiddleware(history), thunk]
+  const middleware = [routerMiddleware(history), thunk, createRavenMiddleware(Raven)] // raven middleware should come before thunk
   const toCompose = []
 
   if (process.env.NODE_ENV !== 'production') {
