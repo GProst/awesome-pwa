@@ -1,6 +1,6 @@
 export const ROUTES = {
   root: '/',
-  main: '/goals',
+  main: '/authentication', // TODO: /goals
   goals: '/goals',
   authentication: '/authentication'
 }

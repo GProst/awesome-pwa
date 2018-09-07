@@ -6,6 +6,7 @@ import {Provider} from 'react-redux'
 import {store} from '../redux/store'
 import {history} from '../history'
 import {ROUTES} from '../routes'
+import {logger} from '../utils/logger'
 import {ThemeProvider} from './global/ThemeProvider'
 
 import {GoalsPage} from './pages/Goals'
@@ -16,7 +17,26 @@ import {AppBackground} from './global/AppBackground'
 class Root extends React.Component {
   static displayName = 'Root'
 
+  state = {
+    error: ''
+  }
+
+  componentDidCatch(error, info) {
+    logger.errorRemote(error, {extra: info})
+    this.setState({
+      error
+    })
+  }
+
   render() {
+    if (this.state.error) {
+      return ( // TODO
+        <AppBackground>
+          Error! Reload the app!
+        </AppBackground>
+      )
+    }
+
     return (
       <Provider store={store}>
         <ThemeProvider>
@@ -25,7 +45,7 @@ class Root extends React.Component {
               <Switch>
                 <Route exact strict path={ROUTES.goals} component={GoalsPage} />
                 <Route exact strict path={ROUTES.authentication} component={AuthPage} />
-                <Redirect to={ROUTES.goals} />
+                <Redirect to={ROUTES.main} />
               </Switch>
             </ConnectedRouter>
           </AppBackground>
