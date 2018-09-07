@@ -3,6 +3,8 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import {ConnectedRouter} from 'react-router-redux'
 import {Provider} from 'react-redux'
 
+import Button from '@material-ui/core/Button'
+
 import {store} from '../redux/store'
 import {history} from '../history'
 import {ROUTES} from '../routes'
@@ -32,7 +34,10 @@ class Root extends React.Component {
     if (this.state.error) {
       return ( // TODO
         <AppBackground>
-          Error! Reload the app!
+          Error!
+          <Button onClick={() => { window.location.href = window.location.origin }}>
+            Reload the app!
+          </Button>
         </AppBackground>
       )
     }
