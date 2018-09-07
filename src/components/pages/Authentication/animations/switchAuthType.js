@@ -40,10 +40,6 @@ export const initAnimationValues = authType => {
 }
 
 export const animateSwitchAuthType = async ({to = AUTH_TYPE.signIn}) => {
-  const allowedValues = [AUTH_TYPE.signIn, AUTH_TYPE.signUp]
-  // FixMe: I need to properly handle errors
-  if (!allowedValues.includes(to)) throw new Error(`Must provide property "to" with value: ${allowedValues.join(' or ')}`)
-
   const {whiteContainer, toSignUpAction, toSignInAction, signInForm, signUpForm, bottomActions, logoWithTitle} = animState
   const toSignUp = to === AUTH_TYPE.signUp
   const toSignIn = to === AUTH_TYPE.signIn
