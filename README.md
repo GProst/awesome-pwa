@@ -25,3 +25,8 @@ yarn start
 * APP_ENVIRONMENT - used as the env for Sentry, allowed values: `local`, `dev`, `stage`, `prod-l`, `prod-kira`
 * APP_RELEASE - used as the release for Sentry (should be a git commit sha)
 * UPLOAD_MAPS_TO_SENTRY - weather we should send source maps to Sentry or not
+
+## Global vars in JS:
+
+* testThrowError - if equals `true` Authenticate component will throw an error inside componentDidUpdate
+* testAnimationBaseDuration - sets base duration for an animation (most likely all animations, so unset it after you used it)

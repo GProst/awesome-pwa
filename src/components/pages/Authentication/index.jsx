@@ -112,6 +112,9 @@ class AuthPage extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (window.testThrowError === true) {
+      throw new Error('Test error using window.testThrowError')
+    }
     const {authType: prevAuthType} = prevState
     const {authType} = this.state
     const {authTypeQueryString: prevAuthTypeQueryString} = prevProps
