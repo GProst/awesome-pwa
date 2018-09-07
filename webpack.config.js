@@ -96,7 +96,7 @@ const config = {
       showErrors: true
     }),
 
-    process.env.UPLOAD_MAPS_TO_SENTRY === 'true' && new SentryCliPlugin({
+    process.env.UPLOAD_MAPS_TO_SENTRY && new SentryCliPlugin({
       release: APP_RELEASE,
       include: './dist'
     })
