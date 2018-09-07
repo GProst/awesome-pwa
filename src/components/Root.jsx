@@ -35,7 +35,7 @@ class Root extends React.Component {
       return ( // TODO
         <AppBackground>
           Error!
-          <Button onClick={() => { window.location.href = window.location.origin }}>
+          <Button onClick={() => { window.location.href = window.location.origin }} data-test-id='reload-app-button'>
             Reload the app!
           </Button>
         </AppBackground>

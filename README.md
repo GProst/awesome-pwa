@@ -30,3 +30,7 @@ yarn start
 
 * testThrowError - if equals `true` Authenticate component will throw an error inside componentDidUpdate
 * testAnimationBaseDuration - sets base duration for an animation (most likely all animations, so unset it after you used it)
+
+## Test attributes
+
+* data-test-id
