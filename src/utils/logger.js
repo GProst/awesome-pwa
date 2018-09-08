@@ -10,6 +10,9 @@ export const logger = {
 
   errorRemote: (error, {extra} = {}) => {
     logger.error(error, {extra})
-    Raven.captureException(error, {extra})
+
+    if (window.testThrowError !== true) { // don't log to Sentry if I just test
+      Raven.captureException(error, {extra})
+    }
   }
 }
