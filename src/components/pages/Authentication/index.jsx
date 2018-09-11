@@ -47,7 +47,7 @@ const BottomAction = styled(_BottomAction)`
 
 const connector = connect(
   state => {
-    const {authType: authTypeQueryString} = queryString.parse(state.router.location.search)
+    const {authType: authTypeQueryString} = queryString.parse(state.router.location.search) // TODO: use URLSearchParams, remove query-string lib
     let authType = authTypeQueryString
     if (![AUTH_TYPE.signIn, AUTH_TYPE.signUp].includes(authType)) authType = AUTH_TYPE.signUp
     return {
