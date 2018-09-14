@@ -31,6 +31,6 @@ export const requestSWRegistration = async () => {
   } else {
     logger.errorRemote(new Error('No \'serviceWorker\' in navigator!'))
     // TODO: I don't really know when this can happen... probably if API in browser changes
-    // I'should probably show something?.. "Something went wrong, make sure you use a supported Chrome browser version"
+    // I'should probably show something?.. "Something went wrong, make sure you use a supported Chrome browser version and HTTPS protocol"
   }
 }
