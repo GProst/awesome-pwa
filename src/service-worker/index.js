@@ -4,7 +4,9 @@ const urlsToCache = [
   '/images/favicon.png',
   '/app.js',
   '/runtime.js',
-  '/vendors~app.js'
+  '/vendors~app.js',
+  '/fonts/roboto-400-latin.woff2',
+  '/fonts/roboto-900-latin.woff2'
 ]
 
 const onInstall = async event => {
@@ -24,6 +26,7 @@ const onFetch = async event => {
   if (response) {
     return response
   }
+  // TODO: actually user can also request additional font family, I need to fetch it and add to cache in parallel
   // this means user requested some SPA route like /authenticate or similar, I need to return index.html
   const indexHTMLRequest = new Request('/') // This is actually tricky because maybe I should copy all of other options from original request
   const indexHTMLResponse = await cache.match(indexHTMLRequest)

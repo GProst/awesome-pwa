@@ -17,7 +17,7 @@ const Desc = styled.span`
 const Link = styled(_Link)`
   font-size: 16px;
   color: #64FFDA;
-  font-weight: bold;
+  font-weight: 900;
   background: none;
   border: none;
   outline: none;

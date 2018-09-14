@@ -86,6 +86,8 @@ const webConfig = {
   entry: {
     app: [
       './robots.txt',
+      './src/fonts/roboto-400-latin.woff2',
+      './src/fonts/roboto-900-latin.woff2',
       './src/index.jsx'
     ]
   },
@@ -134,6 +136,17 @@ const webConfig = {
             loader: 'file-loader',
             options: {
               name: 'images/[name].[ext]'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff2)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[ext]'
             }
           }
         ]
