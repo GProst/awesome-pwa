@@ -17,7 +17,7 @@ export const requestSWRegistration = async () => {
         // Registration already exists, means there is reg.active sw that controls the page
         try {
           // await navigator.serviceWorker.register('/sw-new.js') // TODO: registering new SW
-          // New registration is actually the existing one, so I don't need to assign again
+          // The registration returned by new 'register' call is actually the existing one, so I don't need to assign again
           // You can access new SW in reg.installing and current one in reg.active, reg.waiting is null at this moment
         } catch(err) {
           // TODO: don't send to Sentry if we're offline, that's expected error
