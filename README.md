@@ -28,6 +28,7 @@ yarn start
 * SENTRY_AUTH_TOKEN - needed to upload artifacts to Sentry
 * SENTRY_ORG - needed to upload artifacts to Sentry
 * SENTRY_PROJECT - needed to upload artifacts to Sentry
+* ENABLE_SENTRY (development) - enables Sentry config (I don't use it because it makes a wrapper over console object)
 
 ## Global vars in JS:
 
