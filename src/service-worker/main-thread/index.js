@@ -3,15 +3,34 @@ import {logger} from '../../utils/logger'
 export const requestSWRegistration = async () => {
   if ('serviceWorker' in navigator) {
     try {
-      await navigator.serviceWorker.register('/sw.js')
-      // registration worked TODO
+      let reg = await navigator.serviceWorker.getRegistration()
+      if (!reg) { // means no sw is registered at all, this check works also for force-refresh ☺️ unlike navigator.serviceWorker.controller check
+        try {
+          reg = await navigator.serviceWorker.register('/sw.js')
+          // Created our first registration, and currently first sw is in reg.installing
+        } catch(err) {
+          // TODO: don't send to Sentry if we're offline, but that's unlikely the case because it's first install, so user had to be online to get index.html
+          // TODO: pass network information: speed
+          logger.errorRemote(err)
+        }
+      } else {
+        // Registration already exists, means there is reg.active sw that controls the page
+        try {
+          // await navigator.serviceWorker.register('/sw-new.js') // TODO: registering new SW
+          // New registration is actually the existing one, so I don't need to assign again
+          // You can access new SW in reg.installing and current one in reg.active, reg.waiting is null at this moment
+        } catch(err) {
+          // TODO: don't send to Sentry if we're offline, that's expected error
+          // TODO: pass network information: speed
+          logger.errorRemote(err)
+        }
+      }
     } catch(err) {
-      // registration failed
-      // TODO: pass network information: speed, id offline etc
-      logger.errorRemote(err) // TODO: currently I'm not really sure when this can happen. Looks like doesn't happen when we offline and register the same SW.
-      // TODO: check if after I activate the first SW and then will fetch to a new one OFFLINE will it throw error? Id yes... well... not cool
+      logger.errorRemote(err, {extra: {message: 'Error getting registration using navigator.serviceWorker.getRegistration()...'}})
     }
   } else {
-    logger.error('No \'serviceWorker\' in navigator!')
+    logger.errorRemote(new Error('No \'serviceWorker\' in navigator!'))
+    // TODO: I don't really know when this can happen... probably if API in browser changes
+    // I'should probably show something?.. "Something went wrong, make sure you use a supported Chrome browser version"
   }
 }
