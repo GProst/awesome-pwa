@@ -32,7 +32,7 @@ class Root extends React.Component {
 
   render() {
     if (this.state.error) {
-      return ( // TODO
+      return ( // TODO: "Reload the app or Reinstall the app"
         <AppBackground>
           Error!
           <Button onClick={() => { window.location.href = window.location.origin }} data-test-id='reload-app-button'>
