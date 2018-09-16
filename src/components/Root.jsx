@@ -16,7 +16,7 @@ import {AuthPage} from './pages/Authentication'
 
 import {AppBackground} from './global/AppBackground'
 
-class Root extends React.Component {
+export class Root extends React.Component {
   static displayName = 'Root'
 
   state = {
@@ -58,13 +58,4 @@ class Root extends React.Component {
       </Provider>
     )
   }
-}
-
-if (process.env.NODE_ENV !== 'production') {
-  const {hot} = require('react-hot-loader')
-  Root = hot(module)(Root) // eslint-disable-line no-class-assign
-}
-
-export {
-  Root
 }

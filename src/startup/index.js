@@ -1,4 +1,6 @@
-import {logger} from '../../utils/logger'
+import Raven from 'raven-js'
+
+import {logger} from '../utils/logger'
 
 export const requestSWRegistration = async () => {
   if ('serviceWorker' in navigator) {
@@ -34,3 +36,7 @@ export const requestSWRegistration = async () => {
     // I'should probably show something?.. "Something went wrong, make sure you use a supported Chrome browser version and HTTPS protocol"
   }
 }
+
+Raven.context(() => {
+  requestSWRegistration()
+})

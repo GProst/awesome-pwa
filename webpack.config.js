@@ -84,6 +84,10 @@ const webConfig = {
   ...commonConfig,
   target: 'web',
   entry: {
+    startup: [
+      './src/startup/init-sentry.js', // order matters for webpack, I checked
+      './src/startup/index.js'
+    ],
     app: [
       './robots.txt',
       './src/fonts/roboto-400-latin.woff2',
@@ -95,15 +99,28 @@ const webConfig = {
     ...commonOptimization,
     splitChunks: { // Options for SplitChunksPlugin plugin
       chunks: 'all',
+      minChunks: 1,
+      minSize: 0,
       cacheGroups: {
-        vendors: {
+        'common-vendors': {
+          minChunks: 2, // used both in 'startup' and 'app' chunks
+          name: 'common-vendors',
           test: /[\\/]node_modules[\\/]/,
+          priority: -5
+        },
+        vendors: {
+          name: 'vendors',
+          test: /[\\/]node_modules[\\/]/,
+          chunks: chunk => {
+            // exclude `startup` chunk
+            return chunk.name !== 'startup'
+          },
           priority: -10
         },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
+        common: {
+          name: 'common',
+          minChunks: 2, // used both in 'startup' and 'app' chunks
+          priority: -15
         }
       }
     },
