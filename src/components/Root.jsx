@@ -14,8 +14,6 @@ import {ThemeProvider} from './global/ThemeProvider'
 import {GoalsPage} from './pages/Goals'
 import {AuthPage} from './pages/Authentication'
 
-import {AppBackground} from './global/AppBackground'
-
 export class Root extends React.Component {
   static displayName = 'Root'
 
@@ -33,27 +31,25 @@ export class Root extends React.Component {
   render() {
     if (this.state.error) {
       return ( // TODO: "Reload the app or Reinstall the app"
-        <AppBackground>
+        <>
           Error!
           <Button onClick={() => { window.location.href = window.location.origin }} data-test-id='reload-app-button'>
             Reload the app!
           </Button>
-        </AppBackground>
+        </>
       )
     }
 
     return (
       <Provider store={store}>
         <ThemeProvider>
-          <AppBackground>
-            <ConnectedRouter history={history} store={store}>
-              <Switch>
-                <Route exact strict path={ROUTES.goals} component={GoalsPage} />
-                <Route exact strict path={ROUTES.authentication} component={AuthPage} />
-                <Redirect to={ROUTES.main} />
-              </Switch>
-            </ConnectedRouter>
-          </AppBackground>
+          <ConnectedRouter history={history} store={store}>
+            <Switch>
+              <Route exact strict path={ROUTES.goals} component={GoalsPage} />
+              <Route exact strict path={ROUTES.authentication} component={AuthPage} />
+              <Redirect to={ROUTES.main} />
+            </Switch>
+          </ConnectedRouter>
         </ThemeProvider>
       </Provider>
     )
