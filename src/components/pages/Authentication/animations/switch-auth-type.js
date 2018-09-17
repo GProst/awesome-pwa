@@ -2,7 +2,7 @@ import Animated from 'animated/lib/targets/react-dom'
 
 import {easeIn, easeOut} from '../../../../constants/animation'
 import {AUTH_TYPE} from '../constants'
-import {formLayoutHelper} from '../helpers/formLayoutHelper'
+import {formLayoutHelper} from '../helpers/form-layout-helper'
 
 const getBaseDuration = () => window.testAnimationBaseDuration || 250
 let currentAnimation = null

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../../constants/index'
-import {animState} from '../../animations/switchAuthType'
-import {formLayoutHelper} from '../../helpers/formLayoutHelper'
+import {animState} from '../../animations/switch-auth-type'
+import {formLayoutHelper} from '../../helpers/form-layout-helper'
 
 export class FormContent extends React.Component {
   static displayName = 'FormContent'

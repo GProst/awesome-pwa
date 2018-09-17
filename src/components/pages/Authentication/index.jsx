@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
-import {animateSwitchAuthType, initAnimationValues} from './animations/switchAuthType'
+import {animateSwitchAuthType, initAnimationValues} from './animations/switch-auth-type'
 
 import {AuthForm} from './AuthForm'
 import {BottomAction as _BottomAction} from './BottomAction'

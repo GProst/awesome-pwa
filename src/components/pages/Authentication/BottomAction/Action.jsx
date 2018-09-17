@@ -5,7 +5,7 @@ import {Link as _Link} from 'react-router-dom'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {AUTH_TYPE} from '../constants/index'
-import {animState} from '../animations/switchAuthType'
+import {animState} from '../animations/switch-auth-type'
 import {ROUTES} from '../../../../routes'
 
 const Desc = styled.span`
