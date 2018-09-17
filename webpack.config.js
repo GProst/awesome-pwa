@@ -3,6 +3,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const SentryCliPlugin = require('@sentry/webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -129,12 +130,17 @@ const webConfig = {
   plugins: [
     ...commonPlugins,
 
-    new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin({ // TODO: I can also minify html here!
       template: './src/index.html',
       filename: 'index.html',
       inject: 'body',
+      excludeChunks: ['app', 'vendors'], // TODO: only app after I concat app + vendor
       cache: false,
       showErrors: true
+    }),
+
+    new ScriptExtHtmlWebpackPlugin({
+      inline: ['runtime', 'common-vendors', 'common', 'startup']
     }),
 
     process.env.UPLOAD_MAPS_TO_SENTRY && (
