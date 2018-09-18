@@ -30,7 +30,7 @@ const Content = styled.div`
     if (!props.noScroll) {
       return `
         padding: ${CONTENT_PADDING_WHEN_SCROLLED}px 0;
-        background: linear-gradient(-135deg, #CE93D8 0%, #4A148C 100%); /* This should be exaclty the same as in #root div style in index.html */
+        background: linear-gradient(-135deg, #CE93D8 0%, #4A148C 100%); /* This should be exactly the same as in #root div style in index.html */
 `
     }
   }}
