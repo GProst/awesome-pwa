@@ -21,7 +21,7 @@ const onInstall = async event => {
   const responses = await Promise.all(fetches)
   const clonedResponses = responses.map(res => res.clone())
   const sumContentLength = clonedResponses.reduce((sum, res) => {
-    return sum + Number(res.headers.get('Content-Length'))
+    return sum + Number(res.headers.get('X-Original-Content-Length'))
   }, 0)
   let downloadedContentLength = 0
   const readResponseStream = response => {
