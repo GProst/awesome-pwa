@@ -23,7 +23,7 @@ export const animateShowOnMount = async () => {
       Animated.timing(logoWithTitle, {toValue: 1, duration: baseDuration, easing: easeIn})
     ]),
     Animated.sequence([
-      Animated.delay(baseDuration * 0.75),
+      Animated.delay(baseDuration * 0.5),
       Animated.timing(bottomActions, {toValue: 1, duration: baseDuration, easing: easeIn})
     ])
   ])

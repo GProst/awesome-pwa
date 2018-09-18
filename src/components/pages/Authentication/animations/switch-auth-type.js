@@ -1,6 +1,6 @@
 import Animated from 'animated/lib/targets/react-dom'
 
-import {easeIn, easeOut} from '../../../../constants/animation'
+import {easeOut} from '../../../../constants/animation'
 import {AUTH_TYPE} from '../constants'
 import {formLayoutHelper} from '../helpers/form-layout-helper'
 
@@ -77,10 +77,10 @@ export const animateSwitchAuthType = async ({to = AUTH_TYPE.signIn}) => {
       Animated.timing(disappearingForm, {toValue: 0, duration: baseDuration / 2, easing: easeOut}),
       Animated.timing(appearingForm, {toValue: 1, duration: baseDuration / 2, easing: easeOut})
     ]),
+    Animated.timing(disappearingAction, {toValue: 0, duration: baseDuration / 2, easing: easeOut}),
     Animated.sequence([
-      Animated.timing(disappearingAction, {toValue: 0, duration: baseDuration / 2, easing: easeOut}),
-      Animated.delay(baseDuration * 1.25),
-      Animated.timing(appearingAction, {toValue: 1, duration: baseDuration, easing: easeIn})
+      Animated.delay(baseDuration / 2),
+      Animated.timing(appearingAction, {toValue: 1, duration: baseDuration / 2, easing: easeOut})
     ])
   ])
   currentAnimation.start(({finished}) => {
