@@ -11,6 +11,8 @@ import {ROUTES} from '../routes'
 import {logger} from '../utils/logger'
 import {isAppFirstInstallation} from '../utils/app-installation'
 import {showSnackbarMessage} from '../redux/reducers/snackbar'
+import {hideProgressBar, getStartUpElement, removeProgressBar} from '../startup/installation-progress'
+import {animateShowOnMount} from './pages/Authentication/animations/show-on-mount'
 
 import {ThemeProvider} from './global/ThemeProvider'
 import {Snackbar} from './global/Snackbar'
@@ -41,11 +43,17 @@ export class Root extends React.Component {
 
   componentDidMount() {
     if (isAppFirstInstallation()) {
-      setTimeout(() => {
-        this.showAppInstalledSnackbar()
-      }, 500)
+      getStartUpElement().addEventListener('transitionend', () => {
+        removeProgressBar()
+        animateShowOnMount()
+        setTimeout(() => {
+          this.showAppInstalledSnackbar()
+        }, 300)
+      })
+      hideProgressBar()
+    } else {
+      animateShowOnMount()
     }
-    // TODO: Set opacity 0 to Installation progress popup here and then remove it from DOM after 2s I think
   }
 
   render() {

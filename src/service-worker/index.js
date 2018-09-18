@@ -9,8 +9,42 @@ const urlsToCache = [
 ]
 
 const onInstall = async event => {
+  const windowClients = await clients.matchAll({
+    includeUncontrolled: true,
+    type: 'window'
+  })
   const cache = await caches.open(CACHE_NAME)
-  return cache.addAll(urlsToCache)
+  const fetches = []
+  urlsToCache.forEach(url => {
+    fetches.push(fetch(url))
+  })
+  const responses = await Promise.all(fetches)
+  const clonedResponses = responses.map(res => res.clone())
+  const sumContentLength = clonedResponses.reduce((sum, res) => {
+    return sum + Number(res.headers.get('Content-Length'))
+  }, 0)
+  let downloadedContentLength = 0
+  const readResponseStream = response => {
+    const reader = response.body.getReader()
+    const push = async () => {
+      const {done, value} = await reader.read()
+      if (done) return
+      downloadedContentLength += Number(value.byteLength) // value is Uint8Array or some other view
+      const percent = downloadedContentLength / sumContentLength
+      windowClients.forEach(wClient => {
+        wClient.postMessage(percent)
+      })
+      await push()
+    }
+    return push()
+  }
+  const streamReadingProcesses = clonedResponses.map(res => readResponseStream(res))
+  const cachePutPromises = []
+  // cache responses
+  responses.forEach((response, index) => {
+    cachePutPromises.push(cache.put(urlsToCache[index], response))
+  })
+  return Promise.all([...cachePutPromises, ...streamReadingProcesses])
 }
 
 const onActivate = async event => {

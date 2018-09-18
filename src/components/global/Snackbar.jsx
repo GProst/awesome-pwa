@@ -20,7 +20,7 @@ const Message = styled.div`
   width: 100%;
   min-width: 288px;
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 50%;
   border-radius: 2px;
