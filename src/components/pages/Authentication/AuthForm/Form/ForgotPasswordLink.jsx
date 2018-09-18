@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Link as _Link} from 'react-router-dom'
 
-export const Link = styled(_Link)`
+export const Link = styled.div`
+  cursor: pointer;
   color: #757575;
   font-size: 12px;
   text-decoration: none;
@@ -19,7 +19,7 @@ export class ForgotPasswordLink extends React.Component {
 
   render() {
     return (
-      <Link to={'/forgot-password'}>
+      <Link>
         Forgot password?
       </Link>
     )
