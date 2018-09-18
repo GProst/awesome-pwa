@@ -6,6 +6,7 @@ import Animated from 'animated/lib/targets/react-dom'
 import {Action} from './Action'
 import {AUTH_TYPE} from '../constants/index'
 import {animState} from '../animations/switch-auth-type'
+import {animState as animStateOnMount} from '../animations/show-on-mount'
 
 const Container = styled(Animated.div)`
     display: flex;
@@ -30,7 +31,8 @@ export class BottomAction extends React.Component {
       <Container
         className={className}
         style={{
-          transform: [{translateY: animState.bottomActions}]
+          transform: [{translateY: animState.bottomActions}],
+          opacity: animStateOnMount.bottomActions
         }}
       >
         <Action

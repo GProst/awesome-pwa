@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Animated from 'animated/lib/targets/react-dom'
 
 import {WhiteBackground, paddingVertical} from './WhiteBackground'
 
-const Container = styled.div`
+import {animState} from '../animations/show-on-mount'
+
+const Container = styled(Animated.div)`
   background: transparent;
   padding: ${paddingVertical}px 36px;
   width: 85vw;
@@ -36,7 +39,7 @@ export class PaperContainer extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{opacity: animState.authFrom}}>
         <WhiteBackground />
         <InnerContainer>
           {this.props.children}

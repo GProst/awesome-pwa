@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Animated from 'animated/lib/targets/react-dom'
 
 import {animState} from './animations/switch-auth-type'
+import {animState as animStateOnMount} from './animations/show-on-mount'
 
 export class LogoWithTitle extends React.Component {
   static displayName = 'LogoWithTitle'
@@ -16,7 +17,8 @@ export class LogoWithTitle extends React.Component {
       <Animated.div
         className={this.props.className}
         style={{
-          transform: [{translateY: animState.logoWithTitle}]
+          transform: [{translateY: animState.logoWithTitle}],
+          opacity: animStateOnMount.logoWithTitle
         }}
       >
         <svg viewBox='0 0 138 72'>

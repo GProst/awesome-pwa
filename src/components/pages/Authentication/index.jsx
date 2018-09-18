@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
 import {animateSwitchAuthType, initAnimationValues} from './animations/switch-auth-type'
+import {animateShowOnMount} from './animations/show-on-mount'
 
 import {AuthForm} from './AuthForm'
 import {BottomAction as _BottomAction} from './BottomAction'
@@ -109,6 +110,7 @@ class AuthPage extends React.Component {
     window.addEventListener('resize', this.onResize)
     // content may be absent since we can render Redirect
     if (this.content) this._checkScrollNecessity()
+    animateShowOnMount()
   }
 
   componentDidUpdate(prevProps, prevState) {
