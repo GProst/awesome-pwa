@@ -29,9 +29,8 @@ const Content = styled.div`
   ${props => {
     if (!props.noScroll) {
       return `
-        @media screen {
-          padding: ${CONTENT_PADDING_WHEN_SCROLLED}px 0;
-        }
+        padding: ${CONTENT_PADDING_WHEN_SCROLLED}px 0;
+        background: linear-gradient(-135deg, #CE93D8 0%, #4A148C 100%); /* This should be exaclty the same as in #root div style in index.html */
 `
     }
   }}
