@@ -1,4 +1,5 @@
 const CACHE_NAME = 'my-site-cache-v1'
+// WARNING!!! Remember to set X-Original-Content-Length header for each new asset
 const urlsToCache = [
   '/',
   '/images/favicon.png',
@@ -21,7 +22,8 @@ const onInstall = async event => {
   const responses = await Promise.all(fetches)
   const clonedResponses = responses.map(res => res.clone())
   const sumContentLength = clonedResponses.reduce((sum, res) => {
-    return sum + Number(res.headers.get('X-Original-Content-Length'))
+    // return sum + Number(res.headers.get('X-Original-Content-Length')) // TODO: fix this, this is super lame!
+    return sum + Number(res.headers.get('Content-Language'))
   }, 0)
   let downloadedContentLength = 0
   const readResponseStream = response => {
