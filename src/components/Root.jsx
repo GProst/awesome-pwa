@@ -43,7 +43,7 @@ export class Root extends React.Component {
     if (isAppFirstInstallation()) {
       setTimeout(() => {
         this.showAppInstalledSnackbar()
-      }, 2000)
+      }, 500)
     }
     // TODO: Set opacity 0 to Installation progress popup here and then remove it from DOM after 2s I think
   }
