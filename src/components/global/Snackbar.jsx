@@ -151,10 +151,10 @@ class Snackbar extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const {id, closeOnOuterClick, timeoutDelay, ignoreOuterClickTime} = this.props.message
-    if (id && prevProps.message.id !== id) {
+    if (prevProps.message.id !== id) {
       if (timeoutDelay) this.timeout = setTimeout(this.hideMessage, timeoutDelay)
       document.removeEventListener('click', this.onDocumentClick)
-      if (closeOnOuterClick !== false) {
+      if (id && closeOnOuterClick !== false) {
         setTimeout(() => {
           document.addEventListener('click', this.onDocumentClick)
         }, ignoreOuterClickTime || 2000) // show snackbar for some time regardless of outside clicks
