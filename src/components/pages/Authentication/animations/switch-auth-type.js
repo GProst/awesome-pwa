@@ -77,10 +77,10 @@ export const animateSwitchAuthType = async ({to = AUTH_TYPE.signIn}) => {
       Animated.timing(disappearingForm, {toValue: 0, duration: baseDuration / 2, easing: easeOut}),
       Animated.timing(appearingForm, {toValue: 1, duration: baseDuration / 2, easing: easeOut})
     ]),
-    Animated.timing(disappearingAction, {toValue: 0, duration: baseDuration / 2, easing: easeOut}),
+    Animated.timing(disappearingAction, {toValue: 0, duration: baseDuration * 0.25, easing: easeOut}),
     Animated.sequence([
-      Animated.delay(baseDuration / 2),
-      Animated.timing(appearingAction, {toValue: 1, duration: baseDuration / 2, easing: easeOut})
+      Animated.delay(baseDuration * 0.25),
+      Animated.timing(appearingAction, {toValue: 1, duration: baseDuration * 0.75, easing: easeOut})
     ])
   ])
   currentAnimation.start(({finished}) => {
