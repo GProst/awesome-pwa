@@ -26,14 +26,10 @@ const Content = styled.div`
   align-items: center;
   position: relative;
   
-  ${props => {
-    if (!props.noScroll) {
-      return `
-        padding: ${CONTENT_PADDING_WHEN_SCROLLED}px 0;
-        background: linear-gradient(-135deg, #CE93D8 0%, #4A148C 100%); /* This should be exactly the same as in #root div style in index.html */
-`
-    }
-  }}
+  ${props => !props.noScroll && `
+  padding: ${CONTENT_PADDING_WHEN_SCROLLED}px 0;
+  background: linear-gradient(-135deg, #CE93D8 0%, #4A148C 100%); /* This should be exactly the same as in #root div style in index.html */
+  `}
 `
 
 const LogoWithTitle = styled(_LogoWithTitle)`
