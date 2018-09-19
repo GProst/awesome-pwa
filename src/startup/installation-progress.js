@@ -11,6 +11,8 @@ let helperInterval
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.addEventListener('message', event => {
     // TODO: I need to pass JSON as a message to have 'type' property there and 'payload' in order to distinguish if this is the right message we want to handle here
+    // TODO: Until SW is a web standard: if I received 100% progress, but didn't receive 'oncontrollerchange' after that in 3 secs I should startApp myself and
+    // send event to Sentry. Because this happened to me, I think this is devTools, but it's better to insure
     if (helperInterval) clearInterval(helperInterval) // no need for our helper anymore
     setProgressValue(event.data)
   })
