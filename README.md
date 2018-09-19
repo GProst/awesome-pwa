@@ -67,6 +67,7 @@ In the second group we include the following chunks:
 * SENTRY_ORG - needed to upload artifacts to Sentry
 * SENTRY_PROJECT - needed to upload artifacts to Sentry
 * BUILD_MAIN_BUNDLE - if present main Bundle will be built (app.js), otherwise web-workers will be built
+* INSTALLATION_ASSETS_BYTE_LENGTH - stringified JSON that is used in SW build to get original Content-Length for each installation asset. This is needed because s3 doesn't allow us to set custom headers.
 * ENABLE_SENTRY (development) - enables Sentry config (I don't use it because it makes a wrapper over console object)
 
 ## Global vars in JS:

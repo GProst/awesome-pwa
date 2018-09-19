@@ -1,13 +1,11 @@
+import {urlsToCache} from './urls-to-cache'
+
 const CACHE_NAME = 'my-site-cache-v1'
-// WARNING!!! Remember to set X-Original-Content-Length header for each new asset
-const urlsToCache = [
-  '/',
-  '/images/favicon.png',
-  '/app.js',
-  '/vendors.js',
-  '/fonts/roboto-400-latin.woff2',
-  '/fonts/roboto-900-latin.woff2'
-]
+let installationContentByteLength
+
+if (process.env.NODE_ENV === 'production') {
+  installationContentByteLength = Number(process.env.INSTALLATION_ASSETS_BYTE_LENGTH.trim())
+}
 
 const onInstall = async event => {
   const windowClients = await clients.matchAll({
@@ -21,10 +19,11 @@ const onInstall = async event => {
   })
   const responses = await Promise.all(fetches)
   const clonedResponses = responses.map(res => res.clone())
-  const sumContentLength = clonedResponses.reduce((sum, res) => {
-    // return sum + Number(res.headers.get('X-Original-Content-Length')) // TODO: fix this, this is super lame!
-    return sum + Number(res.headers.get('Content-Language'))
-  }, 0)
+  if (process.env.NODE_ENV !== 'production') {
+    installationContentByteLength = clonedResponses.reduce((sum, res) => {
+      return sum + Number(res.headers.get('Content-Length'))
+    }, 0)
+  }
   let downloadedContentLength = 0
   const readResponseStream = response => {
     const reader = response.body.getReader()
@@ -32,7 +31,7 @@ const onInstall = async event => {
       const {done, value} = await reader.read()
       if (done) return
       downloadedContentLength += Number(value.byteLength) // value is Uint8Array or some other view
-      const percent = downloadedContentLength / sumContentLength
+      const percent = downloadedContentLength / installationContentByteLength
       windowClients.forEach(wClient => {
         wClient.postMessage(percent)
       })
@@ -67,7 +66,7 @@ const onFetch = async event => {
   // Keep in mind, browser either deletes all cache for an origin, or doesn't delete anything: https://developer.mozilla.org/en-US/docs/Web/API/Cache
   // 2. TODO: actually user can also request additional font family, I need to fetch it and add to cache in parallel (let's keep fonts unchanged and always keep them there for backward compatibility of they are changed)
   // 3. If other cases then this means user requested some SPA route like /authenticate or similar, I need to return index.html
-  const indexHTMLRequest = new Request('/') // This is actually tricky because maybe I should copy all of other options from original request
+  const indexHTMLRequest = new Request('/index.html') // This is actually tricky because maybe I should copy all of other options from original request
   const indexHTMLResponse = await cache.match(indexHTMLRequest)
   if (indexHTMLResponse) {
     return indexHTMLResponse

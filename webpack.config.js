@@ -60,7 +60,8 @@ const commonPlugins = [
     process: {
       env: {
         APP_ENVIRONMENT: JSON.stringify(process.env.APP_ENVIRONMENT),
-        APP_RELEASE: JSON.stringify(APP_RELEASE)
+        APP_RELEASE: JSON.stringify(APP_RELEASE),
+        INSTALLATION_ASSETS_BYTE_LENGTH: JSON.stringify(process.env.INSTALLATION_ASSETS_BYTE_LENGTH)
       }
     }
   })
