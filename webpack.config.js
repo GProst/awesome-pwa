@@ -91,6 +91,9 @@ const webConfig = {
       './src/startup/index.js'
     ],
     app: [
+      './src/web-manifest/icons/manifest-192.png',
+      './src/web-manifest/icons/manifest-512.png',
+      './src/web-manifest/icons/manifest-1024.png',
       './robots.txt',
       './src/fonts/roboto-400-latin.woff2',
       './src/fonts/roboto-900-latin.woff2',
@@ -160,6 +163,17 @@ const webConfig = {
             loader: 'file-loader',
             options: {
               name: 'images/[name].[ext]'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.webmanifest$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
             }
           }
         ]

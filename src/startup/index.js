@@ -6,6 +6,13 @@ import {removeProgressBar, showProgressBar} from './installation-progress'
 
 import {startApp} from './start-app'
 
+// TODO: no need to place it in startup.js, move it to app.js
+window.addEventListener('beforeinstallprompt', e => {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
+  e.preventDefault()
+  // TODO: save the event and prompt user when needed
+})
+
 const requestSWRegistration = async () => {
   if ('serviceWorker' in navigator) {
     try {

@@ -61,17 +61,32 @@ const onFetch = async event => {
     return response
   }
   // 1. TODO: if user asked for something that should be in the cache after installation, but it's not there -> means
-  // either user manually deleted it or browser deleted it due to lack of a space... which is a rare case I believe.
-  // In this case I should force-reinstall the app because we can't guarantee that if we get the assets from the net they won't be from new App version (incompatible)
-  // Keep in mind, browser either deletes all cache for an origin, or doesn't delete anything: https://developer.mozilla.org/en-US/docs/Web/API/Cache
+  // user manually deleted it... which is a rare case I believe.
+  // WRONG: In this case I should force-reinstall the app because we can't guarantee that if we get the assets from the net they won't be from new App version (incompatible)
+  // WRONG: Keep in mind, browser either deletes all cache for an origin, or doesn't delete anything: https://developer.mozilla.org/en-US/docs/Web/API/Cache
+  // TODO: for that matter I need to store fonts, images etc forever or mark a new version if I want to update it and probably I wan to do the same for ALL assets, YES! just store a separate version folders for each app version
+  // TODO: so here check if the url in the urlsToCache or includes 'images' or 'fonts' and if YES -> download and cache
   // 2. TODO: actually user can also request additional font family, I need to fetch it and add to cache in parallel (let's keep fonts unchanged and always keep them there for backward compatibility of they are changed)
   // 3. If other cases then this means user requested some SPA route like /authenticate or similar, I need to return index.html
-  const indexHTMLRequest = new Request('/index.html') // This is actually tricky because maybe I should copy all of other options from original request
+  const {url} = event.request
+  if (url === location.origin || url === `${location.origin}/`) {
+    const indexHTMLResponse = await cache.match(new Request('/index.html'))
+    if (indexHTMLResponse) {
+      return indexHTMLResponse
+    }
+    // TODO: fetch, cache and return
+  }
+  if (urlsToCache.includes(url) || url.includes('image') || url.includes('font')) { // I use singular form here just in case
+    // TODO: cache responses
+    return fetch(event.request)
+  }
+  const indexHTMLRequest = new Request('/index.html')
   const indexHTMLResponse = await cache.match(indexHTMLRequest)
   if (indexHTMLResponse) {
     return indexHTMLResponse
   }
-  // TODO: log error to Sentry, index.html should be in cache and should be returned, provide details
+  // Same thing, probably user deleted index.html from cache manually, this is a rare case, just download it and cache
+  // TODO: cache index.html
   return fetch(event.request)
 }
 
