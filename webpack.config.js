@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path')
+const fs = require('fs')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
@@ -206,7 +207,11 @@ const webConfig = {
     historyApiFallback: true,
     contentBase: distFolder,
     disableHostCheck: true,
-    inline: true
+    inline: true,
+    https: {
+      key: fs.readFileSync('./tls-certs-creation/device.key'),
+      cert: fs.readFileSync('./tls-certs-creation/local.crt')
+    }
   }
 }
 

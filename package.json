@@ -5,6 +5,7 @@
   "author": "GProst a.k.a German Prostakov <gprostmail@gmail.com>",
   "scripts": {
     "gzip-public": "chmod +x ./gzip.sh && ./gzip.sh",
+    "create-tls": "openssl req -x509 -nodes -newkey rsa:4096 -keyout tls-certs/key.pem -out tls-certs/cert.pem -days 365 -subj \"/C=US/ST=Oregon/L=Portland/O=Company Name/OU=Org/CN=localhost\" -sha256 -extfile tls-certs/v3.ext",
     "lint": "eslint --ext .js --ext .jsx --ignore-path .gitignore ./",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ignore-path .gitignore ./"
   },
