@@ -5,8 +5,12 @@ progressElement.style.setProperty('transform', `scaleX(${progressValue})`)
 
 let helperInterval
 
+// FixMe: I need to listen to this only on first installation, I don't want to listen to it when the second sw is being installed
+// TODO: move it to function and invoke from index.js
+// TODO: removeEventListener when you don't need it, and look for other eventListeners if they are to remove them too when needed
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.addEventListener('message', event => {
+    // TODO: I need to pass JSON as a message to have 'type' property there and 'payload' in order to distinguish if this is the right message we want to handle here
     if (helperInterval) clearInterval(helperInterval) // no need for our helper anymore
     setProgressValue(event.data)
   })
