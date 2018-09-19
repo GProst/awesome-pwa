@@ -24,7 +24,7 @@ export const hideProgressBar = () => {
 
 export const showProgressBar = () => {
   helperInterval = setInterval(() => {
-    setProgressValue(progressValue + 0.005)
+    if (progressValue < 0.2) setProgressValue(progressValue + 0.005)
   }, 600) // Show progress even if we don't have real installation data received yet
   startUpElement.style.setProperty('opacity', '1')
 }
