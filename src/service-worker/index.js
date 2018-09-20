@@ -56,6 +56,7 @@ const onActivate = async event => {
 
 const onFetch = async event => {
   const cache = await caches.open(CACHE_NAME)
+  // TODO: handle cases (not only on this line) where request is failed due to user is offline -> I need to send a message to WindowClient to show 'No internet connection, check it and refresh'
   const response = await cache.match(event.request)
   if (response) {
     return response
