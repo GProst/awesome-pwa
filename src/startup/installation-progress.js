@@ -1,3 +1,5 @@
+import {setAppStartTimeout} from './start-app'
+
 const startUpElement = document.getElementById('startup')
 const progressElement = startUpElement.querySelector('.startup__progress_fill')
 let progressValue = 0.01
@@ -5,16 +7,16 @@ progressElement.style.setProperty('transform', `scaleX(${progressValue})`)
 
 let helperInterval
 
-// FixMe: I need to listen to this only on first installation, I don't want to listen to it when the second sw is being installed
-// TODO: move it to function and invoke from index.js
-// TODO: removeEventListener when you don't need it, and look for other eventListeners if they are to remove them too when needed
-if ('serviceWorker' in navigator) {
+export const startListeningToSWInstallation = () => {
+  // TODO: removeEventListener when you don't need it, and look for other eventListeners if they are to remove them too when needed
   navigator.serviceWorker.addEventListener('message', event => {
     // TODO: I need to pass JSON as a message to have 'type' property there and 'payload' in order to distinguish if this is the right message we want to handle here
-    // TODO: Until SW is a web standard: if I received 100% progress, but didn't receive 'oncontrollerchange' after that in 3 secs I should startApp myself and
-    // send event to Sentry. Because this happened to me, I think this is devTools, but it's better to insure
     if (helperInterval) clearInterval(helperInterval) // no need for our helper anymore
-    setProgressValue(event.data)
+    const percentage = Number(event.data) // where 1 value is 100%
+    setProgressValue(percentage)
+    if (percentage === 1) {
+      setAppStartTimeout()
+    }
   })
 }
 

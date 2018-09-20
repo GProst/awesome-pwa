@@ -2,7 +2,7 @@ import Raven from 'raven-js'
 
 import {logger} from '../utils/logger'
 import {setIsAppFirstInstallation} from '../utils/app-installation'
-import {removeProgressBar, showProgressBar} from './installation-progress'
+import {removeProgressBar, showProgressBar, startListeningToSWInstallation} from './installation-progress'
 
 import {startApp} from './start-app'
 
@@ -25,6 +25,7 @@ const requestSWRegistration = async () => {
       if (isFirstInstallation) { // means no sw is registered at all, this check works also for force-refresh ☺️ unlike navigator.serviceWorker.controller check
         try {
           showProgressBar()
+          startListeningToSWInstallation()
           navigator.serviceWorker.oncontrollerchange = startApp // navigator.serviceWorker.ready.then(startApp) failed because somehow requests weren't caught by SW, see this: https://stackoverflow.com/questions/40161452/service-worker-controllerchange-never-fires
           reg = await navigator.serviceWorker.register('/sw.js')
           // Created our first registration, and currently first sw is in reg.installing
