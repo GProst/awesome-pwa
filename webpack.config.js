@@ -209,8 +209,8 @@ const webConfig = {
     disableHostCheck: true,
     inline: true,
     https: {
-      key: fs.readFileSync('./tls-certs-creation/device.key'),
-      cert: fs.readFileSync('./tls-certs-creation/local.crt')
+      key: fs.readFileSync('./lets-encrypt/privkey.pem'),
+      cert: fs.readFileSync('./lets-encrypt/fullchain.pem')
     }
   }
 }

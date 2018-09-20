@@ -17,3 +17,6 @@ awsmobilejs/\#current-backend-info
 *.crt
 *.csr
 *.srl
+
+lets-encrypt
+tmp
