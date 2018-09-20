@@ -10,10 +10,7 @@ import {startApp} from './start-app'
 window.addEventListener('beforeinstallprompt', e => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
   e.preventDefault()
-  setTimeout(() => {
-    // TODO: save the event and prompt user when needed
-    e.prompt()
-  }, 7000)
+  e.prompt()
 })
 
 const requestSWRegistration = async () => {

@@ -5,12 +5,12 @@ let startAppCalled = false
 let oncontrollerchangeTimeout
 
 // I have two options to start an app:
-// 1. When I receive 100% installation progress
-// 2. When I receive oncontrollerchange event
-// I don't pick only one because I'm not sure that I will always receive 100% message from SW (who knows why)
-// And oncontrollerchange event sometimes isn't fired (probably because when I write it PWA is still experimental stage)
+// 1. When I receive oncontrollerchange event
+// 2. When I receive 100% installation progress
+// I don't pick only one because oncontrollerchange event sometimes isn't fired (probably because when I write it PWA is still experimental stage)
+// And I want SW to be active by the time I start the app so that subsequent requests are interfered by SW
 export const setAppStartTimeout = () => {
-  oncontrollerchangeTimeout = setTimeout(startApp, 100) // why wait long?
+  oncontrollerchangeTimeout = setTimeout(startApp, 3000) // we need to wait longer to give a chance SW to finish installation and activation stages (so that requests that we'll make were retrieved from cache)
 }
 
 export const startApp = () => {
