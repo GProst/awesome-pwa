@@ -81,18 +81,20 @@ class AuthPage extends React.Component {
   }
 
   _checkScrollNecessity() {
-    // In one particular case we don't make it scrollable (small mobile device in portrait layout)
-    if (!isDesktop && isPortrait() && window.innerWidth < 400) {
-      this.setState({
-        noScroll: true
-      })
-      return
-    }
     const height = parseInt(window.getComputedStyle(this.content).height, 10)
     const verticalPadding = CONTENT_PADDING_WHEN_SCROLLED * 2
-    this.setState({
-      noScroll: (height + verticalPadding) <= window.innerHeight
-    })
+    const noScroll = (height + verticalPadding) <= window.innerHeight
+    if (!noScroll) { // if decides that scroll is needed
+      // In one particular case we don't make it scrollable (small mobile device in portrait layout).
+      // Probably it's just an iPhone 5 (320x568)
+      if (!isDesktop && isPortrait() && window.innerHeight > 550 && window.innerWidth < 400) {
+        this.setState({
+          noScroll: true
+        })
+        return
+      }
+    }
+    this.setState({noScroll})
   }
 
   onResize = () => {
