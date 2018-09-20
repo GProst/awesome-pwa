@@ -10,7 +10,9 @@ let oncontrollerchangeTimeout
 // I don't pick only one because oncontrollerchange event sometimes isn't fired (probably because when I write it PWA is still experimental stage)
 // And I want SW to be active by the time I start the app so that subsequent requests are interfered by SW
 export const setAppStartTimeout = () => {
-  oncontrollerchangeTimeout = setTimeout(startApp, 3000) // we need to wait longer to give a chance SW to finish installation and activation stages (so that requests that we'll make were retrieved from cache)
+  // we need to wait longer to give a chance SW to finish installation and activation stages (so that requests that we'll make were retrieved from cache)
+  // you need to understand that if it's slow 3G then downloading assets will take much time, so TODO: set timeout time depending on network connection
+  oncontrollerchangeTimeout = setTimeout(startApp, 5000)
 }
 
 export const startApp = () => {
