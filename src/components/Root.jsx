@@ -9,6 +9,7 @@ import {store} from '../redux/store'
 import {history} from '../history'
 import {ROUTES} from '../routes'
 import {logger} from '../utils/logger'
+import {isDesktop} from '../utils/device'
 import {isAppFirstInstallation} from '../utils/app-installation'
 import {showSnackbarMessage} from '../redux/reducers/snackbar'
 import {hideProgressBar, getStartUpElement, removeProgressBar} from '../startup/installation-progress'
@@ -46,7 +47,7 @@ export class Root extends React.Component {
       getStartUpElement().addEventListener('transitionend', () => {
         removeProgressBar()
         animateShowOnMount()
-        setTimeout(() => {
+        isDesktop && setTimeout(() => {
           this.showAppInstalledSnackbar()
         }, 300)
       })
