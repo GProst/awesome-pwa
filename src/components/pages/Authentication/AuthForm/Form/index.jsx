@@ -125,6 +125,7 @@ export class Form extends React.Component {
         break
       }
     }
+    // TODO: I probably don't need to call it if validationState.status === true
     this.setState(prevState => ({
       errors: {
         ...prevState.errors,
