@@ -1,7 +1,7 @@
 {
-  "name": "priority-book-pwa",
+  "name": "awesome-pwa",
   "version": "1.0.0",
-  "description": "Priority Book PWA",
+  "description": "Awesome PWA",
   "author": "GProst a.k.a German Prostakov <gprostmail@gmail.com>",
   "scripts": {
     "gzip-public": "chmod +x ./gzip.sh && ./gzip.sh",

@@ -3,7 +3,7 @@
 Get your your temp credentials using the following command:
 
 ```shell
-aws --profile anoact sts get-session-token --serial-number arn-of-the-mfa-device --token-code code-from-token
+aws --profile my-profile sts get-session-token --serial-number arn-of-the-mfa-device --token-code code-from-token
 ```
 
 You'll receive the following response:
